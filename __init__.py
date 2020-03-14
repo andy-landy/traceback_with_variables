@@ -15,7 +15,7 @@ def rich_traceback(reraise=True, file_=sys.stderr, flush=False, max_locals_str_l
                 trace_str = get_trace_str(e, list(inspect.trace())[2:], max_locals_str_length)
                 file_.write(trace_str)
             except Exception:  # shit happens)
-                file_.write(f'{traceback.format_exc()}\nRichTracaback raised an exception')
+                file_.write(f'{traceback.format_exc()}\nRichTraceback raised an exception')
 
             file_.write('\n')
             if flush:
