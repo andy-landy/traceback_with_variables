@@ -3,7 +3,7 @@ def main():
     args = parse_args()
 
     with rich_traceback():
-        do_something(...)
+        substitute_in_files(args.root_path, 'OOP', 'FP')
 ```
 
 ```
