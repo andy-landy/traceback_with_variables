@@ -1,28 +1,28 @@
 ```
-def main():
-    args = parse_args()
-
+def example(h1, w1, h2, w2):
     with rich_traceback():
-        substitute_in_files(args.root_path, 'OOP', 'FP')
+        get_avg_ratio([h1, w1], [h2, w2])
 ```
 
 ```
 RichTraceback (most recent call last):
-  File "./temp.py", line 25, in substitute_in_files
-    substitute_in_one_file(os.path.join(dir_, filename), old_fragment, new_fragment)
-      dir_=test_dir
-      filename=file3
-      filenames=['file3', 'file2', 'file1']
-      new_fragment=FP
-      old_fragment=OOP
-      root_path=test_dir
-      subdirs=[]
-  File "./temp.py", line 16, in substitute_in_one_file
-    with open(path, 'r') as in_:
-      new_fragment=FP
-      old_fragment=OOP
-      path=test_dir/file3
-builtins.PermissionError: [Errno 13] Permission denied: 'test_dir/file3'
+  File "./test.py", line 25, in example
+    get_avg_ratio([h1, w1], [h2, w2])
+      h1 = 300
+      w1 = 200
+      h1 = 300
+      w1 = 0
+  File "./test.py", line 16, in get_avg_ratio
+    ratios = [get_ratio(w, h) for w, h in [size1, size2]]
+      size1 = [300, 200]
+      size2 = [300, 0]
+      w = 300
+      h = 0
+  File "./test.py", line 10, in get_ratio
+    return wifth / height
+      width = 300
+      height = 0
+builtins.ZeroDivisionError: division by zero
 ```
 
 
