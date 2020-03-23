@@ -57,7 +57,7 @@ def _crop(line: str, max_length: int, ellipsis: str) -> str:
 
 def _to_cropped_str(obj: Any, max_value_str_len: int, max_exc_str_len: int, ellipsis: str) -> str:
     try:
-        return _crop(str(obj), max_value_str_len, ellipsis)
+        return _crop(repr(obj), max_value_str_len, ellipsis)
     except:
         return _crop(
             '<exception while printing> ' + traceback.format_exc().replace('\n', '\n  '),
