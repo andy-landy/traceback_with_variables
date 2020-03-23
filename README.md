@@ -24,3 +24,9 @@ RichTraceback (most recent call last):
       path=test_dir/file3
 builtins.PermissionError: [Errno 13] Permission denied: 'test_dir/file3'
 ```
+
+
+* output to `sys.stderr` (default) or any opened file (use `LoggerAsFile` to wrap a logger)
+* limit messages size, set `max_value_str_len`
+* all exceptions raised while printing out the traceback are caught and printed too
+
