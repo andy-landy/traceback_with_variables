@@ -1,4 +1,4 @@
-## Print local variables and arguments in tracebacks.
+## Add the variable values to the standard traceback.
 
 ### 
 ###
@@ -8,31 +8,44 @@
 
 ```diff
   def example(h1, w1, h2, w2):
--     get_avg_ratio([h1, w1], [h2, w2])  
+-     try:
 +     with rich_traceback():
-+         get_avg_ratio([h1, w1], [h2, w2])
+          return get_avg_ratio([h1, w1], [h2, w2])
+-     except:
+-         logger.error(f'something happened :(, h1 = {h1}, w1 = {w1}, h2 = {h2}, w2 = {w2}')
+-         raise
+-         # or
+-         raise MyToolException(f'something happened :(, h1 = {h1}, w1 = {w1}, h2 = {h2}, w2 = {w2}')
           
   def get_avg_ratio(size1, size2):
--    try:
--        ...raising code...
--    except:
--        logger.error(f'something happened :(, size1 = {size1}, size2 = {size2}')
--        raise
--        # or
--        raise MyToolException(f'something happened :(, size1 = {size1}, size2 = {size2}')
-+    ...raising code...
+-     try:
+          return mean(get_ratio(h, w) for h, w in [size1, size2])
+-     except:
+-         logger.error(f'something happened :(, size1 = {size1}, size2 = {size2}')
+-         raise
+-         # or
+-         raise MyToolException(f'something happened :(, size1 = {size1}, size2 = {size2}')
+
+  def get_ratio(height, width):
+-     try:
+          return height / width
+-     except:
+-         logger.error(f'something happened :(, width = {width}, height = {height}')
+-         raise
+-         # or
+-         raise MyToolException(f'something happened :(, width = {width}, height = {height}')
 ```
 
 ```
 RichTraceback (most recent call last):
   File "./test.py", line 25, in example
-    get_avg_ratio([h1, w1], [h2, w2])
+    return get_avg_ratio([h1, w1], [h2, w2])
       h1 = 300
       w1 = 200
-      h1 = 300
-      w1 = 0
+      h2 = 300
+      w2 = 0
   File "./test.py", line 16, in get_avg_ratio
-    ratios = [get_ratio(w, h) for w, h in [size1, size2]]
+    return mean(get_ratio(h, w) for h, w in [size1, size2])
       size1 = [300, 200]
       size2 = [300, 0]
       w = 300
@@ -79,18 +92,24 @@ def example(h1, w1, h2, w2):
 * limit messages size, set `max_value_str_len`
 * all exceptions raised while printing out the traceback are caught and printed too
 
-#### Free your exceptions of unnecesseary information load:
+#### Mission: free your exceptions of unnecesseary information load:
 
 ```
 def make_a_cake(sugar, eggs, milk, flour, salt, water, chief):
-    is_salty = sugar < salt
+    is_sweet = sugar > salt
     is_vegan = not (eggs or milk)
     is_huge = (sugar + eggs + milk + flour + salt + water > 10000)
-    if (
-        is_salty
-        or (is_huge and not chief.can_make_huge())
-        or (is_vegan and not chief.can_make_vegan())
-    ):
+    if not (is_sweet and chief.can_make_huge() and chief.can_make_vegan(is_vegan)):
         raise ValueError('This is unacceptable!')
     ...
 ```
+
+#### Mission: stop this tedious practice in production:
+
+1. Notice some exception in a production service.
+2. Add more printouts, logging, and exception messages.
+3. Rerun the service.
+4. Wait till (hopefully) the bug repeats.
+5. Examine the printouts and possibly add some more info (then go back to step 2).
+6. Erase all recently added printouts, logging and exception messages.
+7. Go back to step 1 once bugs appear.
