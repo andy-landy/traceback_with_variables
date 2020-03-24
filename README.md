@@ -1,4 +1,4 @@
-## Add the variable values to the standard traceback.
+## Print local variables and arguments in tracebacks.
 
 ### 
 ###
