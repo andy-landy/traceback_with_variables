@@ -12,10 +12,10 @@
 +     with rich_traceback():
           return get_avg_ratio([h1, w1], [h2, w2])
 -     except:
--         logger.error(f'something happened :(, h1 = {h1}, w1 = {w1}, h2 = {h2}, w2 = {w2}')
+-         logger.error(f'something happened :(, locals = {locals()[:1000]}')
 -         raise
 -         # or
--         raise MyToolException(f'something happened :(, h1 = {h1}, w1 = {w1}, h2 = {h2}, w2 = {w2}')
+-         raise MyToolException(f'something happened :(, locals = {locals()[:1000]}')
           
   def get_avg_ratio(size1, size2):
 -     try:
@@ -51,9 +51,9 @@ RichTraceback (most recent call last):
       w = 300
       h = 0
   File "./test.py", line 10, in get_ratio
-    return width / height
-      width = 300
-      height = 0
+    return height / width
+      width = 0
+      height = 300
 builtins.ZeroDivisionError: division by zero
 ```
 
@@ -68,21 +68,21 @@ def example(h1, w1, h2, w2):
 ```
 2020-03-30 18:24:31 main ERROR RichTraceback (most recent call last):
 2020-03-30 18:24:31 main ERROR   File "./test.py", line 25, in example
-2020-03-30 18:24:31 main ERROR     get_avg_ratio([h1, w1], [h2, w2])
+2020-03-30 18:24:31 main ERROR     return get_avg_ratio([h1, w1], [h2, w2])
 2020-03-30 18:24:31 main ERROR       h1 = 300
 2020-03-30 18:24:31 main ERROR       w1 = 200
-2020-03-30 18:24:31 main ERROR       h1 = 300
-2020-03-30 18:24:31 main ERROR       w1 = 0
+2020-03-30 18:24:31 main ERROR       h2 = 300
+2020-03-30 18:24:31 main ERROR       w2 = 0
 2020-03-30 18:24:31 main ERROR   File "./test.py", line 16, in get_avg_ratio
-2020-03-30 18:24:31 main ERROR     ratios = [get_ratio(w, h) for w, h in [size1, size2]]
+2020-03-30 18:24:31 main ERROR     return mean(get_ratio(h, w) for h, w in [size1, size2])
 2020-03-30 18:24:31 main ERROR       size1 = [300, 200]
 2020-03-30 18:24:31 main ERROR       size2 = [300, 0]
 2020-03-30 18:24:31 main ERROR       w = 300
 2020-03-30 18:24:31 main ERROR       h = 0
 2020-03-30 18:24:31 main ERROR   File "./test.py", line 10, in get_ratio
-2020-03-30 18:24:31 main ERROR     return width / height
-2020-03-30 18:24:31 main ERROR       width = 300
-2020-03-30 18:24:31 main ERROR       height = 0
+2020-03-30 18:24:31 main ERROR     return height / width
+2020-03-30 18:24:31 main ERROR       width = 0
+2020-03-30 18:24:31 main ERROR       height = 300
 2020-03-30 18:24:31 main ERROR builtins.ZeroDivisionError: division by zero
 ```
 
