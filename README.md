@@ -1,7 +1,26 @@
-```
-def example(h1, w1, h2, w2):
-    with rich_traceback():
-        get_avg_ratio([h1, w1], [h2, w2])
+## Add the variable values to the standard traceback.
+
+### 
+###
+###
+
+#### Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code.
+
+```diff
+  def example(h1, w1, h2, w2):
+-     get_avg_ratio([h1, w1], [h2, w2])  
++     with rich_traceback():
++         get_avg_ratio([h1, w1], [h2, w2])
+          
+  def get_avg_ratio(size1, size2):
+-    try:
+-        ...raising code...
+-    except:
+-        logger.error(f'something happened :(, size1 = {size1}, size2 = {size2}')
+-        raise
+-        # or
+-        raise MyToolException(f'something happened :(, size1 = {size1}, size2 = {size2}')
++    ...raising code...
 ```
 
 ```
@@ -25,7 +44,7 @@ RichTraceback (most recent call last):
 builtins.ZeroDivisionError: division by zero
 ```
 
-What if you want to log it silently?
+#### What if you want to log it silently?
 
 ```
 def example(h1, w1, h2, w2):
@@ -54,8 +73,20 @@ def example(h1, w1, h2, w2):
 2020-03-30 18:24:31 main ERROR builtins.ZeroDivisionError: division by zero
 ```
 
+#### Also you can:
 
 * output to `sys.stderr` (default) or any opened file (use `LoggerAsFile` to wrap a logger)
 * limit messages size, set `max_value_str_len`
 * all exceptions raised while printing out the traceback are caught and printed too
 
+#### Free your exceptions of unnecesseary information load:
+
+```
+def make_a_cake(sugar, eggs, milk, flour, salt, water, chief):
+    is_sweet = sugar > salt
+    is_vegan = not (eggs or milk)
+    is_huge = (sugar + eggs + milk + flour + salt + water > 10000)
+    if not (is_sweet and chief.can_make_huge() and chief.can_make_vegan(is_vegan)):
+        raise ValueError('This is unacceptable!')
+    ...
+```
