@@ -83,10 +83,14 @@ def example(h1, w1, h2, w2):
 
 ```
 def make_a_cake(sugar, eggs, milk, flour, salt, water, chief):
-    is_sweet = sugar > salt
+    is_salty = sugar < salt
     is_vegan = not (eggs or milk)
     is_huge = (sugar + eggs + milk + flour + salt + water > 10000)
-    if not (is_sweet and chief.can_make_huge() and chief.can_make_vegan(is_vegan)):
+    if (
+        is_salty
+        or (is_huge and not chief.can_make_huge())
+        or (is_vegan and not chief.can_make_vegan())
+    ):
         raise ValueError('This is unacceptable!')
     ...
 ```
