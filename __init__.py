@@ -3,7 +3,7 @@ import logging
 import sys
 import traceback
 from contextlib import contextmanager
-from typing import Any, List, Iterator, NoReturn
+from typing import Any, List, Iterator, NoReturn, TextIO
 
 
 class LoggerAsFile:
@@ -21,7 +21,7 @@ class LoggerAsFile:
 @contextmanager
 def rich_traceback(
     reraise: bool = True,
-    file_=sys.stderr,
+    file_: TextIO = sys.stderr,
     flush: bool = False,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
@@ -39,7 +39,8 @@ def rich_traceback(
                 max_exc_str_len=max_exc_str_len,
                 ellipsis=ellipsis,
             ):
-                file_.write(trace_str + '\n')
+                file_.write(trace_str)
+                file_.write('\n')
 
             if flush:
                 file_.flush()
@@ -58,6 +59,7 @@ def _crop(line: str, max_length: int, ellipsis: str) -> str:
 def _to_cropped_str(obj: Any, max_value_str_len: int, max_exc_str_len: int, ellipsis: str) -> str:
     try:
         return _crop(repr(obj), max_value_str_len, ellipsis)
+
     except:
         return _crop(
             '<exception while printing> ' + traceback.format_exc().replace('\n', '\n  '),
@@ -74,13 +76,13 @@ def _iter_trace_strs(
     ellipsis: str,
 ) -> Iterator[str]:
     try:
-        yield 'RichTraceback (most recent call last):'
+        yield 'Rich traceback (most recent call last):'
 
         for frame, filename, line_num, func_name, code_lines, func_line_num in trace:
             yield f'  File "{filename}", line {line_num}, in {func_name}'
 
             if code_lines:
-                yield '    ' + ''.join(code_lines).rstrip('\n').lstrip(' ')
+                yield '    ' + ''.join(code_lines).rstrip('\r\n').lstrip(' ')  # TODO strip
 
             try:
                 for var_name, var in frame.f_locals.items():
@@ -88,12 +90,15 @@ def _iter_trace_strs(
                     for line in f'{var_name} = {var_str}'.split('\n'):
                         yield f'      {line}'
 
-            except:
+            except:  # indicates a bug in this lib
+                yield '     <rich_traceback: exception while printing locals>'
                 yield f'    {traceback.format_exc()}'
-                yield '     <exception while printing locals (fix it!)>'  # indicates a bug
 
         yield f'{e.__class__.__module__}.{e.__class__.__name__}: {e}'
 
-    except:  # indicates a bug
+    except:  # indicates a bug in this lib
+        yield '     <rich_traceback: exception while printing locals>'
         yield f'{traceback.format_exc()}'
-        yield 'RichTraceback raised an exception'  # indicates a bug
+
+def mean(a):
+    return 0
