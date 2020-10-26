@@ -68,9 +68,13 @@ builtins.ZeroDivisionError: division by zero
 #### What if you want to log it silently?
 
 ```python
-def example(h1, w1, h2, w2):
-    with rich_traceback(file_=LoggerAsFile(logging.getLogger('main')), reraise=False):
-        get_avg_ratio([h1, w1], [h2, w2])
+def main():
+    ...
+    with rich_traceback(
+        file_=LoggerAsFile(logging.getLogger('main')),
+        reraise=False
+    ):
+        ...
 ```
 
 ```
@@ -126,9 +130,11 @@ def make_a_cake(sugar, eggs, milk, flour, salt, water):
 6. Erase all recently added printouts, logging and exception messages.
 7. Go back to step 1 once bugs appear.
 
-#### Installation
+#### Installation (simple checkout)
 
 ```
-cd path/to/my_libs
-git clone https://github.com/andy-landy/rich_traceback.git
+mkdir temp
+(cd temp; git clone https://github.com/andy-landy/rich_traceback.git)
+cp -r temp/rich_traceback/rich_traceback path/to/your/libs
+rm -r temp
 ```

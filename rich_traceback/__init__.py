@@ -3,7 +3,7 @@ import logging
 import sys
 import traceback
 from contextlib import contextmanager
-from typing import Any, List, Iterator, NoReturn, TextIO
+from typing import Any, List, Iterator, NoReturn, TextIO, Union
 
 
 class LoggerAsFile:
@@ -14,14 +14,14 @@ class LoggerAsFile:
         pass
 
     def write(self, text: str) -> NoReturn:
-        for line in text.rstrip('\n').split('\n'):
+        for line in text.rstrip('\r\n').split('\n'):
             self.logger.error(line)
 
 
 @contextmanager
 def rich_traceback(
     reraise: bool = True,
-    file_: TextIO = sys.stderr,
+    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
     flush: bool = False,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
@@ -39,8 +39,7 @@ def rich_traceback(
                 max_exc_str_len=max_exc_str_len,
                 ellipsis=ellipsis,
             ):
-                file_.write(trace_str)
-                file_.write('\n')
+                file_.write(trace_str + '\n')
 
             if flush:
                 file_.flush()
@@ -62,7 +61,7 @@ def _to_cropped_str(obj: Any, max_value_str_len: int, max_exc_str_len: int, elli
 
     except:
         return _crop(
-            '<exception while printing> ' + traceback.format_exc().replace('\n', '\n  '),
+            '<exception while printing> ' + traceback.format_exc(chain=False).replace('\n', '\n  '),
             max_exc_str_len,
             ellipsis,
         )
@@ -99,6 +98,3 @@ def _iter_trace_strs(
     except:  # indicates a bug in this lib
         yield '     <rich_traceback: exception while printing locals>'
         yield f'{traceback.format_exc()}'
-
-def mean(a):
-    return 0
