@@ -5,12 +5,12 @@ from io import StringIO
 
 import pytest
 
-from rich_traceback import rich_traceback, LoggerAsFile
+from traceback_with_variables import traceback_with_variables, LoggerAsFile
 
 
 def test_file():
     out = StringIO()
-    with rich_traceback(reraise=False, file_=out):
+    with traceback_with_variables(reraise=False, file_=out):
         f(10001)
 
     assert_smart_equals_ref('test_file', out.getvalue())
@@ -18,7 +18,7 @@ def test_file():
 
 def test_ellipsis():
     out = StringIO()
-    with rich_traceback(reraise=False, file_=out, ellipsis='*'):
+    with traceback_with_variables(reraise=False, file_=out, ellipsis='*'):
         f(10000)
 
     assert_smart_equals_ref('test_ellipsis', out.getvalue())
@@ -26,7 +26,7 @@ def test_ellipsis():
 
 def test_max_value_str_len():
     out = StringIO()
-    with rich_traceback(reraise=False, file_=out, max_value_str_len=10):
+    with traceback_with_variables(reraise=False, file_=out, max_value_str_len=10):
         f(10000)
 
     assert_smart_equals_ref('test_max_value_str_len', out.getvalue())
@@ -34,7 +34,7 @@ def test_max_value_str_len():
 
 def test_max_exc_str_len():
     out = StringIO()
-    with rich_traceback(reraise=False, file_=out, max_exc_str_len=10):
+    with traceback_with_variables(reraise=False, file_=out, max_exc_str_len=10):
         f(10000)
 
     assert_smart_equals_ref('test_max_exc_str_len', out.getvalue())
@@ -42,22 +42,21 @@ def test_max_exc_str_len():
 
 def test_reraise():
     out = StringIO()
-
     with pytest.raises(ZeroDivisionError):
-        with rich_traceback(reraise=True, file_=out):
+        with traceback_with_variables(reraise=True, file_=out):
             f(10000)
 
     assert_smart_equals_ref('test_reraise', out.getvalue())
 
 
 def test_logger(caplog):
-    with rich_traceback(reraise=False, file_=LoggerAsFile(logging.getLogger('test-logger'))):
+    with traceback_with_variables(reraise=False, file_=LoggerAsFile(logging.getLogger('test-logger'))):
         f(10000)
 
     assert_smart_equals_ref('test_logger', caplog.text)
 
-# - playground - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# - playground - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def f(n: int) -> int:
     s1 = 'short string with n={}'.format(n)
@@ -96,13 +95,9 @@ def assert_equals_ref(name: str, value: str) -> None:
             assert value == in_.read()
 
 
-def hide_paths(text: str) -> str:
-    return text.replace(os.path.abspath(os.path.curdir), '.')
-
-
-def hide_objs(text: str) -> str:
-    return re.sub(r'object at 0x\w+', 'object at 0x???', text)
-
-
 def assert_smart_equals_ref(name: str, value: str) -> None:
-    assert_equals_ref(name, hide_objs(hide_paths(value)))
+    for dir_ in ['traceback_with_variables', 'tests']:
+        value = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...\2', value)
+    value = re.sub(r'(object at 0x)\w+', r'\1...', value)
+
+    assert_equals_ref(name, value)

@@ -1,4 +1,4 @@
-## Add the variable values to the standard traceback.
+## Add variable values to the standard traceback.
 
 ### 
 ###
@@ -7,19 +7,19 @@
 #### Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code.
 
 ```diff
-+ from rich_traceback import rich_traceback
++ from traceback_with_variables import traceback_with_variables
 
   def main():
       sizes_str = sys.argv[1]
       h1, w1, h2, w2 = map(int, sizes_str.split())
 -     try:
-+     with rich_traceback():
++     with traceback_with_variables():
           return get_avg_ratio([h1, w1], [h2, w2])
 -     except:
--         logger.error(f'something happened :(, locals = {locals()[:1000]}')
+-         logger.error(f'something happened :(, variables = {variables()[:1000]}')
 -         raise
 -         # or
--         raise MyToolException(f'something happened :(, locals = {locals()[:1000]}')
+-         raise MyToolException(f'something happened :(, variables = {variables()[:1000]}')
           
   def get_avg_ratio(size1, size2):
 -     try:
@@ -41,7 +41,7 @@
 ```
 
 ```
-Rich traceback (most recent call last):
+Traceback with variables (most recent call last):
   File "./temp.py", line 7, in main
     return get_avg_ratio([h1, w1], [h2, w2])
       sizes_str = '300 200 300 0'
@@ -70,7 +70,7 @@ builtins.ZeroDivisionError: division by zero
 ```python
 def main():
     ...
-    with rich_traceback(
+    with traceback_with_variables(
         file_=LoggerAsFile(logging.getLogger('main')),
         reraise=False
     ):
@@ -78,7 +78,7 @@ def main():
 ```
 
 ```
-2020-03-30 18:24:31 main ERROR Rich traceback (most recent call last):
+2020-03-30 18:24:31 main ERROR Traceback with variables (most recent call last):
 2020-03-30 18:24:31 main ERROR   File "./temp.py", line 7, in main
 2020-03-30 18:24:31 main ERROR     return get_avg_ratio([h1, w1], [h2, w2])
 2020-03-30 18:24:31 main ERROR       sizes_str = '300 200 300 0'
@@ -133,8 +133,7 @@ def make_a_cake(sugar, eggs, milk, flour, salt, water):
 #### Installation (simple checkout)
 
 ```
-mkdir temp
-(cd temp; git clone https://github.com/andy-landy/rich_traceback.git)
-cp -r temp/rich_traceback/rich_traceback path/to/your/libs
-rm -r temp
+git clone https://github.com/andy-landy/traceback_with_variables.git
+cp -r traceback_with_variables/traceback_with_variables path/to/your/libs
+rm -r traceback_with_variables
 ```

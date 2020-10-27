@@ -19,7 +19,7 @@ class LoggerAsFile:
 
 
 @contextmanager
-def rich_traceback(
+def traceback_with_variables(
     reraise: bool = True,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
     flush: bool = False,
@@ -75,7 +75,7 @@ def _iter_trace_strs(
     ellipsis: str,
 ) -> Iterator[str]:
     try:
-        yield 'Rich traceback (most recent call last):'
+        yield 'Traceback with variables (most recent call last):'
 
         for frame, filename, line_num, func_name, code_lines, func_line_num in trace:
             yield f'  File "{filename}", line {line_num}, in {func_name}'
@@ -90,11 +90,11 @@ def _iter_trace_strs(
                         yield f'      {line}'
 
             except:  # indicates a bug in this lib
-                yield '     <rich_traceback: exception while printing locals>'
+                yield '    <traceback-with-variables: exception while printing variables>'
                 yield f'    {traceback.format_exc()}'
 
         yield f'{e.__class__.__module__}.{e.__class__.__name__}: {e}'
 
     except:  # indicates a bug in this lib
-        yield '     <rich_traceback: exception while printing locals>'
+        yield '    <traceback-with-variables: exception while printing variables>'
         yield f'{traceback.format_exc()}'

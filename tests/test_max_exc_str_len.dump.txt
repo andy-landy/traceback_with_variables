@@ -1,8 +1,8 @@
-Rich traceback (most recent call last):
-  File "./tests/test_all.py", line 38, in test_max_exc_str_len
+Traceback with variables (most recent call last):
+  File ".../tests/test_all.py", line 38, in test_max_exc_str_len
     f(10000)
-      out = <_io.StringIO object at 0x???>
-  File "./tests/test_all.py", line 68, in f
+      out = <_io.StringIO object at 0x...>
+  File ".../tests/test_all.py", line 67, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short string with n=10000'
