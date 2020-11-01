@@ -133,7 +133,5 @@ def make_a_cake(sugar, eggs, milk, flour, salt, water):
 #### Installation (simple checkout)
 
 ```
-git clone https://github.com/andy-landy/traceback_with_variables.git
-cp -r traceback_with_variables/traceback_with_variables path/to/your/libs
-rm -r traceback_with_variables
+pip install traceback-with-variables
 ```
