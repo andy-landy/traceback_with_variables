@@ -5,13 +5,13 @@ with open('README.md', 'r') as in_:
 
 setuptools.setup(
     name='traceback-with-variables',
-    version='1.0.0',
+    version='1.1.0',
     author='Andrey Lyashko',
     author_email='andrewlyashko@gmail.com',
     description='print traceback with variables, simple to use',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/andy-landy/rich_traceback',
+    url='https://github.com/andy-landy/traceback_with_variables',
     packages=setuptools.find_packages(),
     keywords=['python', 'traceback', 'locals', 'logging', 'debugging', 'print',
               'variables', 'python3', 'stacktrace', 'arguments'],
