@@ -1,19 +1,45 @@
-## Add variable values to the standard traceback.
+## Python traceback (stacktrace) printing variables.
+
+Simple and versatile.    
 
 ### 
 ###
 ###
 
-#### Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code.
+### Quick Start
+
+Simplest usage:
+```python
+    from traceback_with_variables import activate_by_import
+```
+
+Decorator:
+```python
+    @prints_tb()
+    def main():
+```
+
+Context:
+```python
+    with printing_tb(file_=LoggerAsFile(logger)):
+```
+
+Work with traceback lines:
+```python
+    return status_500_tmpl(iter_tb_lines(e))
+```
+
+### Rationale
+
+Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code:
 
 ```diff
-+ from traceback_with_variables import traceback_with_variables
++ from traceback_with_variables import activate_by_import
 
   def main():
       sizes_str = sys.argv[1]
       h1, w1, h2, w2 = map(int, sizes_str.split())
 -     try:
-+     with traceback_with_variables():
           return get_avg_ratio([h1, w1], [h2, w2])
 -     except:
 -         logger.error(f'something happened :(, variables = {variables()[:1000]}')
@@ -65,15 +91,14 @@ Traceback with variables (most recent call last):
 builtins.ZeroDivisionError: division by zero
 ```
 
-#### What if you want to log it silently?
+Easy automated logging:
 
 ```python
+logger = logging.getLogger('main')
+
 def main():
     ...
-    with traceback_with_variables(
-        file_=LoggerAsFile(logging.getLogger('main')),
-        reraise=False
-    ):
+    with printing_tb(file_=LoggerAsFile(logger))
         ...
 ```
 
@@ -102,13 +127,7 @@ def main():
 2020-03-30 18:24:31 main ERROR builtins.ZeroDivisionError: division by zero
 ```
 
-#### Also you can:
-
-* output to `sys.stderr` (default) or any opened file (use `LoggerAsFile` to wrap a logger)
-* limit messages size, set `max_value_str_len`
-* all exceptions raised while printing out the traceback are caught and printed too
-
-#### Rationale: free your exceptions of unnecessary information load:
+Free your exceptions of unnecessary information load:
 
 ```python
 def make_a_cake(sugar, eggs, milk, flour, salt, water):
@@ -120,7 +139,7 @@ def make_a_cake(sugar, eggs, milk, flour, salt, water):
     ...
 ```
 
-#### Rationale: stop this tedious practice in production:
+Stop this tedious practice in production:
 
 1. Notice some exception in a production service.
 2. Add more printouts, logging, and exception messages.
@@ -130,8 +149,82 @@ def make_a_cake(sugar, eggs, milk, flour, salt, water):
 6. Erase all recently added printouts, logging and exception messages.
 7. Go back to step 1 once bugs appear.
 
-#### Installation (simple checkout)
+### Installation
 
 ```
 pip install traceback-with-variables
+```
+
+### Reference
+
+#### `.activate_by_import`
+Just import it. No arguments, for real quick use.
+```python
+from traceback_with_variables import activate_by_import
+```
+
+#### `.override.override_print_tb`
+Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
+```python
+def main():
+    override_print_tb(...)
+```
+
+
+#### `.print.prints_tb`
+Function decorator, used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
+```python
+@prints_tb(...)
+def f(...):
+```
+
+#### `.print.printing_tb`
+Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
+```python
+with printing_tb(...):
+```
+
+#### `.print.LoggerAsFile`
+A logger-to-file wrapper, to pass a logger to `.print` tools as a file.
+
+#### `.core.iter_tb_lines`
+Iterates the lines, which are usually printed one-by-one in terminal.
+
+### Recipes
+
+#### Simplest usage
+```python
+from traceback_with_variables import activate_by_import
+```
+
+#### Override standard traceback if env variable X is set
+```python
+def main():
+    override_print_tb(activate_by_env_var='X')
+```
+
+#### Override standard traceback unless env variable Y is set
+```python
+def main():
+    override_print_tb(deactivate_by_env_var='Y')
+```
+
+#### Log traceback for a block of code, exclude external frames
+```python
+    logger = logging.getLogger(__name__)
+    ...
+    with printing_tb(file_=LoggerAsFile(logger)):
+```
+
+#### Log traceback for a function, exclude external frames
+```python
+    logger = logging.getLogger(__name__)
+    ...
+    @prints_tb(file_=LoggerAsFile(logger))
+    def f(...):
+```
+
+#### Print traceback for inner frames
+```python
+    with printing_tb():
 ```

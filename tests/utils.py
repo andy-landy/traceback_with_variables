@@ -16,7 +16,9 @@ def assert_equals_ref(name: str, value: str) -> None:
 
 def assert_smart_equals_ref(name: str, value: str) -> None:
     for dir_ in ['traceback_with_variables', 'tests']:
-        value = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...\2', value)
-    value = re.sub(r'(object at 0x)\w+', r'\1...', value)
+        value = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...omitted for tests only...\2', value)
+    value = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', value)
+    value = re.sub(r"'/.*\.py'", "'/...omitted for tests only...py'", value)
+    value = re.sub(r'( at 0x)\w+', r'\1...omitted for tests only...', value)
 
     assert_equals_ref(name, value)

@@ -1,11 +1,11 @@
 Traceback with variables (most recent call last):
-  File ".../tests/test_core.py", line 32, in check
+  File "...omitted for tests only.../tests/test_core.py", line 32, in check
     f(arg)
       name = 'max_exc_str_len'
       arg = 10000
       kwargs = {'max_exc_str_len': 10}
       e = ZeroDivisionError('integer division or modulo by zero')
-  File ".../tests/test_core.py", line 43, in f
+  File "...omitted for tests only.../tests/test_core.py", line 43, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short string with n: 10000'

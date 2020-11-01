@@ -1,7 +1,6 @@
 import os
 import sys
-import traceback
-from typing import Callable
+from typing import NoReturn
 
 from traceback_with_variables.core import iter_tb_lines
 
@@ -10,10 +9,9 @@ def override_print_tb(
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
-    return_only: bool = False,  # for tests only
     activate_by_env_var: str = '',
     deactivate_by_env_var: str = '',
-) -> Callable:
+) -> NoReturn:
     if (activate_by_env_var and not os.getenv(activate_by_env_var, '')) or \
             (deactivate_by_env_var and os.getenv(deactivate_by_env_var, '')):
         return sys.excepthook
@@ -35,7 +33,4 @@ def override_print_tb(
 
         sys.stderr.flush()
 
-    if not return_only:
-        sys.excepthook = excepthook
-
-    return excepthook
+    sys.excepthook = excepthook
