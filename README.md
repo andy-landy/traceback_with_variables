@@ -1,41 +1,58 @@
-## Python traceback (stacktrace) printing variables.
-
-Very simple to use, but versatile when needed.    
-
----
-
 ![Example](https://raw.githubusercontent.com/andy-landy/traceback_with_variables/master/header.png)
 
+<h2 align="center">Python Traceback (Error Message) Printing Variables</h2>
+<p align="center">Very simple to use, but versatile when needed.</p>
+<br/>
+<p align="center">
+<a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
+<a href="https://codecov.io/gh/andy-landy/traceback_with_variables"><img alt="Codecov" src="https://codecov.io/gh/andy-landy/traceback_with_variables/branch/master/graph/badge.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
+<a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback_with_variables"></a>
+<a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
+<!--
+<a href="https://pepy.tech/project/traceback_with_variables"><img alt="Downloads" src="https://pepy.tech/badge/traceback_with_variables"></a>
+<a href="https://anaconda.org/conda-forge/traceback_with_variables/"><img alt="conda-forge" src="https://img.shields.io/conda/dn/conda-forge/traceback_with_variables.svg?label=conda-forge"></a>
+-->
+</p>
+
+> “It is useless work that darkens the heart.” 
+> <em>– Ursula K. Le Guin</em>
+
+Tired of useless job of putting all your variables into debug exception messages? Just stop it. 
+Automate it and clean your code. Once and for all.
+
 ---
 
-### 
-###
-###
+_Contents:_ **[Quick Start](#quick-start)** | **[Installation](#installation)**
+| **[How does it save my time?](#how-does-it-save-my-time)** | 
+**[Examples and recipes](#examples-and-recipes)** | **[Reference](#reference)**
+
+---
 
 ### Quick Start
 
-Simplest usage:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage</a>, for the whole program:
 ```python
     from traceback_with_variables import activate_by_import
 ```
 
-Decorator:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">Decorator</a>, for a single function:
 ```python
     @prints_tb
     # def main(): or def some_func(...):
 ```
 
-Context:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block.py">Context</a>, for a single code block:
 ```python
     with printing_tb():
 ```
 
-Work with traceback lines:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">Work with traceback lines</a> in a custom manner:
 ```python
     return '\n'.join(iter_tb_lines(e))
 ```
 
-Using a logger:
+Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_function.py">with a decorator</a>, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">with a context</a>]:
 ```python
     with printing_tb(file_=LoggerAsFile(logger)):
     # or
@@ -48,9 +65,9 @@ Using a logger:
 pip install traceback-with-variables
 ```
 
-### Rationale
+### How does it save my time?
 
-* Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code:
+* Turn a code totally covered by debug formatting from this:
 
     ```diff
       def main():
@@ -82,7 +99,7 @@ pip install traceback-with-variables
     -         # or
     -         raise MyToolException(f'something happened :(, width = {width}, height = {height}')
     ```
-    Must become this:
+    into this (zero debug code):
     
     ```diff
     + from traceback_with_variables import activate_by_import
@@ -99,7 +116,7 @@ pip install traceback-with-variables
           return height / width
     ```
     
-    To produce:
+    And obtain total debug info spending 0 lines of code:
     
     ```
     Traceback with variables (most recent call last):
@@ -126,7 +143,7 @@ pip install traceback-with-variables
     builtins.ZeroDivisionError: division by zero
     ```
 
-* Make automated logging easier:
+* Automate your logging too:
     
     ```python
     logger = logging.getLogger('main')
@@ -184,9 +201,20 @@ pip install traceback-with-variables
      step 6: Erase all recently added printouts, logging and exception messages. \
      step 7: Go back to step 1 once bugs appear.
 
-### Reference
+### Examples and recipes
 
----
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks.py">a bit more controlled usage</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks_customised.py">a bit more controlled usage, customised</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">working with a function</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function_customised.py">working with a function, customised</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_function.py">working with a function, logging</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block.py">working with a code block</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block_customised.py">working with a code block, customised</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">working with a code block, logging</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">get traceback lines for custom things</a>
+
+### Reference
 
 #### All functions have output customization
 * `max_value_str_len` max length of each variable string
@@ -197,7 +225,7 @@ pip install traceback-with-variables
 
 ---
 
-#### `activate_by_import`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/activate_by_import.py">`activate_by_import`</a>
 Just import it. No arguments, for real quick use.
 ```python
 from traceback_with_variables import activate_by_import
@@ -205,7 +233,7 @@ from traceback_with_variables import activate_by_import
 
 ---
 
-#### `override_print_tb`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py">`override_print_tb`</a>
 Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
 ```python
 def main():
@@ -214,7 +242,7 @@ def main():
 
 ---
 
-#### `prints_tb`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`prints_tb`</a>
 Function decorator, used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
 @prints_tb
@@ -226,7 +254,7 @@ def f(...):
 
 ---
 
-#### `printing_tb`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`printing_tb`</a>
 Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the `with` scope. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
 with printing_tb(...):
@@ -234,49 +262,14 @@ with printing_tb(...):
 
 ---
 
-#### `LoggerAsFile`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`LoggerAsFile`</a>
 A logger-to-file wrapper, to pass a logger to print tools as a file.
 
 ---
 
-#### `iter_tb_lines`
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`iter_tb_lines`</a>
 Iterates the lines, which are usually printed one-by-one in terminal.
 
-### Recipes
 
-#### Simplest usage
-```python
-from traceback_with_variables import activate_by_import
-```
 
-#### Override standard traceback if env variable X is set
-```python
-def main():
-    override_print_tb(activate_by_env_var='X')
-```
 
-#### Override standard traceback unless env variable Y is set
-```python
-def main():
-    override_print_tb(deactivate_by_env_var='Y')
-```
-
-#### Log traceback for a block of code, exclude external frames
-```python
-    logger = logging.getLogger(__name__)
-    ...
-    with printing_tb(file_=LoggerAsFile(logger)):
-```
-
-#### Log traceback for a function, exclude external frames
-```python
-    logger = logging.getLogger(__name__)
-    ...
-    @prints_tb(file_=LoggerAsFile(logger))
-    def f(...):
-```
-
-#### Print traceback for inner frames
-```python
-    with printing_tb():
-```

@@ -2,6 +2,12 @@ import os
 import re
 
 
+def f(a, b):
+    print(a)
+    print(b)
+    assert a == b
+
+
 def assert_equals_ref(name: str, value: str) -> None:
     path = 'tests/dumps/{}.txt'.format(name)
 
@@ -11,7 +17,7 @@ def assert_equals_ref(name: str, value: str) -> None:
 
     else:
         with open(path, 'r') as in_:
-            assert value == in_.read()
+            f(value, in_.read())
 
 
 def assert_smart_equals_ref(name: str, value: str) -> None:

@@ -1,6 +1,6 @@
-from .core import iter_tb_lines
-from .print import printing_tb, prints_tb, LoggerAsFile
-from .override import override_print_tb
+from .core import iter_tb_lines  # noqa
+from .print import printing_tb, prints_tb, LoggerAsFile  # noqa
+from .override import override_print_tb  # noqa
 
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"

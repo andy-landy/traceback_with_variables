@@ -1,3 +1,4 @@
+import os
 from subprocess import check_output, CalledProcessError, STDOUT
 
 import pytest
@@ -13,6 +14,6 @@ def f(n):
 f(10)''')
 
     with pytest.raises(CalledProcessError) as e:
-        check_output(['python3', code_path], stderr=STDOUT)
+        check_output(['python3', code_path], stderr=STDOUT, env={'PYTHONPATH': os.getcwd()})
 
     assert_smart_equals_ref('test_override.activate_by_import', e.value.output.decode('utf-8'))

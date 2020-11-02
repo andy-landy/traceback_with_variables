@@ -25,6 +25,7 @@ def printing_tb(
     file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
     flush: bool = False,
     skip_cur_frame: bool = False,
+    num_context_lines: int = 1,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
@@ -41,6 +42,7 @@ def printing_tb(
                 max_value_str_len=max_value_str_len,
                 max_exc_str_len=max_exc_str_len,
                 ellipsis_=ellipsis_,
+                num_context_lines=num_context_lines,
             ):
                 file_.write(trace_str + '\n')
 
@@ -55,6 +57,7 @@ def prints_tb(
     func__for_noncall_case_only: Optional[Callable] = None,  # to call without "()"
     file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
     flush: bool = False,
+    num_context_lines: int = 1,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
@@ -63,6 +66,7 @@ def prints_tb(
         return prints_tb(
             file_=file_,
             flush=flush,
+            num_context_lines=num_context_lines,
             max_value_str_len=max_value_str_len,
             max_exc_str_len=max_exc_str_len,
             ellipsis_=ellipsis_,
@@ -76,6 +80,7 @@ def prints_tb(
                 file_=file_,
                 flush=flush,
                 skip_cur_frame=True,
+                num_context_lines=num_context_lines,
                 max_value_str_len=max_value_str_len,
                 max_exc_str_len=max_exc_str_len,
                 ellipsis_=ellipsis_,

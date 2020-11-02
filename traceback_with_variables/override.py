@@ -9,6 +9,7 @@ def override_print_tb(
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
+    num_context_lines: int = 1,
     activate_by_env_var: str = '',
     deactivate_by_env_var: str = '',
 ) -> NoReturn:
@@ -24,6 +25,7 @@ def override_print_tb(
         for line in iter_tb_lines(
             e=e,
             tb=tb,
+            num_context_lines=num_context_lines,
             max_value_str_len=max_value_str_len,
             max_exc_str_len=max_exc_str_len,
             ellipsis_=ellipsis_,

@@ -1,4 +1,5 @@
 import logging
+import os
 from io import StringIO
 from subprocess import check_output, CalledProcessError, STDOUT
 
@@ -32,7 +33,7 @@ def main():
          
 main()''')
 
-    output = check_output(['python3', code_path], stderr=STDOUT).decode('utf-8')
+    output = check_output(['python3', code_path], stderr=STDOUT, env={'PYTHONPATH': os.getcwd()}).decode('utf-8')
 
     assert_smart_equals_ref('test_print.printing_tb_stderr', output)
 
@@ -70,8 +71,7 @@ try:
     f(10)
 except:
     pass''')
-
-    output = check_output(['python3', code_path], stderr=STDOUT).decode('utf-8')
+    output = check_output(['python3', code_path], stderr=STDOUT, env={'PYTHONPATH': os.getcwd()}).decode('utf-8')
 
     assert_smart_equals_ref('test_print.prints_tb_noncall', output)
 

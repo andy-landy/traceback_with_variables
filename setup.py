@@ -3,14 +3,17 @@ import setuptools
 from traceback_with_variables import __version__
 
 with open('README.md', 'r') as in_:
-    long_description=in_.read()
+    long_description = in_.read()
 
 setuptools.setup(
     name='traceback-with-variables',
     version=__version__,
     author='Andrey Lyashko',
     author_email='andrewlyashko@gmail.com',
-    description='Adds variables to python traceback. Simple, lightweight, controllable. Debug reasons of exceptions by pretty printing variable contexts for each frame in a stacktrace, showing every value. Dump locals environments after errors to console, files, and loggers.',
+    description='Adds variables to python traceback. Simple, lightweight, cont'
+    'rollable. Debug reasons of exceptions by pretty printing variable con'
+    'texts for each frame in a stacktrace, showing every value. Dump local'
+    's environments after errors to console, files, and loggers.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/andy-landy/traceback_with_variables',
