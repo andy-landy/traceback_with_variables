@@ -1,8 +1,8 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_print.py", line 14, in test_printing_tb
+  File "...omitted for tests only.../tests/test_print.py", line 15, in test_printing_tb
     f(10)
       out = <_io.StringIO object at 0x...omitted for tests only...>
-  File "...omitted for tests only.../tests/test_print.py", line 50, in f
+  File "...omitted for tests only.../tests/test_print.py", line 87, in f
     return n / 0
       n = 10
 builtins.ZeroDivisionError: division by zero

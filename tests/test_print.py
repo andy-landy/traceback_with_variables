@@ -1,5 +1,6 @@
 import logging
 from io import StringIO
+from subprocess import check_output, CalledProcessError, STDOUT
 
 import pytest
 
@@ -14,6 +15,26 @@ def test_printing_tb():
         f(10)
 
     assert_smart_equals_ref('test_print.printing_tb', out.getvalue())
+
+
+def test_printing_tb_stderr(tmp_path):
+    code_path = tmp_path / 'code.py'
+    code_path.write_text('''from traceback_with_variables import printing_tb
+def f(n):
+    return n / 0
+    
+def main():
+    try:
+        with printing_tb():
+            return f(10)
+    except:
+        pass
+         
+main()''')
+
+    output = check_output(['python3', code_path], stderr=STDOUT).decode('utf-8')
+
+    assert_smart_equals_ref('test_print.printing_tb_stderr', output)
 
 
 def test_printing_tb_reraise():
@@ -37,6 +58,22 @@ def test_prints_tb():
         prints_tb(file_=out)(f)(10)
 
     assert_smart_equals_ref('test_print.prints_tb', out.getvalue())
+
+
+def test_prints_tb_noncall(tmp_path):
+    code_path = tmp_path / 'code.py'
+    code_path.write_text('''from traceback_with_variables import prints_tb
+@prints_tb
+def f(n):
+    return n / 0
+try:
+    f(10)
+except:
+    pass''')
+
+    output = check_output(['python3', code_path], stderr=STDOUT).decode('utf-8')
+
+    assert_smart_equals_ref('test_print.prints_tb_noncall', output)
 
 
 def test_logger_as_file(caplog):

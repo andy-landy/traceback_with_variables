@@ -1,6 +1,6 @@
 ## Python traceback (stacktrace) printing variables.
 
-Simple and versatile.    
+Very simple to use, but versatile when needed.    
 
 ### 
 ###
@@ -15,8 +15,8 @@ Simplest usage:
 
 Decorator:
 ```python
-    @prints_tb()
-    def main():
+    @prints_tb
+    # def main(): or def some_func(...):
 ```
 
 Context:
@@ -24,14 +24,22 @@ Context:
     with printing_tb():
 ```
 
-Context with a logger:
-```python
-    with printing_tb(file_=LoggerAsFile(logger)):
-```
-
 Work with traceback lines:
 ```python
     return '\n'.join(iter_tb_lines(e))
+```
+
+Using a logger:
+```python
+    with printing_tb(file_=LoggerAsFile(logger)):
+    # or
+    @prints_tb(file_=LoggerAsFile(logger)): 
+```
+
+### Installation
+
+```
+pip install traceback-with-variables
 ```
 
 ### Rationale
@@ -39,8 +47,6 @@ Work with traceback lines:
 * Tired of putting all your variables in debug exception messages? Just stop it. Go clean your code:
 
     ```diff
-    + from traceback_with_variables import activate_by_import
-    
       def main():
           sizes_str = sys.argv[1]
           h1, w1, h2, w2 = map(int, sizes_str.split())
@@ -70,6 +76,24 @@ Work with traceback lines:
     -         # or
     -         raise MyToolException(f'something happened :(, width = {width}, height = {height}')
     ```
+    Must become this:
+    
+    ```diff
+    + from traceback_with_variables import activate_by_import
+    
+      def main():
+          sizes_str = sys.argv[1]
+          h1, w1, h2, w2 = map(int, sizes_str.split())
+          return get_avg_ratio([h1, w1], [h2, w2])
+              
+      def get_avg_ratio(size1, size2):
+          return mean(get_ratio(h, w) for h, w in [size1, size2])
+    
+      def get_ratio(height, width):
+          return height / width
+    ```
+    
+    To produce:
     
     ```
     Traceback with variables (most recent call last):
@@ -154,21 +178,22 @@ Work with traceback lines:
      step 6: Erase all recently added printouts, logging and exception messages. \
      step 7: Go back to step 1 once bugs appear.
 
-### Installation
-
-```
-pip install traceback-with-variables
-```
-
 ### Reference
 
-#### `.activate_by_import`
+#### All functions have output customization
+* `max_value_str_len` max length of each variable string
+* `max_exc_str_len` max length of exception, should variable print fail
+* `num_context_lines` number of lines around the target code line to print
+* `ellipsis_` string to denote long strings truncation, default=`...`
+* `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
+
+#### `activate_by_import`
 Just import it. No arguments, for real quick use.
 ```python
 from traceback_with_variables import activate_by_import
 ```
 
-#### `.override.override_print_tb`
+#### `override_print_tb`
 Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
 ```python
 def main():
@@ -176,23 +201,26 @@ def main():
 ```
 
 
-#### `.print.prints_tb`
+#### `prints_tb`
 Function decorator, used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
+@prints_tb
+def f(...):
+
 @prints_tb(...)
 def f(...):
 ```
 
-#### `.print.printing_tb`
-Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
+#### `printing_tb`
+Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the `with` scope. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
 with printing_tb(...):
 ```
 
-#### `.print.LoggerAsFile`
+#### `LoggerAsFile`
 A logger-to-file wrapper, to pass a logger to `.print` tools as a file.
 
-#### `.core.iter_tb_lines`
+#### `iter_tb_lines`
 Iterates the lines, which are usually printed one-by-one in terminal.
 
 ### Recipes

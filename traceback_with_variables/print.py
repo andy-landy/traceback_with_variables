@@ -1,9 +1,8 @@
-import inspect
 import logging
 import sys
 from contextlib import contextmanager
 from functools import wraps
-from typing import NoReturn, Union, TextIO, Optional
+from typing import NoReturn, Union, TextIO, Optional, Callable
 
 from traceback_with_variables.core import iter_tb_lines
 
@@ -53,12 +52,22 @@ def printing_tb(
 
 
 def prints_tb(
-    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
+    func__for_noncall_case_only: Optional[Callable] = None,  # to call without "()"
+    file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
     flush: bool = False,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
 ):
+    if func__for_noncall_case_only:
+        return prints_tb(
+            file_=file_,
+            flush=flush,
+            max_value_str_len=max_value_str_len,
+            max_exc_str_len=max_exc_str_len,
+            ellipsis_=ellipsis_,
+        )(func__for_noncall_case_only)
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
