@@ -2,6 +2,12 @@
 
 Very simple to use, but versatile when needed.    
 
+---
+
+![Example](https://raw.githubusercontent.com/andy-landy/traceback_with_variables/master/header.png)
+
+---
+
 ### 
 ###
 ###
@@ -180,6 +186,8 @@ pip install traceback-with-variables
 
 ### Reference
 
+---
+
 #### All functions have output customization
 * `max_value_str_len` max length of each variable string
 * `max_exc_str_len` max length of exception, should variable print fail
@@ -187,11 +195,15 @@ pip install traceback-with-variables
 * `ellipsis_` string to denote long strings truncation, default=`...`
 * `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
 
+---
+
 #### `activate_by_import`
 Just import it. No arguments, for real quick use.
 ```python
 from traceback_with_variables import activate_by_import
 ```
+
+---
 
 #### `override_print_tb`
 Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
@@ -200,6 +212,7 @@ def main():
     override_print_tb(...)
 ```
 
+---
 
 #### `prints_tb`
 Function decorator, used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
@@ -211,14 +224,20 @@ def f(...):
 def f(...):
 ```
 
+---
+
 #### `printing_tb`
 Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the `with` scope. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
 with printing_tb(...):
 ```
 
+---
+
 #### `LoggerAsFile`
-A logger-to-file wrapper, to pass a logger to `.print` tools as a file.
+A logger-to-file wrapper, to pass a logger to print tools as a file.
+
+---
 
 #### `iter_tb_lines`
 Iterates the lines, which are usually printed one-by-one in terminal.
