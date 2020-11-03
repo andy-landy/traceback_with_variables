@@ -2,7 +2,7 @@
 
 <h2 align="center">Python Traceback (Error Message) Printing Variables</h2>
 <p align="center">Very simple to use, but versatile when needed.</p>
-<br/>
+
 <p align="center">
 <a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
 <a href="https://codecov.io/gh/andy-landy/traceback_with_variables"><img alt="Codecov" src="https://codecov.io/gh/andy-landy/traceback_with_variables/branch/master/graph/badge.svg"></a>
@@ -14,6 +14,7 @@
 <a href="https://anaconda.org/conda-forge/traceback_with_variables/"><img alt="conda-forge" src="https://img.shields.io/conda/dn/conda-forge/traceback_with_variables.svg?label=conda-forge"></a>
 -->
 </p>
+</br>
 
 > “It is useless work that darkens the heart.” 
 > <em>– Ursula K. Le Guin</em>
@@ -23,11 +24,17 @@ Automate it and clean your code. Once and for all.
 
 ---
 
-_Contents:_ **[Quick Start](#quick-start)** | **[Installation](#installation)**
+_Contents:_ **[Installation](#installation)** | **[Quick Start](#quick-start)**
 | **[How does it save my time?](#how-does-it-save-my-time)** | 
 **[Examples and recipes](#examples-and-recipes)** | **[Reference](#reference)**
 
 ---
+
+### Installation
+
+```
+pip install traceback-with-variables
+```
 
 ### Quick Start
 
@@ -57,12 +64,6 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     with printing_tb(file_=LoggerAsFile(logger)):
     # or
     @prints_tb(file_=LoggerAsFile(logger)): 
-```
-
-### Installation
-
-```
-pip install traceback-with-variables
 ```
 
 ### How does it save my time?

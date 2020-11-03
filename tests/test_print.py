@@ -1,26 +1,23 @@
 import logging
-import os
 from io import StringIO
-from subprocess import check_output, CalledProcessError, STDOUT
 
 import pytest
 
 from traceback_with_variables.print import printing_tb, prints_tb, LoggerAsFile
 
-from tests.utils import assert_smart_equals_ref
+from tests.utils import assert_smart_equals_ref, run_code
 
 
 def test_printing_tb():
     out = StringIO()
-    with printing_tb(reraise=False, file_=out):
+    with printing_tb(reraise=False, file_=out, flush=True):
         f(10)
 
     assert_smart_equals_ref('test_print.printing_tb', out.getvalue())
 
 
 def test_printing_tb_stderr(tmp_path):
-    code_path = tmp_path / 'code.py'
-    code_path.write_text('''from traceback_with_variables import printing_tb
+    code = '''from traceback_with_variables import printing_tb
 def f(n):
     return n / 0
     
@@ -31,11 +28,9 @@ def main():
     except:
         pass
          
-main()''')
+main()'''
 
-    output = check_output(['python3', code_path], stderr=STDOUT, env={'PYTHONPATH': os.getcwd()}).decode('utf-8')
-
-    assert_smart_equals_ref('test_print.printing_tb_stderr', output)
+    assert_smart_equals_ref('test_print.printing_tb_stderr', run_code(tmp_path=tmp_path, code=code, raises=False))
 
 
 def test_printing_tb_reraise():
@@ -62,18 +57,16 @@ def test_prints_tb():
 
 
 def test_prints_tb_noncall(tmp_path):
-    code_path = tmp_path / 'code.py'
-    code_path.write_text('''from traceback_with_variables import prints_tb
+    code = '''from traceback_with_variables import prints_tb
 @prints_tb
 def f(n):
     return n / 0
 try:
     f(10)
 except:
-    pass''')
-    output = check_output(['python3', code_path], stderr=STDOUT, env={'PYTHONPATH': os.getcwd()}).decode('utf-8')
+    pass'''
 
-    assert_smart_equals_ref('test_print.prints_tb_noncall', output)
+    assert_smart_equals_ref('test_print.prints_tb_noncall', run_code(tmp_path=tmp_path, code=code, raises=False))
 
 
 def test_logger_as_file(caplog):
