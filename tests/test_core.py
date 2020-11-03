@@ -1,4 +1,4 @@
-from traceback_with_variables.core import iter_tb_lines
+from traceback_with_variables import core
 
 from tests.utils import assert_smart_equals_ref
 
@@ -27,11 +27,23 @@ def test_num_context_lines():
     check('num_context_lines', 10000, num_context_lines=5)
 
 
+def test_test_mode_1():
+    core.__test_mode = 1
+    check('test_mode_1', 10000)
+    core.__test_mode = 0
+
+
+def test_test_mode_2():
+    core.__test_mode = 2
+    check('test_mode_2', 10000)
+    core.__test_mode = 0
+
+
 def check(name, arg, **kwargs):
     try:
         f(arg)
     except Exception as e:  # noqa
-        assert_smart_equals_ref('test_core.{}'.format(name), '\n'.join(iter_tb_lines(e, **kwargs)))
+        assert_smart_equals_ref('test_core.{}'.format(name), '\n'.join(core.iter_tb_lines(e, **kwargs)))
 
 
 def f(n: int) -> int:

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "...omitted for tests only...", line 5, in <module>
+    f(10)
+  File "...omitted for tests only...", line 3, in f
+    return n / 0
+ZeroDivisionError: division by zero

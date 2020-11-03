@@ -31,11 +31,17 @@ def iter_tb_lines(
                     for line in f'{var_name} = {var_str}'.split('\n'):
                         yield f'      {line}'
 
+                if __test_mode == 1:
+                    raise ValueError('test_mode')
+
             except:  # noqa # indicates a bug in this lib
                 yield '    <traceback-with-variables: exception while printing variables>'
                 yield f'    {traceback.format_exc()}'
 
         yield f'{e.__class__.__module__}.{e.__class__.__name__}: {e}'
+
+        if __test_mode == 2:
+            raise ValueError('test_mode')
 
     except:  # noqa # indicates a bug in this lib
         yield '    <traceback-with-variables: exception while printing variables>'
@@ -59,3 +65,6 @@ def _to_cropped_str(obj: Any, max_value_str_len: int, max_exc_str_len: int, elli
             max_exc_str_len,
             ellipsis_,
         )
+
+
+__test_mode = 0

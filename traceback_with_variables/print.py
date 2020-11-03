@@ -12,7 +12,7 @@ class LoggerAsFile:
         self.logger = logger
 
     def flush(self) -> NoReturn:
-        pass
+        """pass"""
 
     def write(self, text: str) -> NoReturn:
         for line in text.rstrip('\r\n').split('\n'):
