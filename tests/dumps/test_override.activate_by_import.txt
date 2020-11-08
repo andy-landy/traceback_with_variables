@@ -7,7 +7,7 @@ Traceback with variables (most recent call last):
       __loader__ = <_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>
       __spec__ = None
       __annotations__ = {}
-      __builtins__ = <module 'builtins' (built-in)>
+      __builtins__ = {...omitted for tests only...}
       __file__ = '/...omitted for tests only...py'
       __cached__ = None
       traceback_with_variables = <module 'traceback_with_variables' from '/...omitted for tests only...py'>
