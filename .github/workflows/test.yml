@@ -32,7 +32,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          python -m pytest --cov=./traceback_with_variables --cov-report=xml
+          python -m pytest -s --cov=./traceback_with_variables --cov-report=xml
 
       - name: Upload Codecov
         uses: codecov/codecov-action@v1
