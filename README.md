@@ -9,8 +9,8 @@
 <a href="https://github.com/andy-landy/traceback_with_variables/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback_with_variables"></a>
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
-<img title="type hints in everything" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg">
-<img title="no obscure objects, only transparent functions and dataclasses" alt="No-OOP coverage" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg">
+<img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg">
+<img title="no obscure objects, only transparent functions and dataclass objects" alt="No-OOP coverage" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg">
 <a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
 <a href="https://lgtm.com/projects/g/andy-landy/traceback_with_variables/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/andy-landy/traceback_with_variables.svg?logo=lgtm&logoWidth=18"/></a>
