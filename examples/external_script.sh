@@ -1,11 +1,11 @@
 # if usually you called
-  path/to/some_external_script.py --some-arg some-value
+  path/to/some_cmd --some-arg some-value
   # or
-  python3 path/to/some_external_script.py --some-arg some-value
+  path/to/some_script.py --some-arg some-value
   # or
-  python3 -m some_external_script --some-arg some-value
+  python3 path/to/some_script.py --some-arg some-value
   # or
-  some_external_command --some-arg some-value
+  python3 -m some_module --some-arg some-value
 
 
 # then you can upgrade the traceback like this:
