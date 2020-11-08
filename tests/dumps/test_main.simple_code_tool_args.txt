@@ -1,0 +1,14 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only...", line 5, in <module>
+    f(a - 2)
+      sys = <module 's...
+      argparse = <module 'a...
+      __name__ = '__main__'
+      __builtins__ = {'__name__...
+      f = <function ...
+      a = 3
+  File "...omitted for tests only...", line 3, in f
+    return 1 / m
+      n = 1
+      m = 0
+builtins.ZeroDivisionError: division by zero

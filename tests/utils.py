@@ -38,14 +38,19 @@ def assert_smart_equals_ref(name: str, value: str) -> None:
 
 
 def run_code(tmp_path, python_argv: List[str], code: str, code_argv: List[str], raises: bool = False) -> str:
-    (tmp_path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
     code_path = tmp_path / 'code.py'
     code_path.write_text(code)
 
-    return run_cmd(argv=['python3'] + python_argv + [code_path] + code_argv, raises=raises)
+    return run_py(tmp_path=tmp_path, argv=python_argv + [str(code_path)] + code_argv, raises=raises)
 
 
-def run_cmd(argv: List[str], raises: bool = False):
+def run_py(tmp_path, argv: List[str], raises: bool = False) -> str:
+    (tmp_path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
+
+    return run_cmd(argv=['python3'] + argv, raises=raises)
+
+
+def run_cmd(argv: List[str], raises: bool = False) -> str:
     if raises:
         with pytest.raises(CalledProcessError) as e:
             check_output(argv, stderr=STDOUT)

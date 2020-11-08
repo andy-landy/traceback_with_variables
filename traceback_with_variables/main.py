@@ -1,6 +1,7 @@
 import argparse
 import sys
 from distutils.spawn import find_executable
+from importlib.util import find_spec
 from pathlib import Path
 from typing import List, Optional, NoReturn, Tuple
 
@@ -17,6 +18,11 @@ def run_script(
 ) -> int:
     sys.path[0] = str(path.parent)
     sys.argv = [str(path)] + argv
+    globals_ = {
+        'sys': sys,
+        'argparse': argparse,
+        '__name__': '__main__',
+    }
 
     with printing_tb(
         reraise=False,
@@ -26,11 +32,7 @@ def run_script(
         ellipsis_=ellipsis_,
         num_context_lines=num_context_lines,
     ):
-        exec(
-            compile(path.read_text(), str(path), "exec"),
-            {"__name__": "__main__"},
-            {"__name__": "__main__"},
-        )
+        exec(compile(path.read_text(), str(path), "exec"), globals_, globals_)
 
         return 0
 
@@ -68,7 +70,7 @@ def split_argv_to_own_and_sub(
 def parse_args_and_script_cmd(
     raising_nohelp_noabbrev_parser: argparse.ArgumentParser,  # with raising .error, no help, no abbrev
 ) -> Tuple[argparse.Namespace, Path, List[str]]:
-    public_parser = argparse.ArgumentParser(parents=[raising_nohelp_noabbrev_parser])
+    public_parser = argparse.ArgumentParser(parents=[raising_nohelp_noabbrev_parser])  # only complains
     public_parser.add_argument("script")
     public_parser.add_argument("script-arg", nargs="*")
 
@@ -76,27 +78,27 @@ def parse_args_and_script_cmd(
         raising_nohelp_noabbrev_parser, sys.argv
     )
 
+    args = argparse.Namespace()  # make linter happy
     try:
         args = raising_nohelp_noabbrev_parser.parse_args(own_argv)
     except ParseError:
         public_parser.parse_args(own_argv)
-        args = argparse.Namespace()  # not gonna happen anyway, public_parser exits
 
     if not sub_argv:
         public_parser.parse_args(own_argv)
 
-    if sub_argv[0] == "--help":
-        public_parser.parse_args(["--help"])
+    if sub_argv[0].startswith('-'):
+        public_parser.parse_args(own_argv + sub_argv[:1] + ['some_cmd'])
 
     script_path_str = find_executable(sub_argv[0])
 
     if not script_path_str:
-        module = sys.modules.get(script_path_str)
+        module_spec = find_spec(sub_argv[0])
 
-        if not module:
-            raise ValueError(f"No such file or command or module: {sub_argv[0]}")
+        if not module_spec:
+            public_parser.error(f"No such file or command or module: {sub_argv[0]}")
 
-        script_path_str = module.__file__
+        script_path_str = module_spec.origin
 
     return args, Path(script_path_str), sub_argv[1:]
 
