@@ -30,7 +30,7 @@ def main():
          
 main()'''
 
-    assert_smart_equals_ref('test_print.printing_tb_stderr', run_code(tmp_path=tmp_path, code=code, raises=False))
+    assert_smart_equals_ref('test_print.printing_tb_stderr', run_code(tmp_path, [], code, [], False))
 
 
 def test_printing_tb_reraise():
@@ -66,7 +66,7 @@ try:
 except:
     pass'''
 
-    assert_smart_equals_ref('test_print.prints_tb_noncall', run_code(tmp_path=tmp_path, code=code, raises=False))
+    assert_smart_equals_ref('test_print.prints_tb_noncall', run_code(tmp_path, [], code, [], False))
 
 
 def test_logger_as_file(caplog):

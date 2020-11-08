@@ -37,12 +37,12 @@ def assert_smart_equals_ref(name: str, value: str) -> None:
     assert_equals_ref(name, value)
 
 
-def run_code(tmp_path, code: str, raises: bool = False) -> str:
+def run_code(tmp_path, python_argv: List[str], code: str, code_argv: List[str], raises: bool = False) -> str:
     (tmp_path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
     code_path = tmp_path / 'code.py'
     code_path.write_text(code)
 
-    return run_cmd(argv=['python3', code_path], raises=raises)
+    return run_cmd(argv=['python3'] + python_argv + [code_path] + code_argv, raises=raises)
 
 
 def run_cmd(argv: List[str], raises: bool = False):

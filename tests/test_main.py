@@ -1,6 +1,6 @@
 from typing import List
 
-from tests.utils import assert_smart_equals_ref, run_cmd
+from tests.utils import assert_smart_equals_ref, run_code
 
 
 simple_code = '''def f(n):
@@ -25,16 +25,19 @@ f(a - 2)'''
 
 
 def test_simple_code_no_args(tmp_path):
-    run_code(tmp_path, 'simple_code_no_args', simple_code, [], True)
+    _test('simple_code_no_args', tmp_path, [], simple_code, [], True)
 
 
-def run_code(tmp_path, name: str, code: str, argv: List[str], raises: bool):
-    code_path = tmp_path / 'code.py'
-    code_path.write_text(simple_code)
-
+def _test(name: str, tmp_path, main_argv: List[str], code: str, code_argv: List[str], raises: bool):
     assert_smart_equals_ref(
         f'test_main.{name}',
-        run_cmd(['python3', 'traceback_with_variables/main.py', str(code_path)] + argv, raises=True)
+        run_code(
+            tmp_path=tmp_path,
+            python_argv=['traceback_with_variables/main.py'] + main_argv,
+            code=code,
+            code_argv=code_argv,
+            raises=raises
+        )
     )
 
 # test module, command, script
