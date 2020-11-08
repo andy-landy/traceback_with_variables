@@ -31,5 +31,13 @@ setuptools.setup(
         'Topic :: Software Development :: Debuggers',
         'Topic :: Software Development :: Libraries',
     ],
-    python_requires='>=3.4',
+    entry_points={'console_scripts': [
+        'traceback-with-variables = traceback_with_variables.main:main',
+    ]},
+    tests_require=[
+        'flake8',
+        'pytest-cov'
+    ],
+    install_requires=[],
+    python_requires='>=3.5',
 )

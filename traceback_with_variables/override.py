@@ -15,7 +15,7 @@ def override_print_tb(
 ) -> NoReturn:
     if (activate_by_env_var and not os.getenv(activate_by_env_var, '')) or \
             (deactivate_by_env_var and os.getenv(deactivate_by_env_var, '')):
-        return sys.excepthook
+        return
 
     def excepthook(
         e_cls,  # noqa

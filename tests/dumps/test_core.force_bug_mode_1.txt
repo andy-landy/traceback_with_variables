@@ -1,10 +1,25 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only.../tests/test_core.py", line 44, in check
     f(arg)
-      name = 'test_mode_2'
+      name = 'force_bug_mode_1'
       arg = 10000
       kwargs = {}
       e = ZeroDivisionError('integer division or modulo by zero')
+    <traceback-with-variables: exception while printing variables>
+    Traceback (most recent call last):
+  File "...omitted for tests only.../tests/test_core.py", line 44, in check
+    f(arg)
+  File "...omitted for tests only.../tests/test_core.py", line 55, in f
+    return 1 // (n * 0)
+ZeroDivisionError: integer division or modulo by zero
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "...omitted for tests only.../traceback_with_variables/core.py", line 35, in iter_tb_lines
+    raise ValueError('force_bug_mode')
+ValueError: force_bug_mode
+
   File "...omitted for tests only.../tests/test_core.py", line 55, in f
     return 1 // (n * 0)
       n = 10000
@@ -17,9 +32,8 @@ Traceback with variables (most recent call last):
             raise ValueError("please don't print me")
         ValueError: please don't print me
         
-builtins.ZeroDivisionError: integer division or modulo by zero
     <traceback-with-variables: exception while printing variables>
-Traceback (most recent call last):
+    Traceback (most recent call last):
   File "...omitted for tests only.../tests/test_core.py", line 44, in check
     f(arg)
   File "...omitted for tests only.../tests/test_core.py", line 55, in f
@@ -29,6 +43,8 @@ ZeroDivisionError: integer division or modulo by zero
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "...omitted for tests only.../traceback_with_variables/core.py", line 44, in iter_tb_lines
-    raise ValueError('test_mode')
-ValueError: test_mode
+  File "...omitted for tests only.../traceback_with_variables/core.py", line 35, in iter_tb_lines
+    raise ValueError('force_bug_mode')
+ValueError: force_bug_mode
+
+builtins.ZeroDivisionError: integer division or modulo by zero

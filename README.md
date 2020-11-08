@@ -1,7 +1,7 @@
 ![Example](https://raw.githubusercontent.com/andy-landy/traceback_with_variables/master/header.png)
 
 <h2 align="center">Python Traceback (Error Message) Printing Variables</h2>
-<p align="center">Very simple to use, but versatile when needed.</p>
+<p align="center">Very simple to use, but versatile when needed. Try for debug and keep for production.</p>
 
 <p align="center">
 <a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
@@ -9,12 +9,16 @@
 <a href="https://github.com/andy-landy/traceback_with_variables/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback_with_variables"></a>
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
+<img title="type hints in everything" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg">
+<img title="no obscure objects, only transparent functions and dataclasses" alt="No-OOP coverage" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg">
+<a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
+<a href="https://lgtm.com/projects/g/andy-landy/traceback_with_variables/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/andy-landy/traceback_with_variables.svg?logo=lgtm&logoWidth=18"/></a>
 <a href="https://pepy.tech/project/traceback_with_variables"><img alt="Downloads" src="https://pepy.tech/badge/traceback_with_variables"></a>
 <a href="https://anaconda.org/conda-forge/traceback_with_variables/"><img alt="conda-forge" src="https://img.shields.io/conda/dn/conda-forge/traceback_with_variables.svg?label=conda-forge"></a>
 -->
 </p>
-</br>
+<br/>
 
 > “It is useless work that darkens the heart.” 
 > <em>– Ursula K. Le Guin</em>
@@ -64,6 +68,11 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     with printing_tb(file_=LoggerAsFile(logger)):
     # or
     @prints_tb(file_=LoggerAsFile(logger)): 
+```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">Running external tool/command/script in console</a>:
+```
+traceback-with-variables ...command with arguments...
 ```
 
 ### How does it save my time?

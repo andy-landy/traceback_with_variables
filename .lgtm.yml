@@ -1,0 +1,10 @@
+queries:
+  - exclude: py/catch-base-exception
+
+path_classifiers:
+  library:
+    - traceback_with_variables/
+  test:
+    - tests/
+  docs:
+    - examples/

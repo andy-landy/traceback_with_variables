@@ -2,6 +2,7 @@ import os
 import re
 from pathlib import Path
 from subprocess import check_output, CalledProcessError, STDOUT
+from typing import List
 
 import pytest
 
@@ -36,15 +37,19 @@ def assert_smart_equals_ref(name: str, value: str) -> None:
     assert_equals_ref(name, value)
 
 
-def run_code(tmp_path, code, raises=False):
+def run_code(tmp_path, code: str, raises: bool = False) -> str:
     (tmp_path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
     code_path = tmp_path / 'code.py'
     code_path.write_text(code)
 
+    return run_cmd(argv=['python3', code_path], raises=raises)
+
+
+def run_cmd(argv: List[str], raises: bool = False):
     if raises:
         with pytest.raises(CalledProcessError) as e:
-            check_output(['python3', code_path], stderr=STDOUT)
+            check_output(argv, stderr=STDOUT)
 
         return e.value.output.decode('utf-8')
 
-    return check_output(['python3', code_path], stderr=STDOUT).decode('utf-8')
+    return check_output(argv, stderr=STDOUT).decode('utf-8')

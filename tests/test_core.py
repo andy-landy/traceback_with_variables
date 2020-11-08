@@ -27,16 +27,16 @@ def test_num_context_lines():
     check('num_context_lines', 10000, num_context_lines=5)
 
 
-def test_test_mode_1():
-    core.__test_mode = 1
-    check('test_mode_1', 10000)
-    core.__test_mode = 0
+def test_force_bug_mode_1():
+    core.__force_bug_mode = 1
+    check('force_bug_mode_1', 10000)
+    core.__force_bug_mode = 0
 
 
-def test_test_mode_2():
-    core.__test_mode = 2
-    check('test_mode_2', 10000)
-    core.__test_mode = 0
+def test_force_bug_mode_2():
+    core.__force_bug_mode = 2
+    check('force_bug_mode_2', 10000)
+    core.__force_bug_mode = 0
 
 
 def check(name, arg, **kwargs):
