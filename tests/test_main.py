@@ -81,7 +81,7 @@ def _test_code(name: str, tmp_path, main_argv: List[str], code: str, code_argv: 
             code=code,
             code_argv=code_argv,
             raises=raises
-        )
+        ).replace('[script-arg [script-arg ...]]', '[script-arg ...]')  # python 3.9+
     )
 
 
@@ -92,5 +92,5 @@ def _test_cmd(name: str, tmp_path, argv: List[str], raises: bool):
             tmp_path=tmp_path,
             argv=['-m', 'traceback_with_variables.main'] + argv,
             raises=raises
-        )
+        ).replace('[script-arg [script-arg ...]]', '[script-arg ...]')  # python 3.9+
     )
