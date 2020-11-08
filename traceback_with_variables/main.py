@@ -60,7 +60,7 @@ def split_argv_to_own_and_sub(
 
         except ParseError as e:
             if e.args[0].startswith("unrecognized arguments"):
-                return _argv[: num_args - 1], _argv[num_args - 1 :]
+                return _argv[: num_args - 1], _argv[num_args - 1:]
 
     return _argv, []
 
