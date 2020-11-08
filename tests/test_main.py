@@ -33,7 +33,7 @@ def _test(name: str, tmp_path, main_argv: List[str], code: str, code_argv: List[
         f'test_main.{name}',
         run_code(
             tmp_path=tmp_path,
-            python_argv=['traceback_with_variables/main.py'] + main_argv,
+            python_argv=['-m', 'traceback_with_variables.main'] + main_argv,
             code=code,
             code_argv=code_argv,
             raises=raises
