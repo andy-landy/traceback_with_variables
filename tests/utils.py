@@ -33,7 +33,7 @@ def assert_smart_equals_ref(name: str, value: str) -> None:
     value = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', value)
     value = re.sub(r"'/.*\.py'", "'/...omitted for tests only...py'", value)
     value = re.sub(r'( at 0x)\w+', r'\1...omitted for tests only...', value)
-    value = re.sub(r'(      __builtins__ = )[^\n]*', r'\1{...omitted for tests only...}', value)
+    value = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1...omitted for tests only...}', value)
 
     assert_equals_ref(name, value)
 

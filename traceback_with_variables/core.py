@@ -34,8 +34,10 @@ def iter_tb_lines(
             try:
                 for var_name, var in frame.f_locals.items():
                     var_str = _to_cropped_str(var, max_value_str_len, max_exc_str_len, ellipsis_)
-                    for line in f'{c.n}{var_name}{c.c_} = {c.v_}{var_str}{c.e}'.split('\n'):
-                        yield f'{c.c}      {c.e}{line}'
+                    var_lines = var_str.split('\n')
+                    yield f'{c.c}      {c.n_}{var_name}{c.c_} = {c.v_}{var_lines[0] if var_lines else var_str}{c.e}'
+                    for line in var_lines[1:]:
+                        yield f'{c.c}      {c.v_}{line}{c.e}'
 
                 if __force_bug_mode == 1:
                     raise ValueError('force_bug_mode')
