@@ -14,7 +14,8 @@ def iter_tb_lines(
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
     num_context_lines: int = 1,
-    color_scheme: ColorScheme = ColorSchemes.none
+    color_scheme: ColorScheme = ColorSchemes.none,
+    __force_bug_mode: int = 0,  # for tests only
 ) -> Iterator[str]:
     c = color_scheme
 
@@ -70,6 +71,3 @@ def _to_cropped_str(obj: Any, max_value_str_len: int, max_exc_str_len: int, elli
             max_exc_str_len,
             ellipsis_,
         )
-
-
-__force_bug_mode = 0

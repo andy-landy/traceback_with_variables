@@ -36,19 +36,11 @@ def test_color_scheme_synthwave():
 
 
 def test_force_bug_mode_1():
-    try:
-        core.__force_bug_mode = 1
-        check('force_bug_mode_1', 10000)
-    finally:
-        core.__force_bug_mode = 0
+    check('force_bug_mode_1', 10000, __force_bug_mode=1)
 
 
 def test_force_bug_mode_2():
-    try:
-        core.__force_bug_mode = 2
-        check('force_bug_mode_2', 10000)
-    finally:
-        core.__force_bug_mode = 0
+    check('force_bug_mode_2', 10000, __force_bug_mode=2)
 
 
 def check(name, arg, **kwargs):
