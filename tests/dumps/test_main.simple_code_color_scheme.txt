@@ -1,0 +1,14 @@
+[37mTraceback with variables (most recent call last):[0m
+[37m  File "...omitted for tests only...", line [0m[36;1m5[0m[37m, in [0m[36;1m<module>[0m
+[37m    [0m[36mf(a - 2)[0m
+[37m      [0m[32;1msys[0m[37m = [0m[37m<module 'sys' (built-in)>[0m
+[37m      [0m[32;1margparse[0m[37m = [0m[37m<module 'argparse' from '/...omitted for tests only...py'>[0m
+[37m      [0m[32;1m__name__[0m[37m = [0m[37m'__main__'[0m
+[37m      [0m[32;1m__builtins__[0m[37m = [0m[37m{'__name__': 'builtins', '__doc__': "Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-i...[0m
+[37m      [0m[32;1mf[0m[37m = [0m[37m<function f at 0x...omitted for tests only...>[0m
+[37m      [0m[32;1ma[0m[37m = [0m[37m3[0m
+[37m  File "...omitted for tests only...", line [0m[36;1m3[0m[37m, in [0m[36;1mf[0m
+[37m    [0m[36mreturn 1 / m[0m
+[37m      [0m[32;1mn[0m[37m = [0m[37m1[0m
+[37m      [0m[32;1mm[0m[37m = [0m[37m0[0m
+[31mbuiltins.ZeroDivisionError:[0m[91m division by zero[0m
