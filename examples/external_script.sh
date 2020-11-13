@@ -9,9 +9,6 @@
 
 
 # then you can upgrade the traceback like this:
-  # help:
-  traceback-with-variables --help
-
   # script and it's args
   traceback-with-varaibles path/to/some_script.py --some-arg some-value ...
 
@@ -20,6 +17,14 @@
 
   # a module (e.g. 'http.server') and it's args
   traceback-with-varaibles http.server ...
+
+
+# help:
+  traceback-with-variables --help
+
+
+# synthwave
+  traceback_with_variables --color-scheme synthwave ...
 
 
 # more

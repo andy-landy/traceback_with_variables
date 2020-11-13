@@ -5,7 +5,7 @@ from importlib.util import find_spec
 from pathlib import Path
 from typing import List, Optional, NoReturn, Tuple
 
-from traceback_with_variables import printing_tb
+from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme
 
 
 def run_script(
@@ -15,6 +15,7 @@ def run_script(
     max_exc_str_len: int,
     ellipsis_: str,
     num_context_lines: int,
+    color_scheme: ColorScheme,
 ) -> int:
     sys.path[0] = str(path.parent)
     sys.argv = [str(path)] + argv
@@ -31,6 +32,7 @@ def run_script(
         max_exc_str_len=max_exc_str_len,
         ellipsis_=ellipsis_,
         num_context_lines=num_context_lines,
+        color_scheme=color_scheme,
     ):
         exec(compile(path.read_text(), str(path), "exec"), globals_, globals_)
 
@@ -50,7 +52,7 @@ def raising_error_func(message: str) -> NoReturn:
     raise ParseError(message)
 
 
-def split_argv_to_own_and_sub(
+def split_argv_to_own_and_script(
     raising_noabbrev_parser: argparse.ArgumentParser,  # with raising .error, no abbrev
     argv: Optional[List[str]] = None,
 ) -> Tuple[List[str], List[str]]:
@@ -70,11 +72,13 @@ def split_argv_to_own_and_sub(
 def parse_args_and_script_cmd(
     raising_nohelp_noabbrev_parser: argparse.ArgumentParser,  # with raising .error, no help, no abbrev
 ) -> Tuple[argparse.Namespace, Path, List[str]]:
-    public_parser = argparse.ArgumentParser(parents=[raising_nohelp_noabbrev_parser])  # only complains
+    # public_parser is only for help messages and complaints, it is always called with wrong arguments or '--help'
+    # so it terminates the program and exits with status 1 (or 0 if called with '--help')
+    public_parser = argparse.ArgumentParser(parents=[raising_nohelp_noabbrev_parser])
     public_parser.add_argument("script")
     public_parser.add_argument("script-arg", nargs="*")
 
-    own_argv, sub_argv = split_argv_to_own_and_sub(
+    own_argv, script_argv = split_argv_to_own_and_script(
         raising_nohelp_noabbrev_parser, sys.argv
     )
 
@@ -84,23 +88,23 @@ def parse_args_and_script_cmd(
     except ParseError:
         public_parser.parse_args(own_argv)
 
-    if not sub_argv:
+    if not script_argv:
         public_parser.parse_args(own_argv)
 
-    if sub_argv[0].startswith('-'):
-        public_parser.parse_args(own_argv + sub_argv[:1] + ['some_cmd'])
+    if script_argv[0].startswith('-'):
+        public_parser.parse_args(own_argv + script_argv[:1] + ['some_cmd'])
 
-    script_path_str = find_executable(sub_argv[0])
+    script_path_str = find_executable(script_argv[0])
 
     if not script_path_str:
-        module_spec = find_spec(sub_argv[0])
+        module_spec = find_spec(script_argv[0])
 
         if not module_spec:
-            public_parser.error(f"No such file or command or module: {sub_argv[0]}")
+            public_parser.error(f"No such file or command or module: {script_argv[0]}")
 
         script_path_str = module_spec.origin
 
-    return args, Path(script_path_str), sub_argv[1:]
+    return args, Path(script_path_str), script_argv[1:]
 
 
 def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
@@ -111,6 +115,8 @@ def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
     parser.add_argument("--max-exc-str-len", type=int, default=10000)
     parser.add_argument("--ellipsis", default="...")
     parser.add_argument("--num-context-lines", type=int, default=1)
+    parser.add_argument("--color-scheme", default='default' if sys.stdout.isatty() else 'none',
+                        choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
 
     return parse_args_and_script_cmd(parser)
 
@@ -126,6 +132,7 @@ def main():
             max_exc_str_len=args.max_exc_str_len,
             ellipsis_=args.ellipsis,
             num_context_lines=args.num_context_lines,
+            color_scheme=getattr(ColorSchemes, args.color_scheme),
         )
     )
 

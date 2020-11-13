@@ -1,4 +1,4 @@
-from traceback_with_variables import override_print_tb
+from traceback_with_variables import override_print_tb, ColorSchemes
 
 
 def main():
@@ -8,7 +8,8 @@ def main():
         max_exc_str_len=1000,
         ellipsis_='...',
         activate_by_env_var='PY_PRINT_VARS',
-        deactivate_by_env_var='PY_DONT_PRINT_VARS'
+        deactivate_by_env_var='PY_DONT_PRINT_VARS',
+        color_scheme=ColorSchemes.synthwave,
     )
 
     n = 0

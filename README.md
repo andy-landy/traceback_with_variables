@@ -11,6 +11,7 @@
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
 <img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg">
 <img title="no obscure objects, only transparent functions and dataclass objects" alt="No-OOP coverage" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg">
+<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
 <a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
 <a href="https://lgtm.com/projects/g/andy-landy/traceback_with_variables/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/andy-landy/traceback_with_variables.svg?logo=lgtm&logoWidth=18"/></a>
@@ -29,6 +30,7 @@ Automate it and clean your code. Once and for all.
 ---
 
 _Contents:_ **[Installation](#installation)** | **[Quick Start](#quick-start)**
+| **[Colors](#colors)**
 | **[How does it save my time?](#how-does-it-save-my-time)** | 
 **[Examples and recipes](#examples-and-recipes)** | **[Reference](#reference)**
 
@@ -45,6 +47,11 @@ pip install traceback-with-variables
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage</a>, for the whole program:
 ```python
     from traceback_with_variables import activate_by_import
+```
+
+Using without code editing, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">running your script/command/module</a>:
+```
+traceback-with-variables ...script/tool/module with arguments...
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">Decorator</a>, for a single function:
@@ -70,10 +77,10 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     @prints_tb(file_=LoggerAsFile(logger)): 
 ```
 
-<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">Running external tool/command/script in console</a>:
-```
-traceback-with-variables ...command with arguments...
-```
+### Colors
+
+![Example](https://raw.githubusercontent.com/andy-landy/traceback_with_variables/master/color_schemes.png)
+
 
 ### How does it save my time?
 
@@ -86,10 +93,10 @@ traceback-with-variables ...command with arguments...
     -     try:
               return get_avg_ratio([h1, w1], [h2, w2])
     -     except:
-    -         logger.error(f'something happened :(, variables = {variables()[:1000]}')
+    -         logger.error(f'something happened :(, variables = {locals()[:1000]}')
     -         raise
     -         # or
-    -         raise MyToolException(f'something happened :(, variables = {variables()[:1000]}')
+    -         raise MyToolException(f'something happened :(, variables = {locals()[:1000]}')
               
       def get_avg_ratio(size1, size2):
     -     try:
@@ -201,6 +208,12 @@ traceback-with-variables ...command with arguments...
         ...
     ```
 
+* Should I use it after debugging is over, i.e. *in production*?
+
+    Yes, of course! That way it might save you even more time.
+
+<br/>
+
 * Stop this tedious practice in production:
    
      step 1: Notice some exception in a production service. \
@@ -210,6 +223,7 @@ traceback-with-variables ...command with arguments...
      step 5: Examine the printouts and possibly add some more info (then go back to step 2). \
      step 6: Erase all recently added printouts, logging and exception messages. \
      step 7: Go back to step 1 once bugs appear.
+     
 
 ### Examples and recipes
 
@@ -232,6 +246,7 @@ traceback-with-variables ...command with arguments...
 * `num_context_lines` number of lines around the target code line to print
 * `ellipsis_` string to denote long strings truncation, default=`...`
 * `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
+* `color_scheme` one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.none` (by default), `.common`, `.synthwave` 
 
 ---
 

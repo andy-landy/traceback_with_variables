@@ -28,6 +28,10 @@ def test_simple_code_no_args(tmp_path):
     _test_code('simple_code_no_args', tmp_path, [], simple_code, [], True)
 
 
+def test_simple_code_color_scheme(tmp_path):
+    _test_code('simple_code_color_scheme', tmp_path, ['--color-scheme', 'common'], simple_code, [], True)
+
+
 def test_simple_code_excess_script_args(tmp_path):
     _test_code('simple_code_excess_script_args', tmp_path, [], simple_code, ['--b', '2'], True)
 

@@ -1,4 +1,4 @@
-from traceback_with_variables import printing_tb
+from traceback_with_variables import printing_tb, ColorSchemes
 
 
 def f(n):
@@ -13,6 +13,7 @@ def main():
         ellipsis_='...',
         skip_cur_frame=True,  # e.g. no info about 'x'
         reraise=False,  # i.e. program won't fail, exceptions stay inside
+        color_scheme=ColorSchemes.synthwave,
     ):
         x = 1
         f(x - 1)

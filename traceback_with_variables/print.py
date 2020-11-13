@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from functools import wraps
 from typing import NoReturn, Union, TextIO, Optional, Callable
 
-from traceback_with_variables.core import iter_tb_lines
+from traceback_with_variables.core import iter_tb_lines, ColorScheme, ColorSchemes
 
 
 class LoggerAsFile:
@@ -29,6 +29,7 @@ def printing_tb(
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
+    color_scheme: ColorScheme = ColorSchemes.none,
 ):
     try:
         yield
@@ -43,6 +44,7 @@ def printing_tb(
                 max_exc_str_len=max_exc_str_len,
                 ellipsis_=ellipsis_,
                 num_context_lines=num_context_lines,
+                color_scheme=color_scheme,
             ):
                 file_.write(trace_str + '\n')
 
@@ -61,6 +63,7 @@ def prints_tb(
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
+    color_scheme: ColorScheme = ColorSchemes.none,
 ):
     if func__for_noncall_case_only:
         return prints_tb(
@@ -70,6 +73,7 @@ def prints_tb(
             max_value_str_len=max_value_str_len,
             max_exc_str_len=max_exc_str_len,
             ellipsis_=ellipsis_,
+            color_scheme=color_scheme,
         )(func__for_noncall_case_only)
 
     def decorator(func):
@@ -84,6 +88,7 @@ def prints_tb(
                 max_value_str_len=max_value_str_len,
                 max_exc_str_len=max_exc_str_len,
                 ellipsis_=ellipsis_,
+                color_scheme=color_scheme,
             ):
                 return func(*args, **kwargs)
 

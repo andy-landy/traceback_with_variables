@@ -2,7 +2,7 @@ import os
 import sys
 from typing import NoReturn
 
-from traceback_with_variables.core import iter_tb_lines
+from traceback_with_variables.core import iter_tb_lines, ColorScheme, ColorSchemes
 
 
 def override_print_tb(
@@ -12,6 +12,7 @@ def override_print_tb(
     num_context_lines: int = 1,
     activate_by_env_var: str = '',
     deactivate_by_env_var: str = '',
+    color_scheme: ColorScheme = ColorSchemes.none,
 ) -> NoReturn:
     if (activate_by_env_var and not os.getenv(activate_by_env_var, '')) or \
             (deactivate_by_env_var and os.getenv(deactivate_by_env_var, '')):
@@ -29,6 +30,7 @@ def override_print_tb(
             max_value_str_len=max_value_str_len,
             max_exc_str_len=max_exc_str_len,
             ellipsis_=ellipsis_,
+            color_scheme=color_scheme,
         ):
             sys.stderr.write(line)
             sys.stderr.write('\n')

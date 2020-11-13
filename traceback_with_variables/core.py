@@ -3,6 +3,8 @@ import traceback
 from types import TracebackType
 from typing import Any, Iterator, Union, Optional
 
+from traceback_with_variables.color import ColorScheme, ColorSchemes
+
 
 def iter_tb_lines(
     e: Exception,
@@ -12,24 +14,27 @@ def iter_tb_lines(
     max_exc_str_len: int = 10000,
     ellipsis_: str = '...',
     num_context_lines: int = 1,
+    color_scheme: ColorScheme = ColorSchemes.none
 ) -> Iterator[str]:
+    c = color_scheme
+
     try:
-        yield 'Traceback with variables (most recent call last):'
+        yield f'{c.c}Traceback with variables (most recent call last):{c.e}'
 
         trace = inspect.getinnerframes(tb, context=num_context_lines) \
             if tb else inspect.trace(context=num_context_lines)
 
         for frame, filename, line_num, func_name, code_lines, func_line_num in trace[num_skipped_frames:]:
-            yield f'  File "{filename}", line {line_num}, in {func_name}'
+            yield f'{c.c}  File "{c.f_}{filename}{c.c_}", line {c.ln_}{line_num}{c.c_}, in {c.fn_}{func_name}{c.e}'
 
             if code_lines:
-                yield '    ' + ''.join(code_lines).rstrip('\r\n').lstrip(' ')  # TODO strip
+                yield f'{c.c}    {c.fs_}{"".join(code_lines).strip()}{c.e}'
 
             try:
                 for var_name, var in frame.f_locals.items():
                     var_str = _to_cropped_str(var, max_value_str_len, max_exc_str_len, ellipsis_)
-                    for line in f'{var_name} = {var_str}'.split('\n'):
-                        yield f'      {line}'
+                    for line in f'{c.n}{var_name}{c.c_} = {c.v_}{var_str}{c.e}'.split('\n'):
+                        yield f'{c.c}      {c.e}{line}'
 
                 if __force_bug_mode == 1:
                     raise ValueError('force_bug_mode')
@@ -38,7 +43,7 @@ def iter_tb_lines(
                 yield '    <traceback-with-variables: exception while printing variables>'
                 yield f'    {traceback.format_exc()}'
 
-        yield f'{e.__class__.__module__}.{e.__class__.__name__}: {e}'
+        yield f'{c.ec}{e.__class__.__module__}.{e.__class__.__name__}:{c.et_} {e}{c.e}'
 
         if __force_bug_mode == 2:
             raise ValueError('force_bug_mode')

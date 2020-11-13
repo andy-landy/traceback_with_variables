@@ -1,4 +1,4 @@
-from traceback_with_variables import core
+from traceback_with_variables import core, ColorSchemes
 
 from tests.utils import assert_smart_equals_ref
 
@@ -27,16 +27,28 @@ def test_num_context_lines():
     check('num_context_lines', 10000, num_context_lines=5)
 
 
+def test_color_scheme_common():
+    check('color_scheme_common', 10000, color_scheme=ColorSchemes.common)
+
+
+def test_color_scheme_synthwave():
+    check('color_scheme_synthwave', 10000, color_scheme=ColorSchemes.synthwave)
+
+
 def test_force_bug_mode_1():
-    core.__force_bug_mode = 1
-    check('force_bug_mode_1', 10000)
-    core.__force_bug_mode = 0
+    try:
+        core.__force_bug_mode = 1
+        check('force_bug_mode_1', 10000)
+    finally:
+        core.__force_bug_mode = 0
 
 
 def test_force_bug_mode_2():
-    core.__force_bug_mode = 2
-    check('force_bug_mode_2', 10000)
-    core.__force_bug_mode = 0
+    try:
+        core.__force_bug_mode = 2
+        check('force_bug_mode_2', 10000)
+    finally:
+        core.__force_bug_mode = 0
 
 
 def check(name, arg, **kwargs):
