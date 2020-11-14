@@ -115,7 +115,7 @@ def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
     parser.add_argument("--max-exc-str-len", type=int, default=10000)
     parser.add_argument("--ellipsis", default="...")
     parser.add_argument("--num-context-lines", type=int, default=1)
-    parser.add_argument("--color-scheme", default='default' if sys.stdout.isatty() else 'none',
+    parser.add_argument("--color-scheme", default='common' if sys.stderr.isatty() else 'none',
                         choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
 
     return parse_args_and_script_cmd(parser)
