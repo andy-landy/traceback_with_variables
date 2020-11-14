@@ -11,9 +11,9 @@ setuptools.setup(
     author='Andrey Lyashko',
     author_email='andrewlyashko@gmail.com',
     description='Adds variables to python traceback. Simple, lightweight, cont'
-    'rollable. Debug reasons of exceptions by pretty printing variable con'
-    'texts for each frame in a stacktrace, showing every value. Dump local'
-    's environments after errors to console, files, and loggers.',
+    'rollable. Debug reasons of exceptions by logging or pretty printing color'
+    'ful variable contexts for each frame in a stacktrace, showing every value'
+    '. Dump locals environments after errors to console, files, and loggers.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/andy-landy/traceback_with_variables',
@@ -22,7 +22,7 @@ setuptools.setup(
               'variables', 'python3', 'stacktrace', 'arguments', 'errors',
               'error-handling', 'dump', 'exception-handling', 'exceptions',
               'pretty', 'pretty-print', 'frame', 'simple',
-              'environment-variables'],
+              'colors'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
