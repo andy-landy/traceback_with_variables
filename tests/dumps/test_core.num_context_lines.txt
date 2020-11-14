@@ -4,7 +4,7 @@ Traceback with variables (most recent call last):
     try:
         f(arg)
     except Exception as e:  # noqa
-        assert_smart_equals_ref('test_core.{}'.format(name), '\n'.join(core.iter_tb_lines(e, **kwargs)))
+        assert_smart_equals_ref('test_core.{}'.format(name), '/n'.join(core.iter_tb_lines(e, **kwargs)))
       name = 'num_context_lines'
       arg = 10000
       kwargs = {'num_context_lines': 5}

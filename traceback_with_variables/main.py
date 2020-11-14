@@ -1,11 +1,12 @@
 import argparse
+import os
 import sys
 from distutils.spawn import find_executable
 from importlib.util import find_spec
 from pathlib import Path
 from typing import List, Optional, NoReturn, Tuple
 
-from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme
+from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme, supports_ansi
 
 
 def run_script(
@@ -94,7 +95,10 @@ def parse_args_and_script_cmd(
     if script_argv[0].startswith('-'):
         public_parser.parse_args(own_argv + script_argv[:1] + ['some_cmd'])
 
-    script_path_str = find_executable(script_argv[0])
+    if os.path.isfile(script_argv[0]):
+        script_path_str = script_argv[0]
+    else:
+        script_path_str = find_executable(script_argv[0])
 
     if not script_path_str:
         module_spec = find_spec(script_argv[0])
@@ -115,7 +119,7 @@ def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
     parser.add_argument("--max-exc-str-len", type=int, default=10000)
     parser.add_argument("--ellipsis", default="...")
     parser.add_argument("--num-context-lines", type=int, default=1)
-    parser.add_argument("--color-scheme", default='common' if sys.stderr.isatty() else 'none',
+    parser.add_argument("--color-scheme", default='common' if supports_ansi(sys.stderr) else 'none',
                         choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
 
     return parse_args_and_script_cmd(parser)

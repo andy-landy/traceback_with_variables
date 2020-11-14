@@ -1,3 +1,25 @@
+import os
+import sys
+from typing import TextIO
+
+
+def supports_ansi(file_: TextIO) -> bool:
+    try:
+        import winreg
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 'Console')
+        win_reg_ok = winreg.QueryValueEx(key, 'VirtualTerminalLevel')[0] == 1
+    except (ModuleNotFoundError, FileNotFoundError):
+        win_reg_ok = False
+
+    return hasattr(file_, 'isatty') and file_.isatty() and (
+        sys.platform != 'win32'
+        or win_reg_ok
+        or 'WT_SESSION' in os.environ
+        or os.environ.get('TERM_PROGRAM', '') == 'vscode'
+        or 'ANSICON' in os.environ
+    )
+
+
 def to_ansi(str_: str) -> str:
     return f'\033[{str_}m' if str_ else ''
 

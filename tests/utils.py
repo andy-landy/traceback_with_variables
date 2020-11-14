@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from pathlib import Path
 from subprocess import check_output, CalledProcessError, STDOUT
 from typing import List
@@ -10,8 +11,9 @@ import traceback_with_variables
 
 
 def f(a, b):
-    print(a)
-    print(b)
+    if a != b:
+        print(a)
+        print(b)
     assert a == b
 
 
@@ -28,6 +30,10 @@ def assert_equals_ref(name: str, value: str) -> None:
 
 
 def assert_smart_equals_ref(name: str, value: str) -> None:
+    value = value.replace('\\\\', '\\')  # for windows
+    value = re.sub('.:\\\\', '/', value)  # for windows
+    value = value.replace('\\', '/')  # for windows
+    value = value.replace('\r', '')  # for windows
     for dir_ in ['traceback_with_variables', 'tests']:
         value = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...omitted for tests only...\2', value)
     value = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', value)
@@ -48,7 +54,7 @@ def run_code(tmp_path, python_argv: List[str], code: str, code_argv: List[str], 
 def run_py(tmp_path, argv: List[str], raises: bool = False) -> str:
     (tmp_path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
 
-    return run_cmd(argv=['python3'] + argv, raises=raises)
+    return run_cmd(argv=['python' + ('' if 'win' in sys.platform else '3')] + argv, raises=raises)
 
 
 def run_cmd(argv: List[str], raises: bool = False) -> str:
