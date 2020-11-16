@@ -2,7 +2,7 @@ import setuptools
 
 from traceback_with_variables import __version__
 
-with open('README.md', 'r') as in_:
+with open('README.md', 'r', encoding='utf-8') as in_:
     long_description = in_.read()
 
 setuptools.setup(
