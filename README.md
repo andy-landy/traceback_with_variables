@@ -15,7 +15,6 @@
 <a href="https://github.com/andy-landy/traceback_with_variables/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
 <a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
-
 <a href="https://pepy.tech/project/traceback_with_variables"><img alt="Downloads" src="https://pepy.tech/badge/traceback_with_variables"></a>
 <a href="https://anaconda.org/conda-forge/traceback_with_variables/"><img alt="conda-forge" src="https://img.shields.io/conda/dn/conda-forge/traceback_with_variables.svg?label=conda-forge"></a>
 -->
