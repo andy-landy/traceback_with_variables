@@ -11,8 +11,9 @@
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback_with_variables"></a>
 <a href="https://anaconda.org/conda-forge/traceback-with-variables"><img src="https://img.shields.io/conda/vn/conda-forge/traceback-with-variables"></a>
 <a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
-<img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg">
-<img title="no obscure objects, only transparent functions and dataclass objects" alt="No-OOP coverage" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg">
+<a href="https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling"><img title="windows, max, linux etc." alt="Platform" src="https://img.shields.io/badge/platform-all-blue.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/traceback_with_variables/override.py#L9"><img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/traceback_with_variables/override.py#L8"><img title="no obscure objects, only transparent functions and dataclass objects" alt="No-OOP" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg"></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
 <a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
@@ -34,6 +35,7 @@ _Contents:_ **[Installation](#installation)** | **[Quick Start](#quick-start)**
 | **[Colors](#colors)**
 | **[How does it save my time?](#how-does-it-save-my-time)** | 
 **[Examples and recipes](#examples-and-recipes)** | **[Reference](#reference)**
+| **[FAQ](#faq)**
 
 ---
 
@@ -298,6 +300,45 @@ A logger-to-file wrapper, to pass a logger to print tools as a file.
 
 #### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`iter_tb_lines`</a>
 Iterates the lines, which are usually printed one-by-one in terminal.
+
+---
+
+### FAQ
+
+* In Windows console crash messages have no colors. 
+
+    The default Windows console/terminal cannot print [so called *ansi*] colors, but this is 
+    <a href="https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling">fixable</a>
+    , especially with modern Windows versions. Therefore colors are disabled by default,
+    but you can enable them and check if it works in your case.
+    You can force enable colors by passing `--color-scheme common` (for complete list of colors pass `--help`) console argument.
+
+* Windows console prints junk symbols when colors are enabled.
+
+    The default Windows console/terminal cannot print [so called *ansi*] colors, but this is 
+    <a href="https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling">fixable</a>
+    , especially with modern Windows versions. If for some reason the colors are wrongly enabled by default,
+    you can force disable colors by passing `--color-scheme none` console argument.
+    
+* Bash tools like grep sometimes fail to digest the output when used with pipes (`|`) because of colors.
+
+    Please disable colors by passing `--color-scheme none` console argument.
+    The choice for keeping colors in piped output was made to allow convenient usage of `head`, `tail`, file redirection etc.
+    In cases like `| grep` it might have issues, in which case you can disable colors.
+    
+* Output redirected to a file in `> output.txt` manner has no colors when I `cat` it.
+
+    This is considered a rare use case, so colors are disabled by default when outputting to a file.
+    But you can force enable colors by passing `--color-scheme common` (for complete list of colors pass `--help`) console argument.
+  
+* My code doesn't work.  
+
+    Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your case</a>. You are very welcome!
+    
+* Other questions or requests to elaborate answers.
+
+    Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your question or request</a>. You are very welcome! 
+    
 
 
 
