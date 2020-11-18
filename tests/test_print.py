@@ -16,6 +16,15 @@ def test_printing_tb():
     assert_smart_equals_ref('test_print.printing_tb', out.getvalue())
 
 
+def test_printing_tb_to_tty():
+    out = StringIO()
+    out.isatty = lambda: True
+    with printing_tb(reraise=False, file_=out, flush=True):
+        f(10)
+
+    assert_smart_equals_ref('test_print.printing_tb_to_tty', out.getvalue())
+
+
 def test_printing_tb_stderr(tmp_path):
     code = '''from traceback_with_variables import printing_tb
 def f(n):

@@ -1,0 +1,8 @@
+[95mTraceback with variables (most recent call last):[0m
+[95m  File "...omitted for tests only.../tests/test_print.py[0m[95m", line [0m[36;1m23[0m[95m, in [0m[36;1mtest_printing_tb_to_tty[0m
+[95m    [0m[36mf(10)[0m
+[95m      [0m[32;1mout[0m[95m = [0m[37m<_io.StringIO object at 0x...omitted for tests only...>[0m
+[95m  File "...omitted for tests only.../tests/test_print.py[0m[95m", line [0m[36;1m89[0m[95m, in [0m[36;1mf[0m
+[95m    [0m[36mreturn n / 0[0m
+[95m      [0m[32;1mn[0m[95m = [0m[37m10[0m
+[31mbuiltins.ZeroDivisionError:[0m[91m division by zero[0m

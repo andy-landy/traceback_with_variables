@@ -1,14 +1,14 @@
-[37mTraceback with variables (most recent call last):[0m
-[37m  File "...omitted for tests only...", line [0m[36;1m5[0m[37m, in [0m[36;1m<module>[0m
-[37m    [0m[36mf(a - 2)[0m
-[37m      [0m[32;1msys[0m[37m = [0m[37m<module 'sys' (built-in)>[0m
-[37m      [0m[32;1margparse[0m[37m = [0m[37m<module 'argparse' from '/...omitted for tests only...py'>[0m
-[37m      [0m[32;1m__name__[0m[37m = [0m[37m'__main__'[0m
-[37m      [0m[32;1m__builtins__[0m[37m = [0m[37m{...omitted for tests only...}
-[37m      [0m[32;1mf[0m[37m = [0m[37m<function f at 0x...omitted for tests only...>[0m
-[37m      [0m[32;1ma[0m[37m = [0m[37m3[0m
-[37m  File "...omitted for tests only...", line [0m[36;1m3[0m[37m, in [0m[36;1mf[0m
-[37m    [0m[36mreturn 1 / m[0m
-[37m      [0m[32;1mn[0m[37m = [0m[37m1[0m
-[37m      [0m[32;1mm[0m[37m = [0m[37m0[0m
+[95mTraceback with variables (most recent call last):[0m
+[95m  File "...omitted for tests only...", line [0m[36;1m5[0m[95m, in [0m[36;1m<module>[0m
+[95m    [0m[36mf(a - 2)[0m
+[95m      [0m[32;1msys[0m[95m = [0m[37m<module 'sys' (built-in)>[0m
+[95m      [0m[32;1margparse[0m[95m = [0m[37m<module 'argparse' from '/...omitted for tests only...py'>[0m
+[95m      [0m[32;1m__name__[0m[95m = [0m[37m'__main__'[0m
+[95m      [0m[32;1m__builtins__[0m[95m = [0m[37m{...omitted for tests only...}
+[95m      [0m[32;1mf[0m[95m = [0m[37m<function f at 0x...omitted for tests only...>[0m
+[95m      [0m[32;1ma[0m[95m = [0m[37m3[0m
+[95m  File "...omitted for tests only...", line [0m[36;1m3[0m[95m, in [0m[36;1mf[0m
+[95m    [0m[36mreturn 1 / m[0m
+[95m      [0m[32;1mn[0m[95m = [0m[37m1[0m
+[95m      [0m[32;1mm[0m[95m = [0m[37m0[0m
 [31mbuiltins.ZeroDivisionError:[0m[91m division by zero[0m

@@ -62,7 +62,15 @@ class ColorScheme:
 
 class ColorSchemes:
     none = ColorScheme('', '', '', '', '', '', '', '', '', '')
-    common = ColorScheme('37', '36;1', '36;1', '36;1', '36', '32;1', '37', '31', '91', '0')
+    auto = ColorScheme('', '', '', '', '', '', '', '', '', '')
+    common = ColorScheme('95', '36;1', '36;1', '36;1', '36', '32;1', '37', '31', '91', '0')
     synthwave = ColorScheme('38;2;255;153;255', '38;2;255;153;0', '38;2;255;153;0', '38;2;255;153;0',
                             '38;2;50;100;255', '38;2;254;0;254', '38;2;153;204;255', '38;2;255;0;53',
                             '38;2;255;0;123', '0')
+
+
+def choose_color_scheme(color_scheme: ColorScheme, file_: TextIO) -> ColorScheme:
+    if color_scheme is not ColorSchemes.auto:
+        return color_scheme
+
+    return ColorSchemes.common if supports_ansi(file_) else ColorSchemes.none

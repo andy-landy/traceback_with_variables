@@ -1,6 +1,6 @@
 usage: main.py [-h] [--max-value-str-len MAX_VALUE_STR_LEN]
                [--max-exc-str-len MAX_EXC_STR_LEN] [--ellipsis ELLIPSIS]
                [--num-context-lines NUM_CONTEXT_LINES]
-               [--color-scheme {common,none,synthwave}]
+               [--color-scheme {auto,common,none,synthwave}]
                script [script-arg ...]
 main.py: error: the following arguments are required: script, script-arg

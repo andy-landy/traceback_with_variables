@@ -6,7 +6,7 @@ from importlib.util import find_spec
 from pathlib import Path
 from typing import List, Optional, NoReturn, Tuple
 
-from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme, supports_ansi
+from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme, choose_color_scheme
 
 
 def run_script(
@@ -119,7 +119,7 @@ def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
     parser.add_argument("--max-exc-str-len", type=int, default=10000)
     parser.add_argument("--ellipsis", default="...")
     parser.add_argument("--num-context-lines", type=int, default=1)
-    parser.add_argument("--color-scheme", default='common' if supports_ansi(sys.stderr) else 'none',
+    parser.add_argument("--color-scheme", default='auto',
                         choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
 
     return parse_args_and_script_cmd(parser)
@@ -136,7 +136,7 @@ def main():
             max_exc_str_len=args.max_exc_str_len,
             ellipsis_=args.ellipsis,
             num_context_lines=args.num_context_lines,
-            color_scheme=getattr(ColorSchemes, args.color_scheme),
+            color_scheme=choose_color_scheme(getattr(ColorSchemes, args.color_scheme), sys.stderr),
         )
     )
 
