@@ -31,15 +31,15 @@ Automate it and clean your code. Once and for all.
 
 ---
 
-_Contents:_ **[Installation](#installation)** | **[Quick Start](#quick-start)**
-| **[Colors](#colors)**
-| **[How does it save my time?](#how-does-it-save-my-time)** | 
-**[Examples and recipes](#examples-and-recipes)** | **[Reference](#reference)**
-| **[FAQ](#faq)**
+_Contents:_ **[🛠 Installation](#-installation)** | **[🚀 Quick Start](#-quick-start)**
+| **[🌈 Colors](#-colors)**
+| **[👍 How does it save my time?](#-how-does-it-save-my-time)** | 
+**[📜 Examples and recipes](#-examples-and-recipes)** | **[📘 Reference](#-reference)**
+| **[❓ FAQ](#-faq)**
 
 ---
 
-### Installation
+### 🛠 Installation
 
 ```
 pip install traceback-with-variables
@@ -48,7 +48,7 @@ pip install traceback-with-variables
 conda install -c conda-forge traceback-with-variables
 ```
 
-### Quick Start
+### 🚀 Quick Start
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage</a>, for the whole program:
 ```python
@@ -83,12 +83,12 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     @prints_tb(file_=LoggerAsFile(logger)): 
 ```
 
-### Colors
+### 🌈 Colors
 
 ![Example](https://raw.githubusercontent.com/andy-landy/traceback_with_variables/master/color_schemes.png)
 
 
-### How does it save my time?
+### 👍 How does it save my time?
 
 * Turn a code totally covered by debug formatting from this:
 
@@ -231,7 +231,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
      step 7: Go back to step 1 once bugs appear.
      
 
-### Examples and recipes
+### 📜 Examples and recipes
 
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks.py">a bit more controlled usage</a>
@@ -245,7 +245,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">get traceback lines for custom things</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/flask.py">using with `flask`</a>
 
-### Reference
+### 📘 Reference
 
 #### All functions have output customization
 * `max_value_str_len` max length of each variable string
@@ -304,7 +304,7 @@ Iterates the lines, which are usually printed one-by-one in terminal.
 
 ---
 
-### FAQ
+### ❓ FAQ
 
 * In Windows console crash messages have no colors. 
 
