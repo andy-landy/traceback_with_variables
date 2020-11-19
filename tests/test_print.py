@@ -1,4 +1,5 @@
 import logging
+import sys
 from io import StringIO
 
 import pytest
@@ -17,6 +18,9 @@ def test_printing_tb():
 
 
 def test_printing_tb_to_tty():
+    if sys.platform == 'win32':
+        return
+
     out = StringIO()
     out.isatty = lambda: True
     with printing_tb(reraise=False, file_=out, flush=True):

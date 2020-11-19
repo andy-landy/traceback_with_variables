@@ -243,6 +243,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block_customised.py">working with a code block, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">working with a code block, logging</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">get traceback lines for custom things</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/flask.py">using with `flask`</a>
 
 ### Reference
 
@@ -252,7 +253,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * `num_context_lines` number of lines around the target code line to print
 * `ellipsis_` string to denote long strings truncation, default=`...`
 * `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
-* `color_scheme` one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.none` (by default), `.common`, `.synthwave` 
+* `color_scheme` one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.auto`, `.none` , `.common`, `.synthwave` 
 
 ---
 

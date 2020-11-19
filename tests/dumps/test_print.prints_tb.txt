@@ -1,5 +1,5 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_print.py", line 89, in f
+  File "...omitted for tests only.../tests/test_print.py", line 93, in f
     return n / 0
       n = 10
 builtins.ZeroDivisionError: division by zero

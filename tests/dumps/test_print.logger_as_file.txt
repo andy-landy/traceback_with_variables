@@ -1,8 +1,8 @@
 ERROR    test-logger:print.py:20 Traceback with variables (most recent call last):
-ERROR    test-logger:print.py:20   File "...omitted for tests only.../tests/test_print.py", line 83, in test_logger_as_file
+ERROR    test-logger:print.py:20   File "...omitted for tests only.../tests/test_print.py", line 87, in test_logger_as_file
 ERROR    test-logger:print.py:20     f(10)
 ERROR    test-logger:print.py:20       caplog = <_pytest.logging.LogCaptureFixture object at 0x...omitted for tests only...>
-ERROR    test-logger:print.py:20   File "...omitted for tests only.../tests/test_print.py", line 89, in f
+ERROR    test-logger:print.py:20   File "...omitted for tests only.../tests/test_print.py", line 93, in f
 ERROR    test-logger:print.py:20     return n / 0
 ERROR    test-logger:print.py:20       n = 10
 ERROR    test-logger:print.py:20 builtins.ZeroDivisionError: division by zero
