@@ -9,11 +9,12 @@ setuptools.setup(
     name='traceback-with-variables',
     version=__version__,
     author='Andrey Lyashko',
-    author_email='andrewlyashko@gmail.com',
+    author_email='andydashlandy@gmail.com',
     description='Adds variables to python traceback. Simple, lightweight, cont'
     'rollable. Debug reasons of exceptions by logging or pretty printing color'
     'ful variable contexts for each frame in a stacktrace, showing every value'
-    '. Dump locals environments after errors to console, files, and loggers.',
+    '. Dump locals environments after errors to console, files, and loggers. W'
+    'orks with Jupiter and IPython.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/andy-landy/traceback_with_variables',
@@ -36,6 +37,7 @@ setuptools.setup(
     ]},
     tests_require=[
         'flake8',
+        'ipython',
         'pytest-cov'
     ],
     install_requires=[],

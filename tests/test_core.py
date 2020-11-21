@@ -35,6 +35,10 @@ def test_color_scheme_synthwave():
     check('color_scheme_synthwave', 10000, color_scheme=ColorSchemes.synthwave)
 
 
+def test_color_scheme_synthwave():
+    check('color_scheme_nice', 10000, color_scheme=ColorSchemes.nice)
+
+
 def test_force_bug_mode_1():
     check('force_bug_mode_1', 10000, __force_bug_mode=1)
 

@@ -65,3 +65,7 @@ def run_cmd(argv: List[str], raises: bool = False) -> str:
         return e.value.output.decode('utf-8')
 
     return check_output(argv, stderr=STDOUT).decode('utf-8')
+
+
+def rm_ansi(text: str) -> str:
+    return re.sub('\033\[.*?m', '', text)

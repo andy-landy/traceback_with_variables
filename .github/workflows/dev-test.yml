@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest-cov
+          pip install flake8 pytest-cov ipython
 
       - name: Checkout code
         uses: actions/checkout@v2

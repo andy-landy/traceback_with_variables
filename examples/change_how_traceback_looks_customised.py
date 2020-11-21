@@ -10,6 +10,7 @@ def main():
         activate_by_env_var='PY_PRINT_VARS',
         deactivate_by_env_var='PY_DONT_PRINT_VARS',
         color_scheme=ColorSchemes.synthwave,
+        # ipython=True  # for Jupyter or IPython
     )
 
     n = 0

@@ -1,0 +1,2 @@
+!pip install traceback-with-variables
+from traceback_with_variables import activate_in_ipython_by_import

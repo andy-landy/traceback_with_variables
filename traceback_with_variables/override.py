@@ -14,16 +14,13 @@ def override_print_tb(
     activate_by_env_var: str = '',
     deactivate_by_env_var: str = '',
     color_scheme: ColorScheme = ColorSchemes.auto,
+    ipython: bool = False,  # for Jupyter or IPython
 ) -> NoReturn:
     if (activate_by_env_var and not os.getenv(activate_by_env_var, '')) or \
             (deactivate_by_env_var and os.getenv(deactivate_by_env_var, '')):
         return
 
-    def excepthook(
-        e_cls,  # noqa
-        e,
-        tb
-    ):
+    def print_tb(e, tb, num_skipped_frames: int) -> NoReturn:
         for line in iter_tb_lines(
             e=e,
             tb=tb,
@@ -32,10 +29,21 @@ def override_print_tb(
             max_exc_str_len=max_exc_str_len,
             ellipsis_=ellipsis_,
             color_scheme=choose_color_scheme(color_scheme, sys.stderr),
+            num_skipped_frames=num_skipped_frames,
         ):
             sys.stderr.write(line)
             sys.stderr.write('\n')
 
         sys.stderr.flush()
 
-    sys.excepthook = excepthook
+    if ipython:
+        try:
+            import IPython
+        except ModuleNotFoundError:
+            raise ValueError("ipython=True, but IPython not found")
+
+        IPython.core.interactiveshell.InteractiveShell.showtraceback = \
+            lambda self, *args, **kwargs: print_tb(None, None, 1)  # noqa
+
+    else:
+        sys.excepthook = lambda e_cls, e, tb: print_tb(e, tb, 0)  # noqa

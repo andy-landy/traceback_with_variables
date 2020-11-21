@@ -1,0 +1,8 @@
+ERROR    test-logger:print.py:27 Traceback with variables (most recent call last):
+ERROR    test-logger:print.py:27   File "...omitted for tests only.../tests/test_print.py", line 94, in test_logger_as_file_lines
+ERROR    test-logger:print.py:27     f(10)
+ERROR    test-logger:print.py:27       caplog = <_pytest.logging.LogCaptureFixture object at 0x...omitted for tests only...>
+ERROR    test-logger:print.py:27   File "...omitted for tests only.../tests/test_print.py", line 100, in f
+ERROR    test-logger:print.py:27     return n / 0
+ERROR    test-logger:print.py:27       n = 10
+ERROR    test-logger:print.py:27 builtins.ZeroDivisionError: division by zero

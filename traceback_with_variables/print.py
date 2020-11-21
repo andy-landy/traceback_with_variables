@@ -9,22 +9,30 @@ from traceback_with_variables.core import iter_tb_lines, ColorScheme, ColorSchem
 
 
 class LoggerAsFile:
-    def __init__(self, logger: logging.Logger):
+    def __init__(self, logger: logging.Logger, separate_lines: bool = False):
         self.logger = logger
+        self.separate_lines = separate_lines
+        self.lines = []
 
     def flush(self) -> NoReturn:
-        """pass"""
+        if self.lines:
+            self.logger.error('\n    '.join(self.lines))
 
     def write(self, text: str) -> NoReturn:
-        for line in text.rstrip('\r\n').split('\n'):
-            self.logger.error(line)
+        if not text.strip('\n'):
+            return
+
+        if self.separate_lines:
+            for line in text.rstrip().split('\n'):
+                self.logger.error(line)
+        else:
+            self.lines.append(text)
 
 
 @contextmanager
 def printing_tb(
     reraise: bool = True,
     file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
-    flush: bool = False,
     skip_cur_frame: bool = False,
     num_context_lines: int = 1,
     max_value_str_len: int = 1000,
@@ -47,10 +55,10 @@ def printing_tb(
                 num_context_lines=num_context_lines,
                 color_scheme=choose_color_scheme(color_scheme, file_),
             ):
-                file_.write(trace_str + '\n')
+                file_.write(trace_str)
+                file_.write('\n')
 
-            if flush:
-                file_.flush()
+            file_.flush()
 
         if reraise:
             raise e
@@ -59,7 +67,6 @@ def printing_tb(
 def prints_tb(
     func__for_noncall_case_only: Optional[Callable] = None,  # to call without "()"
     file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
-    flush: bool = False,
     num_context_lines: int = 1,
     max_value_str_len: int = 1000,
     max_exc_str_len: int = 10000,
@@ -69,7 +76,6 @@ def prints_tb(
     if func__for_noncall_case_only:
         return prints_tb(
             file_=file_,
-            flush=flush,
             num_context_lines=num_context_lines,
             max_value_str_len=max_value_str_len,
             max_exc_str_len=max_exc_str_len,
@@ -83,7 +89,6 @@ def prints_tb(
             with printing_tb(
                 reraise=True,
                 file_=file_,
-                flush=flush,
                 skip_cur_frame=True,
                 num_context_lines=num_context_lines,
                 max_value_str_len=max_value_str_len,

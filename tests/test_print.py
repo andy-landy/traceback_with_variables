@@ -11,7 +11,7 @@ from tests.utils import assert_smart_equals_ref, run_code
 
 def test_printing_tb():
     out = StringIO()
-    with printing_tb(reraise=False, file_=out, flush=True):
+    with printing_tb(reraise=False, file_=out):
         f(10)
 
     assert_smart_equals_ref('test_print.printing_tb', out.getvalue())
@@ -23,7 +23,7 @@ def test_printing_tb_to_tty():
 
     out = StringIO()
     out.isatty = lambda: True
-    with printing_tb(reraise=False, file_=out, flush=True):
+    with printing_tb(reraise=False, file_=out):
         f(10)
 
     assert_smart_equals_ref('test_print.printing_tb_to_tty', out.getvalue())
@@ -87,6 +87,13 @@ def test_logger_as_file(caplog):
         f(10)
 
     assert_smart_equals_ref('test_print.logger_as_file', caplog.text)
+
+
+def test_logger_as_file_lines(caplog):
+    with printing_tb(reraise=False, file_=LoggerAsFile(logging.getLogger('test-logger'), separate_lines=True)):
+        f(10)
+
+    assert_smart_equals_ref('test_print.logger_as_file_lines', caplog.text)
 
 
 def f(n):

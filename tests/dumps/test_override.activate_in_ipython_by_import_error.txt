@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "...omitted for tests only.../traceback_with_variables/override.py", line 41, in override_print_tb
+    import IPython
+  File "...omitted for tests only...", line 1, in <module>
+    import nonexistent_module
+ModuleNotFoundError: No module named 'nonexistent_module'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "...omitted for tests only...", line 1, in <module>
+    import traceback_with_variables.activate_in_ipython_by_import
+  File "...omitted for tests only.../traceback_with_variables/activate_in_ipython_by_import.py", line 8, in <module>
+    override_print_tb(ipython=True, color_scheme=ColorSchemes.common)
+  File "...omitted for tests only.../traceback_with_variables/override.py", line 43, in override_print_tb
+    raise ValueError("ipython=True, but IPython not found")
+ValueError: ipython=True, but IPython not found

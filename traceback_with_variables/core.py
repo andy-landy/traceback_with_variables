@@ -1,4 +1,5 @@
 import inspect
+import sys
 import traceback
 from types import TracebackType
 from typing import Any, Iterator, Union, Optional
@@ -7,7 +8,7 @@ from traceback_with_variables.color import ColorScheme, ColorSchemes
 
 
 def iter_tb_lines(
-    e: Exception,
+    e: Optional[Exception] = None,
     tb: Optional[Union[inspect.Traceback, TracebackType]] = None,
     num_skipped_frames: int = 0,
     max_value_str_len: int = 1000,
@@ -17,15 +18,15 @@ def iter_tb_lines(
     color_scheme: ColorScheme = ColorSchemes.none,
     __force_bug_mode: int = 0,  # for tests only
 ) -> Iterator[str]:
+    e_: Exception = e or sys.exc_info()[1]
+    tb_: Union[inspect.Traceback, TracebackType] = tb or sys.exc_info()[2]
     c = color_scheme
 
     try:
         yield f'{c.c}Traceback with variables (most recent call last):{c.e}'
 
-        trace = inspect.getinnerframes(tb, context=num_context_lines) \
-            if tb else inspect.trace(context=num_context_lines)
-
-        for frame, filename, line_num, func_name, code_lines, func_line_num in trace[num_skipped_frames:]:
+        for frame, filename, line_num, func_name, code_lines, func_line_num in \
+                inspect.getinnerframes(tb_, context=num_context_lines)[num_skipped_frames:]:
             yield f'{c.c}  File "{c.f_}{filename}{c.c_}", line {c.ln_}{line_num}{c.c_}, in {c.fn_}{func_name}{c.e}'
 
             if code_lines:
@@ -46,7 +47,7 @@ def iter_tb_lines(
                 yield '    <traceback-with-variables: exception while printing variables>'
                 yield f'    {traceback.format_exc()}'
 
-        yield f'{c.ec}{e.__class__.__module__}.{e.__class__.__name__}:{c.et_} {e}{c.e}'
+        yield f'{c.ec}{e_.__class__.__module__}.{e_.__class__.__name__}:{c.et_} {e_}{c.e}'
 
         if __force_bug_mode == 2:
             raise ValueError('force_bug_mode')
