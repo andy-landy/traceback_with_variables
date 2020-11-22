@@ -1,6 +1,0 @@
-variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
-      f = <function f at 0x...omitted for tests only...>
-  File "...omitted for tests only...", line 3, in f
-    return n / 0
-      n = 10
-builtins.ZeroDivisionError: division by zero

@@ -1,19 +1,18 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_core.py", line 52, in check
+  File "...omitted for tests only.../tests/test_core.py", line 106, in check
     f(arg)
       name = 'max_value...
       arg = 10000
-      kwargs = {'max_valu...
-      e = ZeroDivisi...
-  File "...omitted for tests only.../tests/test_core.py", line 63, in f
+      kwargs = {'fmt': <t...
+  File "...omitted for tests only.../tests/dummies.py", line 12, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short str...
       l1 = 'long stri...
       us = <exception while printing> Traceback (most recent call last):
-          File "...omitted for tests only.../traceback_with_variables/core.py", line 69, in _to_cropped_str
-            return _crop(repr(obj), max_value_str_len, ellipsis_)
-          File "...omitted for tests only.../tests/test_core.py", line 77, in __repr__
+          File "...omitted for tests only.../traceback_with_variables/core.py", line 213, in _to_cropped_str
+            raw = print_(obj)
+          File "...omitted for tests only.../tests/dummies.py", line 3, in __repr__
             raise ValueError("please don't print me")
         ValueError: please don't print me
         

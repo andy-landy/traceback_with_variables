@@ -10,15 +10,16 @@ import pytest
 import traceback_with_variables
 
 
-def f(a, b):
-    if a != b:
-        print(a)
-        print(b)
-    assert a == b
+def assert_eq(v1, v2):  # o_O
+    if v1 != v2:
+        print('left =', v1)
+        print('right =', v2)
+
+    assert v1 == v2
 
 
 def assert_equals_ref(name: str, value: str) -> None:
-    path = 'tests/dumps/{}.txt'.format(name)
+    path = 'tests/dumps/{}.txt'.format(''.join(c if c.isalnum() or c in '.' else '_' for c in name))
 
     if os.getenv('PYTEST_UPDATE_REFS', ''):
         with open(path, 'w') as out:
@@ -26,7 +27,7 @@ def assert_equals_ref(name: str, value: str) -> None:
 
     else:
         with open(path, 'r') as in_:
-            f(value, in_.read())
+            assert_eq(value, in_.read())
 
 
 def assert_smart_equals_ref(name: str, value: str) -> None:
@@ -68,4 +69,4 @@ def run_cmd(argv: List[str], raises: bool = False) -> str:
 
 
 def rm_ansi(text: str) -> str:
-    return re.sub('\033\[.*?m', '', text)
+    return re.sub(r'\033\[.*?m', '', text)

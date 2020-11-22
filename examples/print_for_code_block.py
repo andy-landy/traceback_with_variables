@@ -1,4 +1,4 @@
-from traceback_with_variables import printing_tb
+from traceback_with_variables import printing_exc
 
 
 def f(n):
@@ -6,7 +6,7 @@ def f(n):
 
 
 def main():
-    with printing_tb():
+    with printing_exc():
         x = 1
         f(x - 1)
 

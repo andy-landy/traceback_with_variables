@@ -7,18 +7,19 @@
 <a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
 <a href="https://codecov.io/gh/andy-landy/traceback_with_variables"><img alt="Codecov" src="https://codecov.io/gh/andy-landy/traceback_with_variables/branch/master/graph/badge.svg"></a>
 <a href="https://lgtm.com/projects/g/andy-landy/traceback_with_variables/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/andy-landy/traceback_with_variables.svg"/></a>
-<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
-<a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback_with_variables"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
+<a href="https://pypi.org/project/traceback-with-variables"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback-with-variables"></a>
 <a href="https://anaconda.org/conda-forge/traceback-with-variables"><img src="https://img.shields.io/conda/vn/conda-forge/traceback-with-variables"></a>
-<a href="https://pypi.org/project/traceback_with_variables/"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
+<a href="https://pypi.org/project/traceback-with-variables"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
 <a href="https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling"><img title="windows, mac, linux etc." alt="Platform" src="https://img.shields.io/badge/platform-all-blue.svg"></a>
-<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/traceback_with_variables/override.py#L9"><img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg"></a>
-<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/traceback_with_variables/override.py#L8"><img title="no obscure objects, only transparent functions and data classes" alt="No-OOP" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg"></a>
-<a href="https://github.com/andy-landy/traceback_with_variables/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py#L9"><img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py#L8"><img title="no obscure objects, only transparent functions and data classes" alt="No-OOP" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
+<a href="https://colab.research.google.com/github/andy-landy/traceback_with_variables/blob/master/examples/colab.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://gitter.im/andy-landy/traceback-with-variables"><img alt="Gitter" src="https://img.shields.io/gitter/room/andy-landy/traceback-with-variables?color=blueviolet"></a>
 <!--
-<a href="https://pepy.tech/project/traceback_with_variables"><img alt="pip Downloads" src="https://static.pepy.tech/personalized-badge/traceback-with-variables?period=total&units=none&left_color=grey&right_color=orange&left_text=pip downloads"></a>
-<a href="https://anaconda.org/conda-forge/traceback_with_variables/"><img alt="conda-forge Downloads" src="https://img.shields.io/conda/dn/conda-forge/traceback-with-variables?color=orange&label=conda%20downloads"></a>
+<a href="https://pypi.org/project/traceback-with-variables"><img alt="pip Downloads" src="https://static.pepy.tech/personalized-badge/traceback-with-variables?period=total&units=none&left_color=grey&right_color=orange&left_text=pip downloads"></a>
+<a href="https://anaconda.org/conda-forge/traceback-with-variables/"><img alt="conda-forge Downloads" src="https://img.shields.io/conda/dn/conda-forge/traceback-with-variables?color=orange&label=conda%20downloads"></a>
 -->
 </p>
 <br/>
@@ -39,6 +40,10 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 
 ---
 
+> :warning: **This module is actively updated and has a substantial list of features to add this week**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
+
+---
+
 ### Installation
 
 ```
@@ -52,7 +57,7 @@ conda install -c conda-forge traceback-with-variables
 
 Using without code editing, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">running your script/command/module</a>:
 ```
-traceback-with-variables ...script/tool/module with arguments...
+traceback-with-variables tested_script.py ...srcipt's args...
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">Simplest usage in regular Python</a>, for the whole program:
@@ -60,7 +65,7 @@ traceback-with-variables ...script/tool/module with arguments...
     from traceback_with_variables import activate_by_import
 ```
 
-<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">Simplest usage in Jupiter or IPython</a>, for the whole program:
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">Simplest usage in Jupyter or IPython</a>, for the whole program:
 ```python
     from traceback_with_variables import activate_in_ipython_by_import
 ```
@@ -68,26 +73,42 @@ traceback-with-variables ...script/tool/module with arguments...
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">Decorator</a>, for a single function:
 ```python
-    @prints_tb
+    @prints_exc
     # def main(): or def some_func(...):
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block.py">Context</a>, for a single code block:
 ```python
-    with printing_tb():
+    with printing_exc():
 ```
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">Work with traceback lines</a> in a custom manner:
 ```python
-    return '\n'.join(iter_tb_lines(e))
+    lines = list(iter_exc_lines(e))
+```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_cur_tb.py">No exception but you want to print the stack anyway?</a>:
+```python
+    print_cur_tb()
 ```
 
 Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_function.py">with a decorator</a>, <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">with a context</a>]:
 ```python
-    with printing_tb(file_=LoggerAsFile(logger)):
+    with printing_exc(file_=LoggerAsFile(logger)):
     # or
-    @prints_tb(file_=LoggerAsFile(logger)): 
+    @prints_exc(file_=LoggerAsFile(logger)): 
 ```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_traceback.py">Print traceback</a> in interactive mode after an exception:
+```
+    >>> print_exc()
+```
+
+<a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/format_customized.py">Customize</a> any of the previous examples:
+```python
+    ...(fmt=Format(max_value_str_len=80, skip_files_except='my_project'))
+```
+
 
 ### Colors
 
@@ -179,7 +200,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
     
     def main():
         ...
-        with printing_tb(file_=LoggerAsFile(logger))
+        with printing_exc(file_=LoggerAsFile(logger))
             ...
     ```
     
@@ -222,7 +243,9 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 * — Should I use it after debugging is over, i.e. *in production*?
 
-    Yes, of course! That way it might save you even more time.
+    Yes, of course! That way it might save you even more time (watch out for sensitive data
+    like passwords and tokens in you logs). Note: you can deploy more serious frameworks,
+    e.g. `Sentry` :)
 
 <br/>
 
@@ -239,29 +262,33 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 ### Examples and recipes
 
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/external_script.sh">run python code without changes: a script, a module, a commnad</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple.py">simple usage</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/simple_jupyter.py">simple usage in Jupyter or IPython</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks.py">a bit more controlled usage</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_how_traceback_looks_customised.py">a bit more controlled usage, customised</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_cur_tb.py">print current stack, when there's no exception</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/interactive_print_last_exception.py">print last exception in Python console</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer.py">manually change global printer</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/change_global_printer_in_jupyter.py">manually change global printer in Jupyter or IPython</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function.py">working with a function</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_function_customised.py">working with a function, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_function.py">working with a function, logging</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block.py">working with a code block</a>
-* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/print_for_code_block_customised.py">working with a code block, customised</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/log_for_code_block.py">working with a code block, logging</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/work_with_traceback_lines.py">get traceback lines for custom things</a>
 * <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/flask.py">using with `flask`</a>
+* <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/format_customized.py">customize the output</a>
 
 ### Reference
 
-#### All functions have output customization
+#### All functions have `fmt=` argument, a `Format` object with fields:
 * `max_value_str_len` max length of each variable string, -1 to disable, default=1000
 * `max_exc_str_len` max length of exception, should variable print fail, -1 to disable, default=10000
-* `num_context_lines` number of lines around the target code line to print, default=1
+* `before` number of code lines before the raising line, default=0
+* `after` number of code lines after the raising line, default=0
 * `ellipsis_` string to denote long strings truncation, default=`...`
-* `file_` where to print exception, a file or a wrapped logger, default=`sys.stderr` i.e. usual printing to console
-* `color_scheme` one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.auto`, `.none` , `.common`, `.nice`, `.synthwave` 
+* `skip_files_except` use to print only certain files; list of regexes, ignored if empty, default=None
+* `brief_files_except` use to print variables only in certain files; list of regexes, ignored if empty, default=None
+* `custom_var_printers` list of pairs of (filter, printer); filter is a name fragment, a type or a function or a list thereof; printer returns `None` to skip a var
+* `color_scheme` is `None` or one of <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>: `.none` , `.common`, `.nice`, `.synthwave`. `None` is for auto-detect 
 
 ---
 
@@ -281,31 +308,56 @@ from traceback_with_variables import activate_in_ipython_by_import
 
 ---
 
-#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py">`override_print_tb`</a>
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/global_hooks.py">`global_print_exc`</a>
 Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
 ```python
 def main():
-    override_print_tb(...)
+    override_print_exc(...)
 ```
 
 ---
 
-#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`prints_tb`</a>
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/global_hooks.py">`global_print_exc_in_ipython`</a>
+Call once in the beginning of your program, to change how traceback after an uncaught exception looks.
+```python
+def main():
+    override_print_exc(...)
+```
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`print_exc`</a>
+Prints traceback for a given/current/last (first being not `None` in the priority list) exception to a file, default=`sys.stderr`. Convenient for manual console or Jupyter sessions or custom try/except blocks. Note that it can be called with a given exception value or it can auto discover current exception in an `except:` block or it can auto descover last exception value (long) after `try/catch` block.
+```python
+print_exc()
+```
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`print_cur_tb`</a>
+Prints current traceback when no exception is raised.
+```python
+print_cur_tb()
+```
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`prints_exc`</a>
 Function decorator, used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the function call. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
-@prints_tb
+@prints_exc
 def f(...):
 
-@prints_tb(...)
+@prints_exc(...)
 def f(...):
 ```
 
 ---
 
-#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`printing_tb`</a>
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/print.py">`printing_exc`</a>
 Context manager (i.e. `with ...`), used for logging or simple printing of scoped tracebacks with variables. I.e. traceback is shorter as it includes only frames inside the `with` scope. Program exiting due to unhandled exception still prints a usual traceback.
 ```python
-with printing_tb(...):
+with printing_exc(...):
 ```
 
 ---
@@ -315,8 +367,23 @@ A logger-to-file wrapper, to pass a logger to print tools as a file.
 
 ---
 
-#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`iter_tb_lines`</a>
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`iter_exc_lines`</a>
 Iterates the lines, which are usually printed one-by-one in terminal.
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`format_exc`</a>
+Like `iter_exc_lines` but returns a single string.
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`iter_cur_tb_lines`</a>
+Like `iter_exc_lines` but doesn't need an exception and prints upper frames..
+
+---
+
+#### <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/core.py">`format_cur_tb`</a>
+Like `iter_cur_tb_lines` but returns a single string.
 
 ---
 
@@ -348,14 +415,29 @@ Iterates the lines, which are usually printed one-by-one in terminal.
     This is considered a rare use case, so colors are disabled by default when outputting to a file.
     But you can force enable colors by passing `--color-scheme common` (for complete list of colors pass `--help`) console argument.
   
-* `activate_by_import` or `override_print_tb` don't work in Jupiter or IPython as if not called at all.
+* `activate_by_import` or `global_print_exc` don't work in Jupyter or IPython as if not called at all.
 
-    Don't forget to use `ipython=True` or import `activate_in_ipython_by_import` since Jupyer/Ipython handles exceptions differently than regular Python.  
+    In Jupyter or IPython you should use `activate_in_ipython_by_import` or `global_print_exc_in_ipython`. IPython handles exceptions differently than regular Python.  
+
+* The server framework (`flask`, `streamlit` etc.) still shows usual tracebacks.
+
+    In such frameworks tracebacks are printed not while exiting the program (the program continues running), hence you should override exception handling in a manner
+    proper for the given framework. Please address the `flask` example.
   
+* How do I reduce output? I don't need all files or all variables.
+
+    Use `skip_files_except`, `brief_files_except`, `custom_var_printers` to cut excess output.
+
+* I have ideas about good colors.
+
+    Please fork, add a new `ColorScheme` to <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/color.py">`ColorSchemes`</a>
+    and create a Pull Request to `next_version` branch. <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Choose the color codes</a> and visually
+    test it like `python3 -m traceback_with_variables.main --color-scheme {its name} examples/for_readme_image.py`. 
+
 * My code doesn't work.  
 
     Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your case</a>. You are very welcome!
     
 * Other questions or requests to elaborate answers.
 
-    Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your question or request</a>. You are very welcome! 
+    Please <a href="https://gitter.im/andy-landy/traceback-with-variables">post your question or request</a>. You are very welcome!

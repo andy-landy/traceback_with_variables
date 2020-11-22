@@ -1,41 +1,42 @@
-# if usually you called
-  path/to/some_cmd --some-arg some-value
+# if normally you called
+  some_cmd ...its args...
   # or
-  path/to/some_script.py --some-arg some-value
+  path/to/some_script.py ...its args...
   # or
-  python3 path/to/some_script.py --some-arg some-value
+  python3 path/to/some_script.py ...its args...
   # or
-  python3 -m some_module --some-arg some-value
+  python3 -m some_module ...its args...
 
 
-# then you can upgrade the traceback like this:
-  # script and it's args
-  traceback-with-varaibles path/to/some_script.py --some-arg some-value ...
-
+# then your calls become:
   # command known to be a script (e.g. 'pip') and it's args
-  traceback-with-varaibles pip ...
+  traceback-with-variables some_cmd ...its args...
+  
+  # script and it's args
+  traceback-with-variables path/to/some_script.py ...its args...
 
   # a module (e.g. 'http.server') and it's args
-  traceback-with-varaibles http.server ...
+  traceback-with-variables some_module ...its args...
 
 
 # help:
   traceback-with-variables --help
 
 
-# synthwave
-  traceback_with_variables --color-scheme synthwave ...
-
-
 # more
-  # with python -m
-  python3 -m traceback_with_variables path/to/some_script.py --some-arg some-value
+  # customizing tracebacks
+  traceback-with-variables --max-value-str-len 100 --before 3 --after 1 path/to/some_script.py ...its args...
 
-  # script and it's args, customized
-  traceback-with-varaibles --max-value-str-len 100 --num-context-lines 3 path/to/some_script.py --some-arg some-value
+  # print less blocks
+  traceback-with-variables --skip-files-except my_porject site --brief-files-except my_project
 
-  # command known to be a script (e.g. 'pip') and it's args, customized
-  traceback-with-varaibles --max-value-str-len 100 --num-context-lines 3 some_cmd --some-arg some-value
+  # no globals
+  traceback-with-variables --no-globals ...
+  
+  # synthwave+
+  traceback-with-variables --color-scheme synthwave ...
+  traceback-with-variables --color-scheme nice ...
+  
+  # runnig with `python -m`
+  python3 -m traceback_with_variables path/to/some_script.py ...its args...
 
-  # a module (e.g. 'http.server') and it's args
-  traceback-with-varaibles --max-value-str-len 100 module_name --some-arg some-value

@@ -1,7 +1,7 @@
-from traceback_with_variables import prints_tb
+from traceback_with_variables import prints_exc
 
 
-@prints_tb
+@prints_exc
 def f(n):
     print(1 / n)
 

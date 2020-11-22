@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "...omitted for tests only.../traceback_with_variables/global_hooks.py", line 13, in global_print_exc_in_ipython
+    import IPython
+  File "...omitted for tests only...", line 1, in <module>
+    import nonexistent_module
+ModuleNotFoundError: No module named 'nonexistent_module'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "...omitted for tests only...", line 1, in <module>
+    import traceback_with_variables.activate_in_ipython_by_import
+  File "...omitted for tests only.../traceback_with_variables/activate_in_ipython_by_import.py", line 8, in <module>
+    global_print_exc_in_ipython(fmt=Format(
+  File "...omitted for tests only.../traceback_with_variables/global_hooks.py", line 15, in global_print_exc_in_ipython
+    raise ValueError("IPython not found")
+ValueError: IPython not found

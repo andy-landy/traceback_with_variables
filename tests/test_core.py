@@ -1,5 +1,8 @@
-from traceback_with_variables import core, ColorSchemes
+import pytest
 
+from traceback_with_variables import core, ColorSchemes, Format
+
+from tests.dummies import Unprintable, f
 from tests.utils import assert_smart_equals_ref
 
 
@@ -7,71 +10,99 @@ def test_default():
     check('default', 10001)
 
 
+def test_explicit_e():
+    try:
+        f(10000)
+    except Exception as e_:  # noqa
+        e = e_
+
+    assert_smart_equals_ref(f'test_core.explicit_e', core.format_exc(e=e))  # noqa
+
+
+def test_no_e():
+    try:
+        f(10000)
+    except:  # noqa
+        pass
+
+    with pytest.raises(ValueError):
+        core.format_exc()
+
+
+# TODO def test_after_unhandled_e():
+
+
 def test_ellipsis():
-    check('ellipsis', 10000, ellipsis_='*')
+    check('ellipsis', 10000, fmt=Format(ellipsis_='*'))
 
 
 def test_max_value_str_len():
-    check('max_value_str_len', 10000, max_value_str_len=10)
+    check('max_value_str_len', 10000, fmt=Format(max_value_str_len=10))
 
 
 def test_max_exc_str_len():
-    check('max_exc_str_len', 10000, max_exc_str_len=10)
+    check('max_exc_str_len', 10000, fmt=Format(max_exc_str_len=10))
 
 
-def test_num_skipped_frames():
-    check('num_skipped_frames', 10001, num_skipped_frames=1)
+@pytest.mark.parametrize('num_skipped_frames', [0, 1, 2])
+def test_num_skipped_frames(num_skipped_frames):
+    check(f'num_skipped_frames_{num_skipped_frames}', 10001, num_skipped_frames=num_skipped_frames)
 
 
-def test_num_context_lines():
-    check('num_context_lines', 10000, num_context_lines=5)
+@pytest.mark.parametrize('before', [0, 2, 100])
+def test_before(before):
+    check(f'before_{before}', 10000, fmt=Format(before=before))
+
+
+@pytest.mark.parametrize('after', [0, 2, 100])
+def test_after(after):
+    check(f'after_{after}', 10000, fmt=Format(after=after))
+
+
+def test_before_after():
+    check('before_after', 10000, fmt=Format(before=2, after=2))
 
 
 def test_color_scheme_common():
-    check('color_scheme_common', 10000, color_scheme=ColorSchemes.common)
+    check('color_scheme_common', 10000, fmt=Format(color_scheme=ColorSchemes.common))
 
 
 def test_color_scheme_synthwave():
-    check('color_scheme_synthwave', 10000, color_scheme=ColorSchemes.synthwave)
+    check('color_scheme_synthwave', 10000, fmt=Format(color_scheme=ColorSchemes.synthwave))
 
 
-def test_color_scheme_synthwave():
-    check('color_scheme_nice', 10000, color_scheme=ColorSchemes.nice)
+def test_color_scheme_nice():
+    check('color_scheme_nice', 10000, fmt=Format(color_scheme=ColorSchemes.nice))
 
 
-def test_force_bug_mode_1():
-    check('force_bug_mode_1', 10000, __force_bug_mode=1)
+@pytest.mark.parametrize('skip_files_except', [None, '.*dummies.*', ['.*test_core.*']])
+@pytest.mark.parametrize('brief_files_except', [None, '.*dummies.*', ['.*test_core.*']])
+def test_files(skip_files_except, brief_files_except):
+    check(f'files_{skip_files_except}_{brief_files_except}', 10000, fmt=Format(
+        skip_files_except=skip_files_except,
+        brief_files_except=brief_files_except,
+    ))
 
 
-def test_force_bug_mode_2():
-    check('force_bug_mode_2', 10000, __force_bug_mode=2)
+@pytest.mark.parametrize('i1,fs1', enumerate([None, ['s'], ['l', Unprintable], [lambda n, *_: 's' in n]]))
+@pytest.mark.parametrize('i2,fs2', enumerate([None, ['s'], ['l', Unprintable], [lambda n, *_: 's' in n]]))
+def test_var_printers(i1, fs1, i2, fs2):
+    check(f'var_printers_{i1}_{i2}', 10, fmt=Format(
+        custom_var_printers=([(fs1, lambda v: None)] if fs1 else []) + ([(fs2, lambda v: 'var')] if fs2 else [])
+    ))
+
+
+@pytest.mark.parametrize('num_skipped_frames', [0, 1])
+def test_cur_tb(num_skipped_frames):
+    assert_smart_equals_ref(f'test_core.cur_tb_{num_skipped_frames}', get_cur_tb(num_skipped_frames))
+
+
+def get_cur_tb(num_skipped_frames: int) -> str:
+    return core.format_cur_tb(num_skipped_frames=num_skipped_frames, fmt=Format(skip_files_except='test_core'))
 
 
 def check(name, arg, **kwargs):
     try:
         f(arg)
-    except Exception as e:  # noqa
-        assert_smart_equals_ref('test_core.{}'.format(name), '\n'.join(core.iter_tb_lines(e, **kwargs)))
-
-
-def f(n: int) -> int:
-    s1 = 'short string with n: {}'.format(n)
-    l1 = 'long string with 0..n: {}'.format(', '.join(map(str, range(n))))
-    us = [Unprintable(), Unprintable(), Unprintable()]
-
-    if n % 10 == 0:
-        return 1 // (n * 0)
-
-    if n % 2 == 0:
-        return f(n - 1)
-    else:
-        return f(
-            n
-
-            - 1
-        )
-
-
-class Unprintable:
-    def __repr__(self):
-        raise ValueError("please don't print me")
+    except Exception:  # noqa
+        assert_smart_equals_ref('test_core.{}'.format(name), core.format_exc(**kwargs))

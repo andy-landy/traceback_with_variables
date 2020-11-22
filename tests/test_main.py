@@ -1,3 +1,4 @@
+import re
 from typing import List
 
 from tests.utils import assert_smart_equals_ref, run_code, run_py
@@ -40,6 +41,10 @@ def test_simple_code_tool_args(tmp_path):
     _test_code('simple_code_tool_args', tmp_path, ['--max-value-str-len', '10'], simple_code, [], True)
 
 
+def test_simple_code_tool_args_no_globals(tmp_path):
+    _test_code('simple_code_tool_args_no_globals', tmp_path, ['--no-globals'], simple_code, [], True)
+
+
 def test_simple_code_excess_tool_args(tmp_path):
     _test_code('simple_code_excess_tool_args', tmp_path, ['--b', '2'], simple_code, ['pos_arg', '--c', '3'], True)
 
@@ -79,22 +84,22 @@ def test_no_cmd(tmp_path):
 def _test_code(name: str, tmp_path, main_argv: List[str], code: str, code_argv: List[str], raises: bool):
     assert_smart_equals_ref(
         f'test_main.{name}',
-        run_code(
+        re.sub(r']\s+', ']\n', re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', run_code(  # for python3.9
             tmp_path=tmp_path,
             python_argv=['-m', 'traceback_with_variables.main'] + main_argv,
             code=code,
             code_argv=code_argv,
             raises=raises
-        ).replace('[script-arg [script-arg ...]]', '[script-arg ...]')  # python 3.9+
+        )))
     )
 
 
 def _test_cmd(name: str, tmp_path, argv: List[str], raises: bool):
     assert_smart_equals_ref(
         f'test_main.{name}',
-        run_py(
+        re.sub(r']\s+', ']\n', re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', run_py(  # for python3.9
             tmp_path=tmp_path,
             argv=['-m', 'traceback_with_variables.main'] + argv,
             raises=raises
-        ).replace('[script-arg [script-arg ...]]', '[script-arg ...]')  # python 3.9+
+        )))
     )

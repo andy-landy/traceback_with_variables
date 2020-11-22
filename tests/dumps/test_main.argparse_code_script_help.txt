@@ -1,4 +1,5 @@
-usage: code.py [-h] --a A
+usage: code.py [-h]
+--a A
 
 optional arguments:
   -h, --help  show this help message and exit
