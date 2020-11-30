@@ -226,7 +226,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 * — Should I use it after debugging is over, i.e. *in production*?
 
-    Yes, of course! That way it might save you even more time.
+    Yes, of course! That way it might save you even more time. (watch out if your variables have personal data, passwords etc. Filters with be introduced in next versions very soon)
 
 <br/>
 
