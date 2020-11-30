@@ -10,13 +10,13 @@
 
 # then you can upgrade the traceback like this:
   # script and it's args
-  traceback-with-varaibles path/to/some_script.py --some-arg some-value ...
+  traceback-with-variables path/to/some_script.py --some-arg some-value ...
 
   # command known to be a script (e.g. 'pip') and it's args
-  traceback-with-varaibles pip ...
+  traceback-with-variables pip ...
 
   # a module (e.g. 'http.server') and it's args
-  traceback-with-varaibles http.server ...
+  traceback-with-variables http.server ...
 
 
 # help:
@@ -24,7 +24,7 @@
 
 
 # synthwave
-  traceback_with_variables --color-scheme synthwave ...
+  traceback-with-variables --color-scheme synthwave ...
 
 
 # more
@@ -32,10 +32,10 @@
   python3 -m traceback_with_variables path/to/some_script.py --some-arg some-value
 
   # script and it's args, customized
-  traceback-with-varaibles --max-value-str-len 100 --num-context-lines 3 path/to/some_script.py --some-arg some-value
+  traceback-with-variables --max-value-str-len 100 --num-context-lines 3 path/to/some_script.py --some-arg some-value
 
   # command known to be a script (e.g. 'pip') and it's args, customized
-  traceback-with-varaibles --max-value-str-len 100 --num-context-lines 3 some_cmd --some-arg some-value
+  traceback-with-variables --max-value-str-len 100 --num-context-lines 3 some_cmd --some-arg some-value
 
   # a module (e.g. 'http.server') and it's args
-  traceback-with-varaibles --max-value-str-len 100 module_name --some-arg some-value
+  traceback-with-variables --max-value-str-len 100 module_name --some-arg some-value
