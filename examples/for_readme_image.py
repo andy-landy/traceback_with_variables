@@ -1,4 +1,4 @@
-from traceback_with_variables import printing_tb, ColorSchemes
+from traceback_with_variables import printing_exc, ColorSchemes
 
 
 def mean(vs):
@@ -15,17 +15,10 @@ def get_ratio(h, w):
 
 def main():
     sizes_str = '300 200 300 0'
-    with printing_tb(color_scheme=ColorSchemes.common):
+    with printing_exc(reraise=False):
         h1, w1, h2, w2 = map(int, sizes_str.split())
 
         return get_avg_ratio((h1, w1), (h2, w2))
 
 
-try:
-    main()
-
-except:
-    pass
-
-
-
+main()

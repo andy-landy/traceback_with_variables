@@ -4,8 +4,7 @@ from contextlib import contextmanager
 from functools import wraps
 from typing import NoReturn, Union, TextIO, Optional, Callable
 
-from traceback_with_variables.color import choose_color_scheme
-from traceback_with_variables.core import iter_tb_lines, ColorScheme, ColorSchemes
+from traceback_with_variables.core import Format, iter_exc_lines, iter_cur_tb_lines
 
 
 class LoggerAsFile:
@@ -19,82 +18,82 @@ class LoggerAsFile:
             self.logger.error('\n    '.join(self.lines))
 
     def write(self, text: str) -> NoReturn:
-        if not text.strip('\n'):
-            return
-
         if self.separate_lines:
-            for line in text.rstrip().split('\n'):
-                self.logger.error(line)
+            self.logger.error(text.rstrip('\n'))
         else:
-            self.lines.append(text)
+            self.lines.append(text.rstrip('\n'))
+
+
+def print_exc(
+    e: Optional[Exception] = None,
+    num_skipped_frames: int = 0,
+    fmt: Format = Format(),
+    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
+) -> NoReturn:
+    for line in iter_exc_lines(
+        e=e,
+        num_skipped_frames=num_skipped_frames,
+        fmt=fmt,
+        for_file=file_,
+    ):
+        file_.write(line + '\n')
+
+    file_.flush()
+
+
+def print_cur_tb(
+    num_skipped_frames: int = 0,
+    fmt: Format = Format(),
+    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
+) -> NoReturn:
+    for line in iter_cur_tb_lines(
+        num_skipped_frames=num_skipped_frames,
+        fmt=fmt,
+        for_file=file_,
+    ):
+        file_.write(line + '\n')
+
+    file_.flush()
 
 
 @contextmanager
-def printing_tb(
+def printing_exc(
     reraise: bool = True,
-    file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
+    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
     skip_cur_frame: bool = False,
-    num_context_lines: int = 1,
-    max_value_str_len: int = 1000,
-    max_exc_str_len: int = 10000,
-    ellipsis_: str = '...',
-    color_scheme: ColorScheme = ColorSchemes.auto,
+    fmt: Format = Format(),
 ):
     try:
         yield
 
     except Exception as e:
-        if file_:
-            for trace_str in iter_tb_lines(
-                e=e,
-                tb=None,
-                num_skipped_frames=2 if skip_cur_frame else 1,
-                max_value_str_len=max_value_str_len,
-                max_exc_str_len=max_exc_str_len,
-                ellipsis_=ellipsis_,
-                num_context_lines=num_context_lines,
-                color_scheme=choose_color_scheme(color_scheme, file_),
-            ):
-                file_.write(trace_str)
-                file_.write('\n')
-
-            file_.flush()
+        print_exc(
+            e=e,
+            num_skipped_frames=2 if skip_cur_frame else 1,
+            fmt=fmt,
+            file_=file_
+        )
 
         if reraise:
             raise e
 
 
-def prints_tb(
+def prints_exc(
     func__for_noncall_case_only: Optional[Callable] = None,  # to call without "()"
-    file_: Optional[Union[TextIO, LoggerAsFile]] = sys.stderr,
-    num_context_lines: int = 1,
-    max_value_str_len: int = 1000,
-    max_exc_str_len: int = 10000,
-    ellipsis_: str = '...',
-    color_scheme: ColorScheme = ColorSchemes.auto,
+    file_: Union[TextIO, LoggerAsFile] = sys.stderr,
+    fmt: Format = Format(),
 ):
     if func__for_noncall_case_only:
-        return prints_tb(
-            file_=file_,
-            num_context_lines=num_context_lines,
-            max_value_str_len=max_value_str_len,
-            max_exc_str_len=max_exc_str_len,
-            ellipsis_=ellipsis_,
-            color_scheme=choose_color_scheme(color_scheme, file_),
-        )(func__for_noncall_case_only)
+        return prints_exc(file_=file_, fmt=fmt)(func__for_noncall_case_only)
 
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            with printing_tb(
+            with printing_exc(
                 reraise=True,
                 file_=file_,
                 skip_cur_frame=True,
-                num_context_lines=num_context_lines,
-                max_value_str_len=max_value_str_len,
-                max_exc_str_len=max_exc_str_len,
-                ellipsis_=ellipsis_,
-                color_scheme=choose_color_scheme(color_scheme, file_),
+                fmt=fmt,
             ):
                 return func(*args, **kwargs)
 

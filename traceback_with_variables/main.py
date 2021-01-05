@@ -6,17 +6,13 @@ from importlib.util import find_spec
 from pathlib import Path
 from typing import List, Optional, NoReturn, Tuple
 
-from traceback_with_variables import printing_tb, ColorSchemes, ColorScheme, choose_color_scheme
+from traceback_with_variables.print import printing_exc, Format
 
 
 def run_script(
     path: Path,
     argv: List[str],
-    max_value_str_len: int,
-    max_exc_str_len: int,
-    ellipsis_: str,
-    num_context_lines: int,
-    color_scheme: ColorScheme,
+    fmt: Format,
 ) -> int:
     sys.path[0] = str(path.parent)
     sys.argv = [str(path)] + argv
@@ -26,14 +22,10 @@ def run_script(
         '__name__': '__main__',
     }
 
-    with printing_tb(
+    with printing_exc(
         reraise=False,
         skip_cur_frame=True,
-        max_value_str_len=max_value_str_len,
-        max_exc_str_len=max_exc_str_len,
-        ellipsis_=ellipsis_,
-        num_context_lines=num_context_lines,
-        color_scheme=color_scheme,
+        fmt=fmt,
     ):
         exec(compile(path.read_text(), str(path), "exec"), globals_, globals_)
 
@@ -115,31 +107,20 @@ def parse_args() -> Tuple[argparse.Namespace, Path, List[str]]:
     parser = argparse.ArgumentParser(add_help=False, allow_abbrev=False)
     parser.error = raising_error_func
 
-    parser.add_argument("--max-value-str-len", type=int, default=1000)
-    parser.add_argument("--max-exc-str-len", type=int, default=10000)
-    parser.add_argument("--ellipsis", default="...")
-    parser.add_argument("--num-context-lines", type=int, default=1)
-    parser.add_argument("--color-scheme", default='auto',
-                        choices=[a for a in dir(ColorSchemes) if not a.startswith('_')])
+    Format.add_arguments(parser)
 
     return parse_args_and_script_cmd(parser)
 
 
 def main():
-    args, script_path, script_argv = parse_args()
+    ns, script_path, script_argv = parse_args()
 
-    sys.exit(
-        run_script(
-            path=script_path,
-            argv=script_argv,
-            max_value_str_len=args.max_value_str_len,
-            max_exc_str_len=args.max_exc_str_len,
-            ellipsis_=args.ellipsis,
-            num_context_lines=args.num_context_lines,
-            color_scheme=choose_color_scheme(getattr(ColorSchemes, args.color_scheme), sys.stderr),
-        )
+    return run_script(
+        path=script_path,
+        argv=script_argv,
+        fmt=Format.parse(ns)
     )
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

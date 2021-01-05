@@ -1,0 +1,7 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only.../tests/test_core.py", line 97, in test_cur_tb
+    assert_smart_equals_ref(f'test_core.cur_tb_{num_skipped_frames}', get_cur_tb(num_skipped_frames))
+      num_skipped_frames = 0
+  File "...omitted for tests only.../tests/test_core.py", line 101, in get_cur_tb
+    return core.format_cur_tb(num_skipped_frames=num_skipped_frames, fmt=Format(skip_files_except='test_core'))
+      num_skipped_frames = 0

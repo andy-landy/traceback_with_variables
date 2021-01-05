@@ -1,0 +1,9 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only...", line 5, in <module>
+    f(a - 2)
+      ...skipped... 6 vars
+  File "...omitted for tests only...", line 3, in f
+    return 1 / m
+      n = 1
+      m = 0
+builtins.ZeroDivisionError: division by zero
