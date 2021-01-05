@@ -34,8 +34,8 @@ class Format:
         self.before = before
         self.after = after
         self.color_scheme = color_scheme
-        self.skip_files_except: List[re.Pattern] = _to_patterns(skip_files_except)
-        self.brief_files_except: List[re.Pattern] = _to_patterns(brief_files_except)
+        self.skip_files_except: List['re.Pattern'] = _to_patterns(skip_files_except)
+        self.brief_files_except: List['re.Pattern'] = _to_patterns(brief_files_except)
         self.custom_var_printers: List[Tuple[ShouldPrint, Print]] = [
             (_var_filter_to_should_print(f), p) for f, p in custom_var_printers or []
         ]
@@ -222,7 +222,7 @@ def _to_cropped_str(
     return _crop(raw, max_value_str_len, ellipsis_) if raw is not None else None
 
 
-def _to_patterns(patterns: Patterns) -> List[re.Pattern]:
+def _to_patterns(patterns: Patterns) -> List['re.Pattern']:
     p_strs: List[str] = [patterns] if isinstance(patterns, str) else (patterns or [])
 
     return [re.compile(p) for p in p_strs]
