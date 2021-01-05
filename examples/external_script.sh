@@ -39,4 +39,3 @@
   
   # runnig with `python -m`
   python3 -m traceback_with_variables path/to/some_script.py ...its args...
-
