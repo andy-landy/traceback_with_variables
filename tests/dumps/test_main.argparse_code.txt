@@ -1,10 +1,16 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only...", line 9, in <module>
     f(a - 2)
+      __loader__ = <_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>
+      __builtins__ = <module 'builtins' (built-in)>
+      __package__ = None
+      __spec__ = None
+      __annotations__ = None
+      __cached__ = None
       sys = <module 'sys' (built-in)>
-      argparse = <module 'argparse' from '/...omitted for tests only...py'>
       __name__ = '__main__'
-      __builtins__ = {...omitted for tests only...}
+      __file__ = '/...omitted for tests only...py'
+      argparse = <module 'argparse' from '/...omitted for tests only...py'>
       f = <function f at 0x...omitted for tests only...>
       p = ArgumentParser(prog='code.py', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
       args = Namespace(a=3)

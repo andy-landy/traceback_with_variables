@@ -16,18 +16,24 @@ def run_script(
 ) -> int:
     sys.path[0] = str(path.parent)
     sys.argv = [str(path)] + argv
-    globals_ = {
+    globals_ = {k: v for k, v in globals().items() if k in {
+        '__builtins__', '__loader__',
+    }}
+    globals_.update({k: None for k in globals().keys() if k in {
+        '__cached__', '__package__', '__annotations__', '__spec__',
+    }})
+    globals_.update({
         'sys': sys,
-        'argparse': argparse,
         '__name__': '__main__',
-    }
+        '__file__': str(path),
+    })
 
     with printing_exc(
         reraise=False,
         skip_cur_frame=True,
         fmt=fmt,
     ):
-        exec(compile(path.read_text(), str(path), "exec"), globals_, globals_)
+        exec(compile(path.read_text(), str(path), 'exec'), globals_, globals_)
 
         return 0
 
