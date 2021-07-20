@@ -15,7 +15,7 @@ VarFilterItem = Union[str, Type, ShouldPrint]
 VarFilter = Union[VarFilterItem, List[VarFilterItem]]
 
 
-class Format:
+class Format:  # no dataclass for compatibility
     def __init__(
         self,
         max_value_str_len: int = 1000,
@@ -106,7 +106,6 @@ def iter_exc_lines(
 
 def format_cur_tb(
     num_skipped_frames: int = 0,
-
     fmt: Optional[Format] = None,
     for_file: Optional[TextIO] = None,
 ) -> str:

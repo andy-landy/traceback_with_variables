@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3
+- Fixed tests in Windows/Mac
+- Removed `sys` from globals in the "main" mode
+
 ## 2.0.2
 - Fixed globals when calling extrnally, i.e. in the "main" mode
 

@@ -7,7 +7,6 @@
 [36m      [0m[32;1m__spec__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__annotations__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__cached__[0m[36m = [0mNone[0m
-[36m      [0m[32;1msys[0m[36m = [0m<module 'sys' (built-in)>[0m
 [36m      [0m[32;1m__name__[0m[36m = [0m'__main__'[0m
 [36m      [0m[32;1m__file__[0m[36m = [0m'/...omitted for tests only...py'[0m
 [36m      [0m[32;1mf[0m[36m = [0m<function f at 0x...omitted for tests only...>[0m

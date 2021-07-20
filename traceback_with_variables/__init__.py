@@ -10,4 +10,4 @@ from .print import print_exc, print_cur_tb, printing_exc, prints_exc, LoggerAsFi
 from .global_hooks import global_print_exc, global_print_exc_in_ipython, is_ipython_global  # noqa
 
 
-__version__ = '2.0.2'
+__version__ = '2.0.3'

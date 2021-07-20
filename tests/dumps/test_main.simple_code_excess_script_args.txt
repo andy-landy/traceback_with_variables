@@ -7,9 +7,8 @@ Traceback with variables (most recent call last):
       __spec__ = None
       __annotations__ = None
       __cached__ = None
-      sys = <module 'sys' (built-in)>
       __name__ = '__main__'
-      __file__ = '/...omitted for tests only...py'
+      __file__ = '...omitted for tests only...'
       f = <function f at 0x...omitted for tests only...>
       a = 3
   File "...omitted for tests only...", line 3, in f

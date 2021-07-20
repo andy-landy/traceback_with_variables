@@ -23,7 +23,6 @@ def run_script(
         '__cached__', '__package__', '__annotations__', '__spec__',
     }})
     globals_.update({
-        'sys': sys,
         '__name__': '__main__',
         '__file__': str(path),
     })
