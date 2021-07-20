@@ -8,8 +8,7 @@ Traceback with variables (most recent call last):
       __annotations__ = None
       __cached__ = None
       __name__ = '__main__'
-      __file__ = '...omitted for tests only...'
-      f = <function f at 0x...omitted for tests only...>
+      __file__ = '...omitted for tests only...'      f = <function f at 0x...omitted for tests only...>
       a = 3
   File "...omitted for tests only...", line 3, in f
     return 1 / m
