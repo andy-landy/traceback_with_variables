@@ -40,7 +40,7 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 
 ---
 
-> :warning: **This module is being updated and has a substantial list of features to add some time soon**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
+> :warning: **This module is actively updated and has a substantial list of features to add this week**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
 
 ---
 
@@ -106,7 +106,8 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/format_customized.py">Customize</a> any of the previous examples:
 ```python
-    ...(fmt=Format(max_value_str_len=80, skip_files_except='my_project'))
+    default_format.max_value_str_len = 10000
+    default_format.skip_files_except = 'my_project'
 ```
 
 

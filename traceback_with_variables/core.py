@@ -3,7 +3,7 @@ import inspect
 import re
 import sys
 import traceback
-from typing import Any, Iterator, Union, Optional, TextIO, NoReturn, List, Callable, Type, Tuple
+from typing import Any, Iterator, Union, Optional, TextIO, NoReturn, List, Callable, Type, Tuple, Dict
 
 from traceback_with_variables.color import ColorScheme, ColorSchemes, supports_ansi
 
@@ -66,6 +66,16 @@ class Format:  # no dataclass for compatibility
             brief_files_except=ns.brief_files_except,
             custom_var_printers=[((lambda n, t, fn, is_global: is_global), lambda v: None)] if ns.no_globals else None,
         )
+
+    def replace(self, **kwargs: Dict[str, Any]) -> 'Format':
+        result = Format()
+
+        for key, value in self.__dict__.items():
+            setattr(result, key, value)
+        for key, value in kwargs.items():
+            setattr(result, key, value)
+
+        return result
 
 
 def format_exc(
@@ -142,7 +152,7 @@ def _iter_lines(
     fmt: Optional[Format] = None,
     for_file: Optional[TextIO] = None,
 ) -> Iterator[str]:
-    fmt_: Format = fmt or Format()
+    fmt_: Format = fmt or default_format
     c: ColorScheme = fmt_.color_scheme or \
         (ColorSchemes.common if (for_file and supports_ansi(for_file)) else ColorSchemes.none)
 
@@ -245,3 +255,6 @@ def _var_filter_to_should_print(filter_: VarFilter) -> ShouldPrint:
         )
 
     return should_print
+
+
+default_format = Format()

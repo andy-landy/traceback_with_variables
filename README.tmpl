@@ -106,7 +106,8 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
 
 <a href="{{ examples_code_url }}/format_customized.py">Customize</a> any of the previous examples:
 ```python
-    ...(fmt=Format(max_value_str_len=80, skip_files_except='my_project'))
+    default_format.max_value_str_len = 10000
+    default_format.skip_files_except = 'my_project'
 ```
 
 

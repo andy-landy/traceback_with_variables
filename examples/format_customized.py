@@ -1,10 +1,17 @@
-from traceback_with_variables import Format, ColorSchemes, is_ipython_global
+from traceback_with_variables import Format, ColorSchemes, is_ipython_global, default_format as defaults
 
 
-fmt = Format(
+# approach 1
+
+defaults.max_value_str_len = 10000
+
+
+# approach 2
+
+fmt2 = Format(
     before=3,
     after=1,
-    max_value_str_len=100,
+    max_value_str_len=10000,
     max_exc_str_len=1000,
     ellipsis_='...',
     color_scheme=ColorSchemes.synthwave,
@@ -18,3 +25,10 @@ fmt = Format(
         (['secret', dict, (lambda name, *_: 'asd' in name)], lambda v: '???'),  # by different things, print const str
     ]
 )
+# print_exc(fmt=fmt2)
+
+
+# approach 3
+
+fmt3 = defaults.replace(max_value_str_len=10000)
+# print_exc(fmt=fmt3)
