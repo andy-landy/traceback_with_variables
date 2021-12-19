@@ -2,6 +2,8 @@ from pathlib import Path
 
 from jinja2 import Template
 
+from traceback_with_variables import __version__ as version
+
 
 user_name = 'andy-landy'
 repo_name = 'traceback_with_variables'
@@ -30,4 +32,5 @@ Path('README.md').write_text(Template(Path('README.tmpl').read_text()).render(
     pypi_url=pypi_url,
     content_url=content_url,
     gitter_url=gitter_url,
+    version=version,
 ))
