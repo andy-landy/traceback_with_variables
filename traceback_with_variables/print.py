@@ -27,7 +27,7 @@ class LoggerAsFile:
 def print_exc(
     e: Optional[Exception] = None,
     num_skipped_frames: int = 0,
-    fmt: Format = Format(),
+    fmt: Optional[Format] = None,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
 ) -> NoReturn:
     for line in iter_exc_lines(
@@ -43,7 +43,7 @@ def print_exc(
 
 def print_cur_tb(
     num_skipped_frames: int = 0,
-    fmt: Format = Format(),
+    fmt: Optional[Format] = None,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
 ) -> NoReturn:
     for line in iter_cur_tb_lines(
@@ -61,7 +61,7 @@ def printing_exc(
     reraise: bool = True,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
     skip_cur_frame: bool = False,
-    fmt: Format = Format(),
+    fmt: Optional[Format] = None,
 ):
     try:
         yield
@@ -81,7 +81,7 @@ def printing_exc(
 def prints_exc(
     func__for_noncall_case_only: Optional[Callable] = None,  # to call without "()"
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
-    fmt: Format = Format(),
+    fmt: Optional[Format] = None,
 ):
     if func__for_noncall_case_only:
         return prints_exc(file_=file_, fmt=fmt)(func__for_noncall_case_only)

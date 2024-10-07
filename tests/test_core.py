@@ -6,6 +6,21 @@ from tests.dummies import Unprintable, f
 from tests.utils import assert_smart_equals_ref
 
 
+def test_setattr():
+    fmt = Format()
+    fmt.max_value_str_len = 1
+    fmt.max_exc_str_len = 1
+    fmt.ellipsis_ = '.'
+    fmt.before = 1
+    fmt.after = 1
+    fmt.color_scheme = None
+    fmt.skip_files_except = []
+    fmt.brief_files_except = []
+    fmt.custom_var_printers = []
+    with pytest.raises(AttributeError):
+        fmt.max_val_str_len = 1
+
+
 def test_default():
     check('default', 10001)
 
@@ -106,3 +121,5 @@ def check(name, arg, **kwargs):
         f(arg)
     except Exception:  # noqa
         assert_smart_equals_ref('test_core.{}'.format(name), core.format_exc(**kwargs))
+
+

@@ -42,17 +42,17 @@ def test_printing_exc_to_tty():
 
 
 def test_printing_exc_stderr(tmp_path):
-    code = '''from traceback_with_variables import printing_exc
-def f(n):
-    return n / 0
-    
-def main():
-    with printing_exc(reraise=False):
-        return f(10)
-         
-main()'''
+    lines = [
+        'from traceback_with_variables import printing_exc',
+        'def f(n):',
+        '  return n / 0',
+        'def main():',
+        '  with printing_exc(reraise=False):',
+        '    return f(10)',
+        'main()',
+    ]
 
-    assert_smart_equals_ref('test_print.printing_exc_stderr', run_code(tmp_path, [], code, [], False))
+    assert_smart_equals_ref('test_print.printing_exc_stderr', run_code(tmp_path, [], lines, [], False))
 
 
 def test_printing_exc_reraise():
@@ -79,16 +79,18 @@ def test_prints_exc():
 
 
 def test_prints_exc_noncall(tmp_path):
-    code = '''from traceback_with_variables import prints_exc
-@prints_exc
-def f(n):
-    return n / 0
-try:
-    f(10)
-except:
-    pass'''
+    lines = [
+        'from traceback_with_variables import prints_exc',
+        '@prints_exc',
+        'def f(n):',
+        '  return n / 0',
+        'try:',
+        '  f(10)',
+        'except:',
+        '  pass',
+    ]
 
-    assert_smart_equals_ref('test_print.prints_exc_noncall', run_code(tmp_path, [], code, [], False))
+    assert_smart_equals_ref('test_print.prints_exc_noncall', run_code(tmp_path, [], lines, [], False))
 
 
 def test_logger_as_file(caplog):
