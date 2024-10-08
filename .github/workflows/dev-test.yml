@@ -33,9 +33,10 @@ jobs:
 
       - name: Test with pytest
         run: |
-          python -m pytest -vv --cov=./traceback_with_variables --cov-report=xml
+          cd traceback_with_variables
+          python -m pytest -vv --cov=. --cov-report=xml
 
       - name: Upload Codecov
         uses: codecov/codecov-action@v1
         with:
-          file: ./coverage.xml
+          file: ./traceback_with_variables/coverage.xml
