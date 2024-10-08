@@ -3,7 +3,7 @@ import inspect
 import re
 import sys
 import traceback
-from typing import Any, Iterator, Union, Optional, TextIO, NoReturn, List, Callable, Type, Tuple, Dict
+from typing import Any, Iterator, Union, Optional, TextIO, List, Callable, Type, Tuple, Dict
 
 from traceback_with_variables.color import ColorScheme, ColorSchemes, supports_ansi
 
@@ -50,7 +50,7 @@ class Format:  # no dataclass for compatibility
 
 
     @classmethod
-    def add_arguments(cls, parser: argparse.ArgumentParser) -> NoReturn:
+    def add_arguments(cls, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("--max-value-str-len", type=int, default=1000)
         parser.add_argument("--max-exc-str-len", type=int, default=10000)
         parser.add_argument("--ellipsis", default="...")

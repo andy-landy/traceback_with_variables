@@ -2,7 +2,7 @@ import logging
 import sys
 from contextlib import contextmanager
 from functools import wraps
-from typing import NoReturn, Union, TextIO, Optional, Callable
+from typing import Union, TextIO, Optional, Callable
 
 from traceback_with_variables.core import Format, iter_exc_lines, iter_cur_tb_lines
 
@@ -13,11 +13,11 @@ class LoggerAsFile:
         self.separate_lines = separate_lines
         self.lines = []
 
-    def flush(self) -> NoReturn:
+    def flush(self) -> None:
         if self.lines:
             self.logger.error('\n    '.join(self.lines))
 
-    def write(self, text: str) -> NoReturn:
+    def write(self, text: str) -> None:
         if self.separate_lines:
             self.logger.error(text.rstrip('\n'))
         else:
@@ -29,7 +29,7 @@ def print_exc(
     num_skipped_frames: int = 0,
     fmt: Optional[Format] = None,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
-) -> NoReturn:
+) -> None:
     for line in iter_exc_lines(
         e=e,
         num_skipped_frames=num_skipped_frames,
@@ -45,7 +45,7 @@ def print_cur_tb(
     num_skipped_frames: int = 0,
     fmt: Optional[Format] = None,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
-) -> NoReturn:
+) -> None:
     for line in iter_cur_tb_lines(
         num_skipped_frames=num_skipped_frames,
         fmt=fmt,
