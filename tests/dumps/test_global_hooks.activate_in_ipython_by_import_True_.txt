@@ -1,6 +1,6 @@
 variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
       Unprintable = <class '__main__.Unprintable'>
-      f = <function f at 0x...omitted for tests only...>
+      f = <function...omitted for tests only...>
       ...skipped... 18 vars
   File "...omitted for tests only...", line 19, in f
     return f(

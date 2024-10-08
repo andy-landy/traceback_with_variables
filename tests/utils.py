@@ -63,6 +63,9 @@ def strip_tb_text(text: str) -> str:
     text = re.sub(r'( at 0x)\w+', r'\1{}'.format(OFTO), text)
     text = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1{}'.format(OFTO), text)
     text = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1{}\2'.format(OFTO), text)
+    text = re.sub(r'(<_froz).*(>)', r'\1{}\2'.format(OFTO), text)
+    text = re.sub(r'(<trace?b?a?c?k?).*(>)', r'\1{}\2'.format(OFTO), text)
+    text = re.sub(r'(<func?t?i?o?n?).*(>)', r'\1{}\2'.format(OFTO), text)
 
     return text
 

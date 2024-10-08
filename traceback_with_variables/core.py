@@ -222,7 +222,7 @@ def _iter_lines(
 
 
 def _crop(line: str, max_len: int, ellipsis_rel_pos: float, ellipsis_: str) -> str:
-    pre_len = int(max_len * ellipsis_rel_pos)
+    pre_len = int(max_len * min(1.0, max(0.0, ellipsis_rel_pos)))
     suf_len = max_len - pre_len
     if pre_len + len(ellipsis_) + suf_len >= len(line):
         return line

@@ -1,7 +1,7 @@
 [38;2;255;153;255mTraceback with variables (most recent call last):[0m
 [38;2;255;153;255m  File "...omitted for tests only...", line [0m[38;2;255;153;0m13[0m[38;2;255;153;255m, in [0m[38;2;255;153;0mcheck_[0m
 [38;2;255;153;255m    [0m[38;2;50;100;255mf()[0m
-[38;2;255;153;255m      [0m[38;2;254;0;254mkwargs[0m[38;2;255;153;255m = [0m[38;2;153;204;255m{'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}[0m
+[38;2;255;153;255m      [0m[38;2;254;0;254mkwargs[0m[38;2;255;153;255m = [0m[38;2;153;204;255m{'fmt': <traceback...omitted for tests only...>}[0m
 [38;2;255;153;255m      [0m[38;2;254;0;254mtb_reg[0m[38;2;255;153;255m = [0m[38;2;153;204;255m<bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>[0m
 [38;2;255;153;255m  File "...omitted for tests only...", line [0m[38;2;255;153;0m18[0m[38;2;255;153;255m, in [0m[38;2;255;153;0mf[0m
 [38;2;255;153;255m    [0m[38;2;50;100;255mreturn f([0m

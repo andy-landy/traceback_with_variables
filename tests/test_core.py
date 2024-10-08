@@ -20,6 +20,7 @@ def check(tb_reg):
 def test_setattr():
     fmt = Format()
     fmt.max_value_str_len = 1
+    fmt.ellipsis_rel_pos = 0.5
     fmt.max_exc_str_len = 1
     fmt.ellipsis_ = '.'
     fmt.before = 1
@@ -64,6 +65,11 @@ def test_ellipsis(check):
 
 def test_max_value_str_len(check):
     check(fmt=Format(max_value_str_len=10))
+
+
+@pytest.mark.parametrize('ellipsis_rel_pos', [-0.5, 0.0, 0.5, 0.7, 1.0, 1.5])
+def test_ellipsis_rel_pos(check, ellipsis_rel_pos):
+    check(fmt=Format(ellipsis_rel_pos=ellipsis_rel_pos))
 
 
 def test_max_exc_str_len(check):
