@@ -4,7 +4,7 @@ Traceback with variables (most recent call last):
   . 
   . from traceback_with_variables import core, ColorSchemes, Format
   . 
-  . from tests.dummies import Unprintable, f
+  . from tests.dummies import Unprintable, f, A
   . from tests.utils import tb_reg
   . 
   . 
@@ -21,9 +21,15 @@ Traceback with variables (most recent call last):
   .         raise ValueError("please don't print me")
   . 
   . 
+  . class A:
+  .     def __init__(self, f1, f2):
+  .         self.f1 = f1
+  .         self.f2 = f2
+  . 
+  . 
   . def f(n: int = 10001) -> int:
-  .     s1 = 'short string with n: {}'.format(n)
-  .     l1 = 'long string with 0..n: {}'.format(', '.join(map(str, range(n))))
+  .     s1 = f'short string with n: {n}'
+  .     l1 = f'long string with 0..n: {", ".join(map(str, range(n)))}'
   .     us = [Unprintable(), Unprintable(), Unprintable()]
   . 
   .     if n % 10 == 0:
@@ -50,9 +56,15 @@ Traceback with variables (most recent call last):
   .         raise ValueError("please don't print me")
   . 
   . 
+  . class A:
+  .     def __init__(self, f1, f2):
+  .         self.f1 = f1
+  .         self.f2 = f2
+  . 
+  . 
   . def f(n: int = 10001) -> int:
-  .     s1 = 'short string with n: {}'.format(n)
-  .     l1 = 'long string with 0..n: {}'.format(', '.join(map(str, range(n))))
+  .     s1 = f'short string with n: {n}'
+  .     l1 = f'long string with 0..n: {", ".join(map(str, range(n)))}'
   .     us = [Unprintable(), Unprintable(), Unprintable()]
   . 
   .     if n % 10 == 0:

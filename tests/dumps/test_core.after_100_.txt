@@ -10,6 +10,7 @@ Traceback with variables (most recent call last):
   . def test_setattr():
   .     fmt = Format()
   .     fmt.max_value_str_len = 1
+  .     fmt.objects_details = 1
   .     fmt.ellipsis_rel_pos = 0.5
   .     fmt.max_exc_str_len = 1
   .     fmt.ellipsis_ = '.'
@@ -57,6 +58,15 @@ Traceback with variables (most recent call last):
   .     check(fmt=Format(max_value_str_len=10))
   . 
   . 
+  . @pytest.mark.parametrize('obj', [[1, 2, 3], A(11, 12), A(A(11, 12), A(13, 14)), A(Unprintable(), 2)])
+  . @pytest.mark.parametrize('objects_details', [0, 1, 10])
+  . def test_objects_details(tb_reg, obj, objects_details):
+  .     try:
+  .         1/0
+  .     except:
+  .         tb_reg(core.format_exc(fmt=Format(objects_details=objects_details)))
+  . 
+  . 
   . @pytest.mark.parametrize('ellipsis_rel_pos', [-0.5, 0.0, 0.5, 0.7, 1.0, 1.5])
   . def test_ellipsis_rel_pos(check, ellipsis_rel_pos):
   .     check(fmt=Format(ellipsis_rel_pos=ellipsis_rel_pos))
@@ -79,16 +89,6 @@ Traceback with variables (most recent call last):
   . @pytest.mark.parametrize('after', [0, 2, 100])
   . def test_after(check, after):
   .     check(fmt=Format(after=after))
-  . 
-  . 
-  . def test_before_after(check):
-  .     check(fmt=Format(before=2, after=2))
-  . 
-  . 
-  . def test_color_scheme_common(check):
-  .     check(fmt=Format(color_scheme=ColorSchemes.common))
-  . 
-  . 
       kwargs = {'fmt': <traceback...omitted for tests only...>}
       tb_reg = <bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>
   File "...omitted for tests only.../tests/dummies.py", line ...omitted for tests only..., in f

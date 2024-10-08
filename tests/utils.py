@@ -56,23 +56,23 @@ def strip_tb_text(text: str) -> str:
     text = text.replace('\\', '/')  # for windows
     text = text.replace('\r', '')  # for windows
     for dir_ in ['traceback_with_variables', 'tests']:
-        text = re.sub(r'(File ").*(/{}/.*, line )\d+,'.format(dir_), r'\1{}\2{},'.format(OFTO, OFTO), text)
-    text = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1{}"'.format(OFTO), text)
-    text = re.sub(r"'/.*\.py'", "'/{}py'".format(OFTO), text)
-    text = re.sub(r"(__file__ = )[^\n]*\n", r"\1'{}'".format(OFTO), text)
-    text = re.sub(r'( at 0x)\w+', r'\1{}'.format(OFTO), text)
-    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1{}'.format(OFTO), text)
-    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1{}\2'.format(OFTO), text)
-    text = re.sub(r'(<_froz).*(>)', r'\1{}\2'.format(OFTO), text)
-    text = re.sub(r'(<trace?b?a?c?k?).*(>)', r'\1{}\2'.format(OFTO), text)
-    text = re.sub(r'(<func?t?i?o?n?).*(>)', r'\1{}\2'.format(OFTO), text)
+        text = re.sub(fr'(File ").*(/{dir_}/.*, line )\d+,', fr'\1{OFTO}\2{OFTO},', text)
+    text = re.sub(r'(File ")((?!\.\.\.).)*"', fr'\1{OFTO}"', text)
+    text = re.sub(r"'/.*\.py'", f"'/{OFTO}py'", text)
+    text = re.sub(r"(__file__ = )[^\n]*\n", fr"\1'{OFTO}'", text)
+    text = re.sub(r'( at 0x)\w+', fr'\1{OFTO}', text)
+    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', fr'\1{OFTO}', text)
+    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', fr'\1{OFTO}\2', text)
+    text = re.sub(r'(<_froz).*(>)', fr'\1{OFTO}\2', text)
+    text = re.sub(r'(<trace?b?a?c?k?).*(>)', fr'\1{OFTO}\2', text)
+    text = re.sub(r'(<func?t?i?o?n?).*(>)', fr'\1{OFTO}\2', text)
 
     return text
 
 
 @pytest.fixture
 def tb_reg(request):
-    reg = Reg(label='{}.{}'.format(request.module.__name__, request.node.name[5:]))
+    reg = Reg(label=f'{request.module.__name__}.{request.node.name[5:]}')
     return reg.match_tb_text
 
 

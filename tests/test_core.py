@@ -2,7 +2,7 @@ import pytest
 
 from traceback_with_variables import core, ColorSchemes, Format
 
-from tests.dummies import Unprintable, f
+from tests.dummies import Unprintable, f, A
 from tests.utils import tb_reg
 
 
@@ -20,6 +20,7 @@ def check(tb_reg):
 def test_setattr():
     fmt = Format()
     fmt.max_value_str_len = 1
+    fmt.objects_details = 1
     fmt.ellipsis_rel_pos = 0.5
     fmt.max_exc_str_len = 1
     fmt.ellipsis_ = '.'
@@ -65,6 +66,15 @@ def test_ellipsis(check):
 
 def test_max_value_str_len(check):
     check(fmt=Format(max_value_str_len=10))
+
+
+@pytest.mark.parametrize('obj', [[1, 2, 3], A(11, 12), A(A(11, 12), A(13, 14)), A(Unprintable(), 2)])
+@pytest.mark.parametrize('objects_details', [0, 1, 10])
+def test_objects_details(tb_reg, obj, objects_details):
+    try:
+        1/0
+    except:
+        tb_reg(core.format_exc(fmt=Format(objects_details=objects_details)))
 
 
 @pytest.mark.parametrize('ellipsis_rel_pos', [-0.5, 0.0, 0.5, 0.7, 1.0, 1.5])
