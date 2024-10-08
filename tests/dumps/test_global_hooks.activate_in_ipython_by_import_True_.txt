@@ -1,8 +1,9 @@
 variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
       Unprintable = <class '__main__.Unprintable'>
+      A = <class '__main__.A'>
       f = <function...omitted for tests only...>
       ...skipped... 18 vars
-  File "...omitted for tests only...", line 19, in f
+  File "...omitted for tests only...", line 25, in f
     return f(
       n = 10001
       s1 = 'short string with n: 10001'
@@ -14,7 +15,7 @@ variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
             raise ValueError("please don't print me")
         ValueError: please don't print me
         
-  File "...omitted for tests only...", line 13, in f
+  File "...omitted for tests only...", line 19, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short string with n: 10000'

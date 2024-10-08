@@ -1,7 +1,7 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only...", line 9, in <module>
     f(a - 2)
-      __loader__ = <_froz...omitted for tests only...>
+      __loader__ = <_froz...omitted for tests only...>(name='traceback_with_variables.main', path='/...omitted for tests only...py')
       __builtins__ = <module 'builtins' (built-in)>
       __package__ = None
       __spec__ = None

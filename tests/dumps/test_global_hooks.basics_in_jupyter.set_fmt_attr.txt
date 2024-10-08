@@ -1,12 +1,13 @@
 [36mTraceback with variables (most recent call last):[0m
-[36m  File "...omitted for tests only...", line [0m[36;1m25[0m[36m, in [0m[36;1m<module>[0m
+[36m  File "...omitted for tests only...", line [0m[36;1m31[0m[36m, in [0m[36;1m<module>[0m
 [36m    [0m[35mf()[0m
 [36m      [0m[32;1mactivate_in_ipython_by_import[0m[36m = [0m<module...y'>[0m
 [36m      [0m[32;1md[0m[36m = [0m<traceb...omitted for tests only...>[0m
 [36m      [0m[32;1mUnprintable[0m[36m = [0m<class ...e'>[0m
+[36m      [0m[32;1mA[0m[36m = [0m<class ...A'>[0m
 [36m      [0m[32;1mf[0m[36m = [0m<functi...omitted for tests only...>[0m
 [36m      [0m[32;1m...skipped...[0m[36m [0m22[0m[36m vars[0m
-[36m  File "...omitted for tests only...", line [0m[36;1m20[0m[36m, in [0m[36;1mf[0m
+[36m  File "...omitted for tests only...", line [0m[36;1m26[0m[36m, in [0m[36;1mf[0m
 [36m    [0m[35mreturn f([0m
 [36m      [0m[32;1mn[0m[36m = [0m10001[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short ...01'[0m
@@ -18,7 +19,7 @@
 [36m      [0m      raise ValueError("please don't print me")[0m
 [36m      [0m  ValueError: please don't print me[0m
 [36m      [0m  [0m
-[36m  File "...omitted for tests only...", line [0m[36;1m14[0m[36m, in [0m[36;1mf[0m
+[36m  File "...omitted for tests only...", line [0m[36;1m20[0m[36m, in [0m[36;1mf[0m
 [36m    [0m[35mreturn 1 // (n * 0)[0m
 [36m      [0m[32;1mn[0m[36m = [0m10000[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short ...00'[0m

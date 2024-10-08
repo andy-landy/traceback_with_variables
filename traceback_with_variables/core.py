@@ -30,6 +30,7 @@ class Format:  # no dataclass for compatibility
         brief_files_except: Patterns = None,
         custom_var_printers: Optional[List[Tuple[VarFilter, Print]]] = None,  # address examples
     ):
+        self._can_grow = True
         self.max_value_str_len = max_value_str_len
         self.ellipsis_rel_pos = ellipsis_rel_pos
         self.max_exc_str_len = max_exc_str_len
@@ -43,23 +44,19 @@ class Format:  # no dataclass for compatibility
         self.custom_var_printers: List[Tuple[ShouldPrint, Print]] = [
             (_var_filter_to_should_print(f), p) for f, p in custom_var_printers or []
         ]
+        self._can_grow = False
 
     def __setattr__(self, name, value):
-        if name not in {
-            'max_value_str_len', 'ellipsis_rel_pos', 'max_exc_str_len', 'objects_details',
-            'ellipsis_', 'before', 'after', 'color_scheme', 'skip_files_except',
-            'brief_files_except', 'custom_var_printers',
-        }:
+        if (not getattr(self, '_can_grow', True)) and (name not in dir(self)) or (name in dir(type(self))):
             raise AttributeError("'Format' object has no attribute '{name}'")
         super().__setattr__(name, value)
-
 
     @classmethod
     def add_arguments(cls, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("--max-value-str-len", type=int, default=1000)
         parser.add_argument("--ellipsis-rel-pos", type=float, default=0.7)
         parser.add_argument("--max-exc-str-len", type=int, default=10000)
-        parser.add_argument("--object-details", type=int, default=1)
+        parser.add_argument("--objects-details", type=int, default=1)
         parser.add_argument("--ellipsis", default="...")
         parser.add_argument("--before", type=int, default=0)
         parser.add_argument("--after", type=int, default=0)
@@ -310,4 +307,3 @@ def _var_filter_to_should_print(filter_: VarFilter) -> ShouldPrint:
 
 
 default_format = Format()
-

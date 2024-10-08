@@ -1,8 +1,9 @@
 variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>[0m
 [36m      [0m[32;1mUnprintable[0m[36m = [0m<class '__main__.Unprintable'>[0m
+[36m      [0m[32;1mA[0m[36m = [0m<class '__main__.A'>[0m
 [36m      [0m[32;1mf[0m[36m = [0m<function...omitted for tests only...>[0m
 [36m      [0m[32;1m...skipped...[0m[36m [0m18[0m[36m vars[0m
-[36m  File "...omitted for tests only...", line [0m[36;1m19[0m[36m, in [0m[36;1mf[0m
+[36m  File "...omitted for tests only...", line [0m[36;1m25[0m[36m, in [0m[36;1mf[0m
 [36m    [0m[35mreturn f([0m
 [36m      [0m[32;1mn[0m[36m = [0m10001[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10001'[0m
@@ -14,7 +15,7 @@ variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
 [36m      [0m      raise ValueError("please don't print me")[0m
 [36m      [0m  ValueError: please don't print me[0m
 [36m      [0m  [0m
-[36m  File "...omitted for tests only...", line [0m[36;1m13[0m[36m, in [0m[36;1mf[0m
+[36m  File "...omitted for tests only...", line [0m[36;1m19[0m[36m, in [0m[36;1mf[0m
 [36m    [0m[35mreturn 1 // (n * 0)[0m
 [36m      [0m[32;1mn[0m[36m = [0m10000[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10000'[0m

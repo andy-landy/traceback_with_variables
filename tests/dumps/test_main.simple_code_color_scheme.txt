@@ -1,7 +1,7 @@
 [36mTraceback with variables (most recent call last):[0m
 [36m  File "...omitted for tests only...", line [0m[36;1m5[0m[36m, in [0m[36;1m<module>[0m
 [36m    [0m[35mf(a - 2)[0m
-[36m      [0m[32;1m__loader__[0m[36m = [0m<_froz...omitted for tests only...>[0m
+[36m      [0m[32;1m__loader__[0m[36m = [0m<_froz...omitted for tests only...>(name='traceback_with_variables.main', path='/...omitted for tests only...py')[0m
 [36m      [0m[32;1m__builtins__[0m[36m = [0m<module 'builtins' (built-in)>[0m
 [36m      [0m[32;1m__package__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__spec__[0m[36m = [0mNone[0m

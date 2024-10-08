@@ -1,8 +1,8 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only...", line 24, in <module>
+  File "...omitted for tests only...", line 30, in <module>
     f()
-      ...skipped... 12 vars
-  File "...omitted for tests only...", line 19, in f
+      ...skipped... 13 vars
+  File "...omitted for tests only...", line 25, in f
     return f(
       n = 10001
       s1 = 'short string with n: 10001'
@@ -14,7 +14,7 @@ Traceback with variables (most recent call last):
             raise ValueError("please don't print me")
         ValueError: please don't print me
         
-  File "...omitted for tests only...", line 13, in f
+  File "...omitted for tests only...", line 19, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short string with n: 10000'

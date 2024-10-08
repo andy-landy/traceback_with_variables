@@ -2,6 +2,7 @@ usage: main.py [-h]
 [--max-value-str-len MAX_VALUE_STR_LEN]
 [--ellipsis-rel-pos ELLIPSIS_REL_POS]
 [--max-exc-str-len MAX_EXC_STR_LEN]
+[--objects-details OBJECTS_DETAILS]
 [--ellipsis ELLIPSIS]
 [--before BEFORE]
 [--after AFTER]
@@ -19,6 +20,7 @@ optional arguments:
   --max-value-str-len MAX_VALUE_STR_LEN
   --ellipsis-rel-pos ELLIPSIS_REL_POS
   --max-exc-str-len MAX_EXC_STR_LEN
+  --objects-details OBJECTS_DETAILS
   --ellipsis ELLIPSIS
   --before BEFORE
   --after AFTER
