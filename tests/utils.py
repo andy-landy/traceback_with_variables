@@ -50,18 +50,19 @@ def match_text_in_file(path: str, text: str) -> None:
 
 
 def strip_tb_text(text: str) -> str:
+    OFTO = '...omitted for tests only...'
     text = text.replace('\\\\', '\\')  # for windows
     text = re.sub('.:\\\\', '/', text)  # for windows
     text = text.replace('\\', '/')  # for windows
     text = text.replace('\r', '')  # for windows
     for dir_ in ['traceback_with_variables', 'tests']:
-        text = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...omitted for tests only...\2', text)
-    text = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', text)
-    text = re.sub(r"'/.*\.py'", "'/...omitted for tests only...py'", text)
-    text = re.sub(r"(__file__ = )[^\n]*\n", r"\1'...omitted for tests only...'", text)
-    text = re.sub(r'( at 0x)\w+', r'\1...omitted for tests only...', text)
-    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1...omitted for tests only...}', text)
-    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1...omitted for test only...\2', text)
+        text = re.sub(r'(File ").*(/{}/.*, line )\d+,'.format(dir_), r'\1{}\2{},'.format(OFTO, OFTO), text)
+    text = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1{}"'.format(OFTO), text)
+    text = re.sub(r"'/.*\.py'", "'/{}py'".format(OFTO), text)
+    text = re.sub(r"(__file__ = )[^\n]*\n", r"\1'{}'".format(OFTO), text)
+    text = re.sub(r'( at 0x)\w+', r'\1{}'.format(OFTO), text)
+    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1{}'.format(OFTO), text)
+    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1{}\2'.format(OFTO), text)
 
     return text
 

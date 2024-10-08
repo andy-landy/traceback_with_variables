@@ -1,5 +1,6 @@
 usage: main.py [-h]
 [--max-value-str-len MAX_VALUE_STR_LEN]
+[--ellipsis-rel-pos ELLIPSIS_REL_POS]
 [--max-exc-str-len MAX_EXC_STR_LEN]
 [--ellipsis ELLIPSIS]
 [--before BEFORE]
@@ -16,6 +17,7 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --max-value-str-len MAX_VALUE_STR_LEN
+  --ellipsis-rel-pos ELLIPSIS_REL_POS
   --max-exc-str-len MAX_EXC_STR_LEN
   --ellipsis ELLIPSIS
   --before BEFORE

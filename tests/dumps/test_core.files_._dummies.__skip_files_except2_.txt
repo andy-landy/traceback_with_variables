@@ -1,4 +1,4 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_core.py", line 13, in check_
+  File "...omitted for tests only.../tests/test_core.py", line ...omitted for tests only..., in check_
     f()
 builtins.ZeroDivisionError: integer division or modulo by zero
