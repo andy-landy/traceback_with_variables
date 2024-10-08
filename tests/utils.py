@@ -18,41 +18,58 @@ activate_line = 'from traceback_with_variables import activate_by_import'
 jupyter_activate_line = 'from traceback_with_variables import activate_in_ipython_by_import'
 
 
-def assert_eq(v1, v2):  # o_O
-    if v1 != v2:
-        print('left =', v1)
-        print('right =', v2)
+class Reg:
+    def __init__(self, label: str) -> None:
+        self.label: str = label
 
-    assert v1 == v2
+    def match_tb_text(self, text: str, sub_label: str = '') -> None:
+        self.match_text(strip_tb_text(text), sub_label)
+        
+    def match_text(self, text: str, sub_label: str = '') -> None:
+        path = 'tests/dumps/' + parts_to_fname([self.label, sub_label, 'txt'])
+        match_text_in_file(path, text)
 
 
-def assert_equals_ref(name: str, value: str) -> None:
-    path = 'tests/dumps/{}.txt'.format(''.join(c if c.isalnum() or c in '.' else '_' for c in name))
+def parts_to_fname(parts: List[str]) -> str:
+    return ''.join(c if c.isalnum() or c in '.' else '_' for c in '.'.join(p for p in parts if p))
 
+
+def match_text_in_file(path: str, text: str) -> None:
     if os.getenv('PYTEST_UPDATE_REFS', ''):
         with open(path, 'w') as out:
-            out.write(value)
+            out.write(text)
 
     else:
         with open(path, 'r') as in_:
-            assert_eq(value, in_.read())
+            new_text = in_.read()
+            if text != new_text:
+                print('left =', text)
+                print('right =', new_text)
+
+            assert text == new_text
 
 
-def assert_smart_equals_ref(name: str, value: str) -> None:
-    value = value.replace('\\\\', '\\')  # for windows
-    value = re.sub('.:\\\\', '/', value)  # for windows
-    value = value.replace('\\', '/')  # for windows
-    value = value.replace('\r', '')  # for windows
+def strip_tb_text(text: str) -> str:
+    text = text.replace('\\\\', '\\')  # for windows
+    text = re.sub('.:\\\\', '/', text)  # for windows
+    text = text.replace('\\', '/')  # for windows
+    text = text.replace('\r', '')  # for windows
     for dir_ in ['traceback_with_variables', 'tests']:
-        value = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...omitted for tests only...\2', value)
-    value = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', value)
-    value = re.sub(r"'/.*\.py'", "'/...omitted for tests only...py'", value)
-    value = re.sub(r"(__file__ = )[^\n]*\n", r"\1'...omitted for tests only...'", value)
-    value = re.sub(r'( at 0x)\w+', r'\1...omitted for tests only...', value)
-    value = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1...omitted for tests only...}', value)
-    value = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1...omitted for test only...\2', value)
+        text = re.sub(r'(File ").*(/{}/)'.format(dir_), r'\1...omitted for tests only...\2', text)
+    text = re.sub(r'(File ")((?!\.\.\.).)*"'.format(dir_), r'\1...omitted for tests only..."', text)
+    text = re.sub(r"'/.*\.py'", "'/...omitted for tests only...py'", text)
+    text = re.sub(r"(__file__ = )[^\n]*\n", r"\1'...omitted for tests only...'", text)
+    text = re.sub(r'( at 0x)\w+', r'\1...omitted for tests only...', text)
+    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', r'\1...omitted for tests only...}', text)
+    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', r'\1...omitted for test only...\2', text)
 
-    assert_equals_ref(name, value)
+    return text
+
+
+@pytest.fixture
+def tb_reg(request):
+    reg = Reg(label='{}.{}'.format(request.module.__name__, request.node.name[5:]))
+    return reg.match_tb_text
 
 
 def set_lib_env(path: Path) -> None:
@@ -85,8 +102,26 @@ def run_cmd(argv: List[str], raises: bool = False) -> str:
     return check_output(argv, stderr=STDOUT).decode('utf-8')
 
 
+def run_code_in_ipython(tmp_path, lines: List[str], win32: bool) -> str:
+    out = run_code(tmp_path, ['-m', 'IPython'], lines, [], True)
+    out = '\n'.join(out.split('\n')[:-1] + [''])
+    if win32:
+        out = rm_ansi(out)
+
+    return out
+
+
 def rm_ansi(text: str) -> str:
     return re.sub(r'\033\[.*?m', '', text)
+
+
+def run_code_in_ipython_2(tmp_path, lines: List[str], win32: bool) -> str:
+    if (not win32) and sys.platform == 'win32':
+        return 'run skipped'
+    
+    out = run_code_in_ipython(tmp_path, lines, win32)
+
+    return re.sub(r'^.*(variables\.activate)', r'\1', out, flags=re.S)
 
 
 def py_code_to_ipynb_code(lines: List[str]) -> str:

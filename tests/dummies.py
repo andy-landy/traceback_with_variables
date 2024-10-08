@@ -3,7 +3,7 @@ class Unprintable:
         raise ValueError("please don't print me")
 
 
-def f(n: int) -> int:
+def f(n: int = 10001) -> int:
     s1 = 'short string with n: {}'.format(n)
     l1 = 'long string with 0..n: {}'.format(', '.join(map(str, range(n))))
     us = [Unprintable(), Unprintable(), Unprintable()]

@@ -6,14 +6,14 @@ import pytest
 
 from traceback_with_variables.print import printing_exc, prints_exc, print_cur_tb, LoggerAsFile, Format
 
-from tests.utils import assert_smart_equals_ref, run_code
+from tests.dummies import f
+from tests.utils import tb_reg, run_code
 
 
-def test_print_cur_tb():
+def test_print_cur_tb(tb_reg):
     out = StringIO()
     get_cur_tb(out)
-
-    assert_smart_equals_ref('test_print.print_cur_tb', out.getvalue())
+    tb_reg(out.getvalue())
 
 
 def get_cur_tb(out):
@@ -21,27 +21,26 @@ def get_cur_tb(out):
     return print_cur_tb(fmt=Format(skip_files_except='test_print'), file_=out)
 
 
-def test_printing_exc():
+def test_printing_exc(tb_reg):
     out = StringIO()
     with printing_exc(reraise=False, file_=out):
-        f(10)
+        f()
+    tb_reg(out.getvalue())
 
-    assert_smart_equals_ref('test_print.printing_exc', out.getvalue())
 
-
-def test_printing_exc_to_tty():
+def test_printing_exc_to_tty(tb_reg):
     if sys.platform == 'win32':
         return
 
     out = StringIO()
     out.isatty = lambda: True
     with printing_exc(reraise=False, file_=out):
-        f(10)
+        f()
 
-    assert_smart_equals_ref('test_print.printing_exc_to_tty', out.getvalue())
+    tb_reg(out.getvalue())
 
 
-def test_printing_exc_stderr(tmp_path):
+def test_printing_exc_stderr(tb_reg, tmp_path):
     lines = [
         'from traceback_with_variables import printing_exc',
         'def f(n):',
@@ -52,33 +51,33 @@ def test_printing_exc_stderr(tmp_path):
         'main()',
     ]
 
-    assert_smart_equals_ref('test_print.printing_exc_stderr', run_code(tmp_path, [], lines, [], False))
+    tb_reg(run_code(tmp_path, [], lines, [], False))
 
 
 def test_printing_exc_reraise():
     out = StringIO()
     with pytest.raises(ZeroDivisionError):
         with printing_exc(reraise=True, file_=out):
-            f(10)
+            f()
 
 
-def test_printing_exc_skip_cur_frame():
+def test_printing_exc_skip_cur_frame(tb_reg):
     out = StringIO()
     with printing_exc(reraise=False, file_=out, skip_cur_frame=True):
-        f(10)
+        f()
 
-    assert_smart_equals_ref('test_print.printing_exc_skip_cur_frame', out.getvalue())
+    tb_reg(out.getvalue())
 
 
-def test_prints_exc():
+def test_prints_exc(tb_reg):
     out = StringIO()
     with pytest.raises(ZeroDivisionError):
-        prints_exc(file_=out)(f)(10)
+        prints_exc(file_=out)(f)()
 
-    assert_smart_equals_ref('test_print.prints_exc', out.getvalue())
+    tb_reg(out.getvalue())
 
 
-def test_prints_exc_noncall(tmp_path):
+def test_prints_exc_noncall(tmp_path, tb_reg):
     lines = [
         'from traceback_with_variables import prints_exc',
         '@prints_exc',
@@ -90,22 +89,19 @@ def test_prints_exc_noncall(tmp_path):
         '  pass',
     ]
 
-    assert_smart_equals_ref('test_print.prints_exc_noncall', run_code(tmp_path, [], lines, [], False))
+    tb_reg(run_code(tmp_path, [], lines, [], False))
 
 
-def test_logger_as_file(caplog):
+def test_logger_as_file(caplog, tb_reg):
     with printing_exc(reraise=False, file_=LoggerAsFile(logging.getLogger('test-logger'))):
-        f(10)
+        f()
 
-    assert_smart_equals_ref('test_print.logger_as_file', caplog.text)
+    tb_reg(caplog.text)
 
 
-def test_logger_as_file_lines(caplog):
+def test_logger_as_file_lines(caplog, tb_reg):
     with printing_exc(reraise=False, file_=LoggerAsFile(logging.getLogger('test-logger'), separate_lines=True)):
-        f(10)
+        f()
 
-    assert_smart_equals_ref('test_print.logger_as_file_lines', caplog.text)
+    tb_reg(caplog.text)
 
-
-def f(n):
-    return n / 0

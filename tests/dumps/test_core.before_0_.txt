@@ -1,8 +1,8 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_core.py", line 41, in test_explicit_e
+  File "...omitted for tests only.../tests/test_core.py", line 13, in check_
     f()
+      kwargs = {'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}
       tb_reg = <bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>
-      e = ZeroDivisionError('integer division or modulo by zero')
   File "...omitted for tests only.../tests/dummies.py", line 18, in f
     return f(
       n = 10001

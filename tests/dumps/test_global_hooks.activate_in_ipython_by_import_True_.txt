@@ -1,9 +1,8 @@
-Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_core.py", line 41, in test_explicit_e
-    f()
-      tb_reg = <bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>
-      e = ZeroDivisionError('integer division or modulo by zero')
-  File "...omitted for tests only.../tests/dummies.py", line 18, in f
+variables.activate_in_ipython_by_import' from '/...omitted for tests only...py'>
+      Unprintable = <class '__main__.Unprintable'>
+      f = <function f at 0x...omitted for tests only...>
+      ...skipped... 18 vars
+  File "...omitted for tests only...", line 19, in f
     return f(
       n = 10001
       s1 = 'short string with n: 10001'
@@ -11,11 +10,11 @@ Traceback with variables (most recent call last):
       us = <exception while printing> Traceback (most recent call last):
           File "...omitted for tests only.../traceback_with_variables/core.py", line 231, in _to_cropped_str
             raw = print_(obj)
-          File "...omitted for tests only.../tests/dummies.py", line 3, in __repr__
+          File "...omitted for tests only...", line 4, in __repr__
             raise ValueError("please don't print me")
         ValueError: please don't print me
         
-  File "...omitted for tests only.../tests/dummies.py", line 12, in f
+  File "...omitted for tests only...", line 13, in f
     return 1 // (n * 0)
       n = 10000
       s1 = 'short string with n: 10000'
@@ -23,7 +22,7 @@ Traceback with variables (most recent call last):
       us = <exception while printing> Traceback (most recent call last):
           File "...omitted for tests only.../traceback_with_variables/core.py", line 231, in _to_cropped_str
             raw = print_(obj)
-          File "...omitted for tests only.../tests/dummies.py", line 3, in __repr__
+          File "...omitted for tests only...", line 4, in __repr__
             raise ValueError("please don't print me")
         ValueError: please don't print me
         
