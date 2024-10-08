@@ -33,6 +33,8 @@ jobs:
 
       - name: Test with pytest
         run: |
+          echo $(realpath .)
+          ls -oat .
           cd traceback_with_variables
           python -m pytest -vv --cov=. --cov-report=xml
 
