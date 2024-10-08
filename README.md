@@ -40,17 +40,17 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 
 ---
 
-> :warning: **I'm open to update this module to meet new use cases and to make using it easier and fun**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
+> :warning: **This module is actively updated and has a substantial list of features to add this week**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
 
 ---
 
 ### Installation
 
 ```
-pip install traceback-with-variables==2.0.4
+pip install traceback-with-variables==2.0.5
 ```
 ```
-conda install -c conda-forge traceback-with-variables=2.0.4
+conda install -c conda-forge traceback-with-variables=2.0.5
 ```
 
 ### 🚀 Quick Start
@@ -245,8 +245,7 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 * — Should I use it after debugging is over, i.e. *in production*?
 
     Yes, of course! That way it might save you even more time (watch out for sensitive data
-    like passwords and tokens in you logs). Note: you can deploy more serious frameworks,
-    e.g. `Sentry` :)
+    like passwords and tokens in you logs, use skip_files_except to hide code from libs AND custom_var_printers to hide own locals). Note: you can deploy more serious frameworks, e.g. `Sentry`
 
 <br/>
 
@@ -282,6 +281,8 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 #### All functions have `fmt=` argument, a `Format` object with fields:
 * `max_value_str_len` max length of each variable string, -1 to disable, default=1000
+* `objects_details` depth of details of objects inspection
+* `ellipsis_rel_pos` when truncating long strings where to put the "...", from 0.0 to 1.0, default=0.7
 * `max_exc_str_len` max length of exception, should variable print fail, -1 to disable, default=10000
 * `before` number of code lines before the raising line, default=0
 * `after` number of code lines after the raising line, default=0
