@@ -24,7 +24,7 @@ def test_activate_in_ipython_by_import(tmp_path, tb_reg, win32):
 def test_basics_in_jupyter(tmp_path, tb_reg):
     for subname, lines in [
         ('simple', [jupyter_activate_line]),
-        ('set fmt attr', [jupyter_activate_line + ', default_format as d', 'd.max_value_str_len = 10']),
+        ('set fmt attr', [jupyter_activate_line + ', default_format as d', 'd.max_value_str_len = 100']),
     ]:
         tb_reg(run_code_in_jupyter(tmp_path, lines + [dummies_code, 'f()']), subname)
 

@@ -65,7 +65,7 @@ def test_ellipsis(check):
 
 
 def test_max_value_str_len(check):
-    check(fmt=Format(max_value_str_len=10))
+    check(fmt=Format(max_value_str_len=100))
 
 
 @pytest.mark.parametrize('obj', [[1, 2, 3], A(11, 12), A(A(11, 12), A(13, 14)), A(Unprintable(), 2)])

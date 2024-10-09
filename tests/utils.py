@@ -55,17 +55,16 @@ def strip_tb_text(text: str) -> str:
     text = re.sub('.:\\\\', '/', text)  # for windows
     text = text.replace('\\', '/')  # for windows
     text = text.replace('\r', '')  # for windows
-    for dir_ in ['traceback_with_variables', 'tests']:
-        text = re.sub(fr'(File ").*(/{dir_}/.*, line )\d+,', fr'\1{OFTO}\2{OFTO},', text)
-    text = re.sub(r'(File ")((?!\.\.\.).)*"', fr'\1{OFTO}"', text)
-    text = re.sub(r"'/.*\.py'", f"'/{OFTO}py'", text)
-    text = re.sub(r"(__file__ = )[^\n]*\n", fr"\1'{OFTO}'", text)
+    # File "/usr/local/lib/python3.8/dist-packages/_pytest/_code/code.py", line 810, in repr_traceback_entry
+    text = re.sub(r'/[\w/-]+(/[\w.-]+\.py[^\w/-])', fr'{OFTO}\1', text)
+    text = re.sub(r'(line)[^\n,]+(,)', fr'\1{OFTO}\2', text)
+    #text = re.sub(r"(__file__ = )[^\n]*\n", fr"\1'{OFTO}'", text)
     text = re.sub(r'( at 0x)\w+', fr'\1{OFTO}', text)
-    text = re.sub(r'(__builtins__[^{]*{)[^\n]*', fr'\1{OFTO}', text)
+    #text = re.sub(r'(__builtins__[^{]*{)[^\n]*', fr'\1{OFTO}', text)
     text = re.sub(r'(<ipython-input-)\d+-\w+(>)', fr'\1{OFTO}\2', text)
-    text = re.sub(r'(<_froz).*(>)', fr'\1{OFTO}\2', text)
-    text = re.sub(r'(<trace?b?a?c?k?).*(>)', fr'\1{OFTO}\2', text)
-    text = re.sub(r'(<func?t?i?o?n?).*(>)', fr'\1{OFTO}\2', text)
+    #text = re.sub(r'(<_froze?n?s?e?t? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
+    #text = re.sub(r'(<trace?b?a?c?k? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
+    #text = re.sub(r'(<func?t?i?o?n? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
 
     return text
 

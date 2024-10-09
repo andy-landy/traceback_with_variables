@@ -11,4 +11,4 @@ usage: main.py [-h]
 [--brief-files-except [BRIEF_FILES_EXCEPT ...]]
 [--no-globals]
 script [script-arg ...]
-main.py: error: argument --max-value-str-len: invalid int value: '/...omitted for tests only...py'
+main.py: error: argument --max-value-str-len: invalid int value: '...omitted for tests only.../code.py'
