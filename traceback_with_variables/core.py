@@ -253,6 +253,11 @@ def _to_cropped_str(
     print_ = next((p for should_p, p in custom_var_printers if should_p(name, type_, filename, is_global)), repr)
     try:
         raw = print_(obj)
+        print('cmp')
+        print(raw)
+        print('vs')
+        print(f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>')
+        print('/cmp')
         if raw == f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>':
             if len(raw) < max_value_str_len and objects_details > 0:
                 cls_keys = set(dir(type(obj)))

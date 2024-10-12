@@ -16,3 +16,63 @@ Traceback with variables (most recent call last):
       n = 1
       m = 0
 builtins.ZeroDivisionError: division by zero
+cmp
+<_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>
+vs
+<_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>
+/cmp
+cmp
+<module 'builtins' (built-in)>
+vs
+<builtins.module object at 0x...omitted for tests only...>
+/cmp
+cmp
+None
+vs
+<builtins.NoneType object at 0x...omitted for tests only...>
+/cmp
+cmp
+None
+vs
+<builtins.NoneType object at 0x...omitted for tests only...>
+/cmp
+cmp
+None
+vs
+<builtins.NoneType object at 0x...omitted for tests only...>
+/cmp
+cmp
+None
+vs
+<builtins.NoneType object at 0x...omitted for tests only...>
+/cmp
+cmp
+'__main__'
+vs
+<builtins.str object at 0x...omitted for tests only...>
+/cmp
+cmp
+'...omitted for tests only.../code.py'
+vs
+<builtins.str object at 0x...omitted for tests only...>
+/cmp
+cmp
+<function f at 0x...omitted for tests only...>
+vs
+<builtins.function object at 0x...omitted for tests only...>
+/cmp
+cmp
+3
+vs
+<builtins.int object at 0x...omitted for tests only...>
+/cmp
+cmp
+1
+vs
+<builtins.int object at 0x...omitted for tests only...>
+/cmp
+cmp
+0
+vs
+<builtins.int object at 0x...omitted for tests only...>
+/cmp

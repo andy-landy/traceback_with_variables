@@ -28,3 +28,7 @@ variables.activate_in_ipython_by_import' from '...omitted for tests only.../acti
 [36m      [0m  ValueError: please don't print me[0m
 [36m      [0m  [0m
 [31mbuiltins.ZeroDivisionError:[0m[91m integer division or modulo by zero[0m
+
+vs
+<builtins.str object at 0x...omitted for tests only...>
+/cmp

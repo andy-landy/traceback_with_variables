@@ -28,3 +28,7 @@ variables.activate_in_ipython_by_import' from '...omitted for tests only.../acti
         ValueError: please don't print me
         
 builtins.ZeroDivisionError: integer division or modulo by zero
+
+vs
+<builtins.str object at 0x...omitted for tests only...>
+/cmp
