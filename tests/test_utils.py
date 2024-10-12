@@ -57,6 +57,7 @@ def strip_tb_text(text: str) -> str:
     text = text.replace('\r', '')  # for windows
     # File "/usr/local/lib/python3.8/dist-packages/_pytest/_code/code.py", line 810, in repr_traceback_entry
     text = re.sub(r'/[\w/.-]+/[\d]+\.py([^\w/-])', fr'{OFTO}\1', text)
+    text = re.sub(r'\n\s+open = [^\n]+\n', fr'\n', text)
     text = re.sub(r'/[\w/.-]+(/[\w.-]+\.py[^\w/-])', fr'{OFTO}\1', text)
     text = re.sub(r'(line)[^\n,]+(,)', fr'\1{OFTO}\2', text)
     #text = re.sub(r"(__file__ = )[^\n]*\n", fr"\1'{OFTO}'", text)
