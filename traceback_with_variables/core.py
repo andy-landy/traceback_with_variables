@@ -254,7 +254,7 @@ def _to_cropped_str(
     try:
         raw = print_(obj)
         print('cmp')
-        print(raw)
+        print(raw[:200] if raw is not None else None)
         print('vs')
         print(f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>')
         print('/cmp')
