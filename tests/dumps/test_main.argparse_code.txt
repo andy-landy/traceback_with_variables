@@ -9,7 +9,7 @@ Traceback with variables (most recent call last):
       __cached__ = None
       __name__ = '__main__'
       __file__ = '...omitted for tests only.../code.py'
-      argparse = <module 'argparse' from '/usr/lib/python3.8/argparse.py'>
+      argparse = <module 'argparse' from '...omitted for tests only.../argparse.py'>
       f = <function f at 0x...omitted for tests only...>
       p = ArgumentParser(prog='code.py', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
       args = Namespace(a=3)
