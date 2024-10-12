@@ -1,7 +1,7 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only.../test_print.py", line...omitted for tests only..., in test_printing_exc
     f()
-      tb_reg = <bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>
       out = <_io.StringIO object at 0x...omitted for tests only...>()
   File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
     return f(

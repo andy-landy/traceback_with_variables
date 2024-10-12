@@ -2,7 +2,7 @@
 [36m  File "[0m[36;1m...omitted for tests only.../test_core.py[0m[36m", line...omitted for tests only..., in [0m[36;1mcheck_[0m
 [36m    [0m[35mf()[0m
 [36m      [0m[32;1mkwargs[0m[36m = [0m{'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}[0m
-[36m      [0m[32;1mtb_reg[0m[36m = [0m<bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>[0m
+[36m      [0m[32;1mtb_reg[0m[36m = [0m<bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>[0m
 [36m  File "[0m[36;1m...omitted for tests only.../dummies.py[0m[36m", line...omitted for tests only..., in [0m[36;1mf[0m
 [36m    [0m[35mreturn f([0m
 [36m      [0m[32;1mn[0m[36m = [0m10001[0m

@@ -3,7 +3,7 @@ import pytest
 from traceback_with_variables import core, ColorSchemes, Format
 
 from tests.dummies import Unprintable, f, A
-from tests.utils import tb_reg
+from tests.test_utils import tb_reg
 
 
 @pytest.fixture

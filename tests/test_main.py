@@ -3,7 +3,7 @@ from typing import List
 
 import pytest
 
-from tests.utils import tb_reg, run_code, run_py
+from tests.test_utils import tb_reg, run_code, run_py
 
 
 simple_lines = [

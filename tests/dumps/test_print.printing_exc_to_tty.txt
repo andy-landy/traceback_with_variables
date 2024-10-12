@@ -1,7 +1,7 @@
 [36mTraceback with variables (most recent call last):[0m
 [36m  File "[0m[36;1m...omitted for tests only.../test_print.py[0m[36m", line...omitted for tests only..., in [0m[36;1mtest_printing_exc_to_tty[0m
 [36m    [0m[35mf()[0m
-[36m      [0m[32;1mtb_reg[0m[36m = [0m<bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>[0m
+[36m      [0m[32;1mtb_reg[0m[36m = [0m<bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>[0m
 [36m      [0m[32;1mout[0m[36m = [0m<_io.StringIO object at 0x...omitted for tests only...>()[0m
 [36m  File "[0m[36;1m...omitted for tests only.../dummies.py[0m[36m", line...omitted for tests only..., in [0m[36;1mf[0m
 [36m    [0m[35mreturn f([0m

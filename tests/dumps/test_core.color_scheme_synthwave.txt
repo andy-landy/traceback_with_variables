@@ -2,7 +2,7 @@
 [38;2;255;153;255m  File "[0m[38;2;255;153;0m...omitted for tests only.../test_core.py[0m[38;2;255;153;255m", line...omitted for tests only..., in [0m[38;2;255;153;0mcheck_[0m
 [38;2;255;153;255m    [0m[38;2;50;100;255mf()[0m
 [38;2;255;153;255m      [0m[38;2;254;0;254mkwargs[0m[38;2;255;153;255m = [0m[38;2;153;204;255m{'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}[0m
-[38;2;255;153;255m      [0m[38;2;254;0;254mtb_reg[0m[38;2;255;153;255m = [0m[38;2;153;204;255m<bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>[0m
+[38;2;255;153;255m      [0m[38;2;254;0;254mtb_reg[0m[38;2;255;153;255m = [0m[38;2;153;204;255m<bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>[0m
 [38;2;255;153;255m  File "[0m[38;2;255;153;0m...omitted for tests only.../dummies.py[0m[38;2;255;153;255m", line...omitted for tests only..., in [0m[38;2;255;153;0mf[0m
 [38;2;255;153;255m    [0m[38;2;50;100;255mreturn f([0m
 [38;2;255;153;255m      [0m[38;2;254;0;254mn[0m[38;2;255;153;255m = [0m[38;2;153;204;255m10001[0m

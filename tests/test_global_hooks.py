@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from tests.utils import run_code, run_code_in_jupyter, run_code_in_ipython_2 \
+from tests.test_utils import run_code, run_code_in_jupyter, run_code_in_ipython_2 \
     , dummies_code, activate_line, jupyter_activate_line, tb_reg
 
 

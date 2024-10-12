@@ -4,7 +4,7 @@ Traceback with variables (most recent call last):
   >     f()
   . except Exception:  # noqa
       kwargs = {'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}
-      tb_reg = <bound method Reg.match_tb_text of <tests.utils.Reg object at 0x...omitted for tests only...>>
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>
   File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
   . else:
   >     return f(

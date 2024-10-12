@@ -7,7 +7,7 @@ import pytest
 from traceback_with_variables.print import printing_exc, prints_exc, print_cur_tb, LoggerAsFile, Format
 
 from tests.dummies import f
-from tests.utils import tb_reg, run_code
+from tests.test_utils import tb_reg, run_code
 
 
 def test_print_cur_tb(tb_reg):

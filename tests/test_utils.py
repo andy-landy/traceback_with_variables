@@ -42,9 +42,9 @@ def match_text_in_file(path: str, text: str) -> None:
     else:
         with open(path, 'r') as in_:
             old_text = in_.read()
-            if text != old_text:
-                print('new =', text)
-                print('old =', old_text)
+            # if text != old_text:
+            #    print('new =', text)
+            #    print('old =', old_text)
 
             assert text == old_text
 
