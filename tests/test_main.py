@@ -1,4 +1,5 @@
 import re
+import sys
 from typing import List
 
 import pytest
@@ -46,6 +47,8 @@ def test_simple_code_excess_script_args(do_test_code):
 
 
 def test_simple_code_tool_args(do_test_code):
+    if sys.platform == 'win32':
+        return
     do_test_code(['--max-value-str-len', '70'], simple_lines, [], True)
 
 

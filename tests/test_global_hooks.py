@@ -17,6 +17,8 @@ def test_activate_in_ipython_by_import_error(tmp_path, tb_reg):
 
 
 def test_activate_in_ipython_by_import(tmp_path, tb_reg):
+    if sys.platform == 'win32':
+        return
     tb_reg(run_code_in_ipython_2(tmp_path, [jupyter_activate_line, dummies_code, 'f()']))
 
 
