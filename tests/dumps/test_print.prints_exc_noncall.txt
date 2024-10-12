@@ -3,8 +3,3 @@ Traceback with variables (most recent call last):
     return n / 0
       n = 10
 builtins.ZeroDivisionError: division by zero
-cmp
-10
-vs
-<int object at 0x...omitted for tests only...>
-/cmp

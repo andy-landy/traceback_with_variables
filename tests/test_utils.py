@@ -108,11 +108,9 @@ def run_cmd(argv: List[str], raises: bool = False) -> str:
     return check_output(argv, stderr=STDOUT).decode('utf-8')
 
 
-def run_code_in_ipython(tmp_path, lines: List[str], win32: bool) -> str:
+def run_code_in_ipython(tmp_path, lines: List[str]) -> str:
     out = run_code(tmp_path, ['-m', 'IPython'], lines, [], True)
     out = '\n'.join(out.split('\n')[:-1] + [''])
-    if win32:
-        out = rm_ansi(out)
 
     return out
 
@@ -121,11 +119,8 @@ def rm_ansi(text: str) -> str:
     return re.sub(r'\033\[.*?m', '', text)
 
 
-def run_code_in_ipython_2(tmp_path, lines: List[str], win32: bool) -> str:
-    if (not win32) and sys.platform == 'win32':
-        return 'run skipped'
-    
-    out = run_code_in_ipython(tmp_path, lines, win32)
+def run_code_in_ipython_2(tmp_path, lines: List[str]) -> str:
+    out = run_code_in_ipython(tmp_path, lines)
 
     return re.sub(r'^.*(variables\.activate)', r'\1', out, flags=re.S)
 

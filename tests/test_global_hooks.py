@@ -16,9 +16,8 @@ def test_activate_in_ipython_by_import_error(tmp_path, tb_reg):
     tb_reg(run_code(tmp_path, [], [jupyter_activate_line], [], True))
 
 
-@pytest.mark.parametrize('win32', [True, False])
-def test_activate_in_ipython_by_import(tmp_path, tb_reg, win32):
-    tb_reg(run_code_in_ipython_2(tmp_path, [jupyter_activate_line, dummies_code, 'f()'], win32))
+def test_activate_in_ipython_by_import(tmp_path, tb_reg):
+    tb_reg(run_code_in_ipython_2(tmp_path, [jupyter_activate_line, dummies_code, 'f()']))
 
 
 def test_basics_in_jupyter(tmp_path, tb_reg):
