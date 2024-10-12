@@ -45,8 +45,12 @@ def match_text_in_file(path: str, text: str) -> None:
             # if text != old_text:
             #    print('new =', text)
             #    print('old =', old_text)
-
-            assert text == old_text
+            if old_text != text:
+                for i, (oc, c) in enumerate(zip(old_text, text)):
+                    if oc != c:
+                        print(f'first diff at {i}: {ord(oc)} -> {ord(c)}')
+                        break
+            assert old_text == text
 
 
 def strip_tb_text(text: str) -> str:
