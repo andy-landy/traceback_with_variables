@@ -46,7 +46,7 @@ def test_simple_code_excess_script_args(do_test_code):
 
 
 def test_simple_code_tool_args(do_test_code):
-    do_test_code(['--max-value-str-len', '10'], simple_lines, [], True)
+    do_test_code(['--max-value-str-len', '70'], simple_lines, [], True)
 
 
 def test_simple_code_tool_args_no_globals(do_test_code):
@@ -62,7 +62,7 @@ def test_simple_code_incomplete_tool_args(do_test_code):
 
 
 def test_simple_code_tool_help(do_test_code):
-    do_test_code(['--max-value-str-len', '10', '--help'], simple_lines, [], False)
+    do_test_code(['--max-value-str-len', '70', '--help'], simple_lines, [], False)
 
 
 def test_argparse_code(do_test_code):

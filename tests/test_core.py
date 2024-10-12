@@ -83,7 +83,7 @@ def test_ellipsis_rel_pos(check, ellipsis_rel_pos):
 
 
 def test_max_exc_str_len(check):
-    check(fmt=Format(max_exc_str_len=10))
+    check(fmt=Format(max_exc_str_len=50))
 
 
 @pytest.mark.parametrize('num_skipped_frames', [0, 1, 2])

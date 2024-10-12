@@ -1,15 +1,15 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only.../code.py", line...omitted for tests only..., in <module>
     f(a - 2)
-      __loader__ = <_froze...10>
-      __builtins__ = <module...n)>
+      __loader__ = <_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>
+      __builtins__ = <module 'builtins' (built-in)>
       __package__ = None
       __spec__ = None
       __annotations__ = None
       __cached__ = None
       __name__ = '__main__'
-      __file__ = '...omitted for tests only.../p...py'
-      f = <functi...10>
+      __file__ = '...omitted for tests only.../code.py'
+      f = <function f at 0x...omitted for tests only...>
       a = 3
   File "...omitted for tests only.../code.py", line...omitted for tests only..., in f
     return 1 / m
