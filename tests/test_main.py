@@ -85,7 +85,7 @@ def test_module(tmp_path, tb_reg):
     )
     out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
     out = re.sub(r']\s+', ']\n', out)
-    out = out.replace('[', '(').replace(']', ')').lower().replace(' ', '').replace('alternative', 'aleternate')
+    out = out.replace('[', '(').replace(']', ')').lower().replace(' ', '').replace('alternative', 'alternate')
     out = re.sub('\n\n', '\n', out)
     tb_reg(out)
 

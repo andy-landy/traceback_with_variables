@@ -1,7 +1,6 @@
 ERROR    test-logger:print.py:22 Traceback with variables (most recent call last):
 ERROR    test-logger:print.py:22   File "...omitted for tests only.../test_print.py", line...omitted for tests only..., in test_logger_as_file_lines
 ERROR    test-logger:print.py:22     f()
-ERROR    test-logger:print.py:22       caplog = <_pytest.logging.LogCaptureFixture object at 0x...omitted for tests only...>(_initial_handler_level=None, _initial_logger_levels={}, _item=<Function test_logger_as_file_lines>)
 ERROR    test-logger:print.py:22       tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>
 ERROR    test-logger:print.py:22   File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
 ERROR    test-logger:print.py:22     return f(

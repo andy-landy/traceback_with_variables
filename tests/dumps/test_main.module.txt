@@ -12,5 +12,5 @@ optionalarguments:
 specifyalternatebindaddress(default:all
 interfaces)
 --directorydirectory,-ddirectory
-specifyaleternatedirectory(default:current
+specifyalternatedirectory(default:current
 directory)
