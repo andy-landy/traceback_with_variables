@@ -48,7 +48,7 @@ def match_text_in_file(path: str, text: str) -> None:
             if old_text != text:
                 for i, (oc, c) in enumerate(zip(old_text, text)):
                     if oc != c:
-                        print(f'first diff at {i}: {ord(oc)} -> {ord(c)}')
+                        print(f'first diff at {i}: {ord(oc)} -> {ord(c)}, "{text[max(0, i - 10):min(len(text), i + 10)]}"')
                         break
             assert old_text == text
 

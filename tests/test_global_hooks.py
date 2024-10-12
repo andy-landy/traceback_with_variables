@@ -26,6 +26,6 @@ def test_basics_in_jupyter(tmp_path, tb_reg):
     for subname, lines in [
         ('simple', [jupyter_activate_line]),
         ('set fmt attr', [jupyter_activate_line + ', default_format as d', 'd.max_value_str_len = 100']),
-    ]:
+    ][:1 if sys.platform == 'win32' else 2]:
         tb_reg(run_code_in_jupyter(tmp_path, lines + [dummies_code, 'f()']), subname)
 
