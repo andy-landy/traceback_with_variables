@@ -256,9 +256,11 @@ def _to_cropped_str(
         print('cmp')
         print(raw[:200] if raw is not None else None)
         print('vs')
-        print(f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>')
+        #print(f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>')
+        print(object.__repr__(obj))
         print('/cmp')
-        if raw == f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>':
+        #if raw == f'<{type_.__module__}.{type_.__name__} object at {hex(id(obj))}>':
+        if raw == object.__repr__(obj):
             if len(raw) < max_value_str_len and objects_details > 0:
                 cls_keys = set(dir(type(obj)))
                 raw += '(' + ', '.join(key + '=' + (_to_cropped_str(

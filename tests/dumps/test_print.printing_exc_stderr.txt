@@ -8,5 +8,5 @@ builtins.ZeroDivisionError: division by zero
 cmp
 10
 vs
-<builtins.int object at 0x...omitted for tests only...>
+<int object at 0x...omitted for tests only...>
 /cmp
