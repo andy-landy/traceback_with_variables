@@ -1,16 +1,16 @@
-usage: server.py [-h]
-[--cgi]
-[--bind ADDRESS]
-[--directory DIRECTORY]
-[port]
+usage: server.py (-h)
+(--cgi)
+(--bind address)
+(--directory directory)
+(port)
 positional arguments:
-  port                  Specify alternate port [default: 8000]
+  port                  specify alternate port (default: 8000)
 optional arguments:
   -h, --help            show this help message and exit
-  --cgi                 Run as CGI Server
-  --bind ADDRESS, -b ADDRESS
-                        Specify alternate bind address [default: all
-                        interfaces]
---directory DIRECTORY, -d DIRECTORY
-                        Specify alternative directory [default:current
-                        directory]
+  --cgi                 run as cgi server
+  --bind address, -b address
+                        specify alternate bind address (default: all
+                        interfaces)
+--directory directory, -d directory
+                        specify alternative directory (default:current
+                        directory)

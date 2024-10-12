@@ -77,8 +77,16 @@ def test_status0_code(do_test_code):
     do_test_code([], status0_lines, [], False)
 
 
-def test_module(do_test_cmd):
-    do_test_cmd(['http.server', '--help'], False)
+def test_module(tmp_path, tb_reg):
+    out = run_py(
+        tmp_path=tmp_path,
+        argv=['-m', 'traceback_with_variables.main', 'http.server', '--help'],
+        raises=False
+    )
+    out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
+    out = re.sub(r']\s+', ']\n', out)
+    out = out.replace('[', '(').replace(']', ')').lower()
+    tb_reg(out)
 
 
 def test_nonexistent(do_test_cmd):
