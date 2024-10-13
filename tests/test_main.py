@@ -111,7 +111,13 @@ def do_test_code(tmp_path, tb_reg):
             code_argv=code_argv,
             raises=raises
         )
-        tb_reg(re.sub(r']\s+', ']\n', re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)))
+        out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
+        out = re.sub(r']\s+', ']\n', out)
+        out = out.replace('optional args', 'options')
+        out = re.sub('(ambiguous option: )[^ ]+( )', fr'\1...', out)
+        out = re.sub(r'(usage:server.py\(-h\)).*', fr'\1...', out)
+        out = out.replace('required: script, script-arg', 'required: script')
+        tb_reg(out)
     
     return do_test_code_
 
