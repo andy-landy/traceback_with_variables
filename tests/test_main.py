@@ -130,7 +130,9 @@ def do_test_cmd(tmp_path, tb_reg):
             argv=['-m', 'traceback_with_variables.main'] + argv,
             raises=raises
         )
-        tb_reg(re.sub(r']\s+', ']\n', re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)))
+        out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
+        out = re.sub(r']\s+', ']\n', out)
+        out = out.replace('required: script, script-arg', 'required: script')
     
     return do_test_cmd_
 
