@@ -6,11 +6,11 @@
 <p align="center">
 <a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
 <a href="https://codecov.io/gh/andy-landy/traceback_with_variables"><img alt="Codecov" src="https://codecov.io/gh/andy-landy/traceback_with_variables/branch/master/graph/badge.svg"></a>
-<a href="https://lgtm.com/projects/g/andy-landy/traceback_with_variables/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/andy-landy/traceback_with_variables.svg"/></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
+<a href="https://pepy.tech/project/traceback-with-variables"><img alt="Downloads" src="https://static.pepy.tech/badge/traceback-with-variables"></a>
 <a href="https://pypi.org/project/traceback-with-variables"><img alt="PyPI" src="https://img.shields.io/pypi/v/traceback-with-variables"></a>
 <a href="https://anaconda.org/conda-forge/traceback-with-variables"><img src="https://img.shields.io/conda/vn/conda-forge/traceback-with-variables"></a>
-<a href="https://pypi.org/project/traceback-with-variables"><img alt="PyPI" src="https://img.shields.io/badge/python-3.5+-blue.svg"></a>
+<a href="https://pypi.org/project/traceback-with-variables"><img alt="PyPI" src="https://img.shields.io/badge/python-3.6+-blue.svg"></a>
 <a href="https://superuser.com/questions/413073/windows-console-with-ansi-colors-handling"><img title="windows, mac, linux etc." alt="Platform" src="https://img.shields.io/badge/platform-all-blue.svg"></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py#L9"><img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg"></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/traceback_with_variables/override.py#L8"><img title="no obscure objects, only transparent functions and data classes" alt="No-OOP" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg"></a>
