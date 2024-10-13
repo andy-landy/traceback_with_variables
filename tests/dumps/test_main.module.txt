@@ -1,16 +1,1 @@
-usage:server.py(-h)
-(--cgi)
-(--bindaddress)
-(--directorydirectory)
-(port)
-positionalarguments:
-portspecifyalternateport(default:8000)
-optionalarguments:
--h,--helpshowthishelpmessageandexit
---cgirunascgiserver
---bindaddress,-baddress
-specifyalternatebindaddress(default:all
-interfaces)
---directorydirectory,-ddirectory
-specifyalternatedirectory(default:current
-directory)
+usage:server.py(-h)...

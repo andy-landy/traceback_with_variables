@@ -89,6 +89,7 @@ def test_module(tmp_path, tb_reg):
     out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
     out = re.sub(r']\s+', ']\n', out).replace('\r', '')
     out = out.replace('[', '(').replace(']', ')').lower().replace(' ', '').replace('alternative', 'alternate')
+    out = re.sub(r'(usage:server.py\(-h\)).*$', fr'\1...', out, flags=re.S)
     out = re.sub('\n\n', '\n', out)
     tb_reg(out)
 
@@ -113,9 +114,8 @@ def do_test_code(tmp_path, tb_reg):
         )
         out = re.sub(r'\[([^-][^\s]+) \[[^\s]+ ...]]', r'[\1 ...]', out)
         out = re.sub(r']\s+', ']\n', out)
-        out = out.replace('optional args', 'options')
+        out = out.replace('optional arguments', 'options')
         out = re.sub('(ambiguous option: )[^ ]+( )', fr'\1...', out)
-        out = re.sub(r'(usage:server.py\(-h\)).*', fr'\1...', out)
         out = out.replace('required: script, script-arg', 'required: script')
         tb_reg(out)
     

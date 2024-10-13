@@ -15,7 +15,7 @@ positional arguments:
   script
   script-arg
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --max-value-str-len MAX_VALUE_STR_LEN
   --ellipsis-rel-pos ELLIPSIS_REL_POS

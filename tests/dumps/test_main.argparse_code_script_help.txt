@@ -1,6 +1,6 @@
 usage: code.py [-h]
 --a A
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   --a A
