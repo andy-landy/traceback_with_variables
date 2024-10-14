@@ -106,8 +106,8 @@ Using a logger [<a href="https://github.com/andy-landy/traceback_with_variables/
 
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/examples/format_customized.py">Customize</a> any of the previous examples:
 ```python
-    default_format.max_value_str_len = 10000
-    default_format.skip_files_except = 'my_project'
+    fmt.max_value_str_len = 10000
+    fmt.skip_files_except = 'my_project'
 ```
 
 

@@ -1,9 +1,9 @@
-from traceback_with_variables import Format, ColorSchemes, is_ipython_global, default_format
+from traceback_with_variables import Format, ColorSchemes, is_ipython_global, fmt
 
 
 # approach 1
 
-default_format.max_value_str_len = 10000
+fmt.max_value_str_len = 10000
 
 
 # approach 2

@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in <module>
+    from traceback_with_variables import a
+  File "...omitted for tests only.../a.py", line...omitted for tests only..., in <module>
+    from traceback_with_variables import activate_by_import  # noqa
+  File "...omitted for tests only.../activate_by_import.py", line...omitted for tests only..., in <module>
+    import IPython  # noqa
+  File "...omitted for tests only.../__init__.py", line...omitted for tests only..., in <module>
+    from .core.application import Application
+  File "...omitted for tests only.../application.py", line...omitted for tests only..., in <module>
+    from IPython.core import release, crashhandler
+  File "...omitted for tests only.../crashhandler.py", line...omitted for tests only..., in <module>
+    from IPython.core import ultratb
+  File "...omitted for tests only.../ultratb.py", line...omitted for tests only..., in <module>
+    from IPython.core import debugger
+  File "...omitted for tests only.../debugger.py", line...omitted for tests only..., in <module>
+    from pdb import Pdb as OldPdb
+  File "...omitted for tests only.../pdb.py", line...omitted for tests only..., in <module>
+    import code
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in <module>
+    f()
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in f
+    return f(
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in f
+    return 1 // (n * 0)
+ZeroDivisionError: integer division or modulo by zero

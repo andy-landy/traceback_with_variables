@@ -1,7 +1,7 @@
-from traceback_with_variables import activate_by_import  # , defaut_format
+from traceback_with_variables import activate_by_import  # , fmt
 
 
-# default_format.max_value_str_len = 10000
+# fmt.max_value_str_len = 10000
 
 def main():
     n = 0

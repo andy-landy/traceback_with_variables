@@ -11,3 +11,6 @@ from .global_hooks import global_print_exc, global_print_exc_in_ipython, is_ipyt
 
 
 __version__ = '2.0.5'
+
+# shorter names for swifter interactive usage
+fmt = default_format  # noqa
