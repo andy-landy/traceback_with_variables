@@ -1,4 +1,5 @@
-variables.activate_in_ipython_by_import' from '...omitted for tests only.../activate_in_ipython_by_import.py'>[0m
+f()[0m
+[36m      [0m[32;1mactivate_in_ipython_by_import[0m[36m = [0m<module 'traceback_with_variables.activate_in_ipython_by_import' from '...omitted for tests only.../activate_in_ipython_by_import.py'>[0m
 [36m      [0m[32;1mUnprintable[0m[36m = [0m<class '__main__.Unprintable'>[0m
 [36m      [0m[32;1mA[0m[36m = [0m<class '__main__.A'>[0m
 [36m      [0m[32;1mf[0m[36m = [0m<function f at 0x...omitted for tests only...>[0m

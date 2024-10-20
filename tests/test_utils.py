@@ -42,14 +42,6 @@ def match_text_in_file(path: str, text: str) -> None:
     else:
         with open(path, 'r') as in_:
             old_text = in_.read()
-            # if text != old_text:
-            #    print('new =', text)
-            #    print('old =', old_text)
-            if old_text != text:
-                for i, (oc, c) in enumerate(zip(old_text, text)):
-                    if oc != c:
-                        print(f'first diff at {i}: {ord(oc)} -> {ord(c)}, "{text[max(0, i - 10):min(len(text), i + 10)]}"')
-                        break
             assert old_text == text
 
 
@@ -128,7 +120,7 @@ def rm_ansi(text: str) -> str:
 def run_code_in_ipython_2(tmp_path, lines: List[str]) -> str:
     out = run_code_in_ipython(tmp_path, lines)
 
-    return re.sub(r'^.*(variables\.activate)', r'\1', out, flags=re.S)
+    return re.sub(r'^.*(f\(\))', r'\1', out, flags=re.S)
 
 
 def py_code_to_ipynb_code(lines: List[str]) -> str:
