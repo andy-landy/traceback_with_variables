@@ -18,6 +18,14 @@ def global_print_exc_in_ipython(fmt: Optional[Format] = None) -> None:
         lambda self, *args, **kwargs: print_exc(num_skipped_frames=1, fmt=fmt)
 
 
+def in_ipython() -> bool:
+    try:
+        __IPYTHON__  # noqa
+        return True
+    except NameError:
+        return False
+
+
 def is_ipython_global(name: str, type_: Type, filename: str, is_global: bool) -> bool:
     return is_global and (
         name in ['In', 'Out', 'get_ipython', 'exit', 'quit']
