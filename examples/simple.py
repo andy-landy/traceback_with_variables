@@ -1,3 +1,5 @@
+from traceback_with_variables import a  # , fmt
+# or
 from traceback_with_variables import activate_by_import  # , fmt
 
 
