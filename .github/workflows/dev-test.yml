@@ -39,12 +39,10 @@ jobs:
           python -m pytest -vv --cov=. --cov-report=xml
 
       - name: Uplaoad Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: true
           files: ./coverage.xml
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
