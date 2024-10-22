@@ -1,11 +1,18 @@
 # Changelog
 
 ## 2.5.0
+- Fully compatible with 2.0.4
 - Add short names for frequently used things like `a` and `fmt`
-- Fixed some bugs
+- Add unified `activate_by_import` to be used both for Jupyter and regular Python
+- Add rel ellipsis pos for strings like `x=['some', ...long', 'list']`
+- Add object detailed printout, useful for non-dataclass classes
+- Add protection against acidental mistyping in format attributes
+- Fixed some bugs, e.g.
+    - cli not working in Python 3.12+
+    - `default_format` being sometimes ignored
 
 ## 2.0.4
-- ...
+- ...much, to be filled...
 
 ## 2.0.3
 - Fixed tests in Windows/Mac
