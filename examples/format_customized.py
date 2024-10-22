@@ -1,9 +1,9 @@
-from traceback_with_variables import Format, ColorSchemes, is_ipython_global, default_format as defaults
+from traceback_with_variables import Format, ColorSchemes, is_ipython_global, fmt
 
 
 # approach 1
 
-defaults.max_value_str_len = 10000
+fmt.max_value_str_len = 10000
 
 
 # approach 2
@@ -12,6 +12,8 @@ fmt2 = Format(
     before=3,
     after=1,
     max_value_str_len=10000,
+    objects_details=0,
+    ellipsis_rel_pos=0.7
     max_exc_str_len=1000,
     ellipsis_='...',
     color_scheme=ColorSchemes.synthwave,

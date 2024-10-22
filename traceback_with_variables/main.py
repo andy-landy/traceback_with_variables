@@ -1,10 +1,10 @@
 import argparse
 import os
+import shutil
 import sys
-from distutils.spawn import find_executable
 from importlib.util import find_spec
 from pathlib import Path
-from typing import List, Optional, NoReturn, Tuple
+from typing import List, Optional, Tuple
 
 from traceback_with_variables.print import printing_exc, Format
 
@@ -46,7 +46,7 @@ class ParseError(RuntimeError):
     pass
 
 
-def raising_error_func(message: str) -> NoReturn:
+def raising_error_func(message: str) -> None:
     raise ParseError(message)
 
 
@@ -95,7 +95,7 @@ def parse_args_and_script_cmd(
     if os.path.isfile(script_argv[0]):
         script_path_str = script_argv[0]
     else:
-        script_path_str = find_executable(script_argv[0])
+        script_path_str = shutil.which(script_argv[0])
 
     if not script_path_str:
         module_spec = find_spec(script_argv[0])

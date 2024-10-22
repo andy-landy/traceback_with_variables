@@ -1,6 +1,8 @@
 usage: main.py [-h]
 [--max-value-str-len MAX_VALUE_STR_LEN]
+[--ellipsis-rel-pos ELLIPSIS_REL_POS]
 [--max-exc-str-len MAX_EXC_STR_LEN]
+[--objects-details OBJECTS_DETAILS]
 [--ellipsis ELLIPSIS]
 [--before BEFORE]
 [--after AFTER]
@@ -13,10 +15,12 @@ positional arguments:
   script
   script-arg
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   --max-value-str-len MAX_VALUE_STR_LEN
+  --ellipsis-rel-pos ELLIPSIS_REL_POS
   --max-exc-str-len MAX_EXC_STR_LEN
+  --objects-details OBJECTS_DETAILS
   --ellipsis ELLIPSIS
   --before BEFORE
   --after AFTER

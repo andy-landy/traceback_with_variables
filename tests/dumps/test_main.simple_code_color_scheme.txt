@@ -1,17 +1,17 @@
 [36mTraceback with variables (most recent call last):[0m
-[36m  File "...omitted for tests only...", line [0m[36;1m5[0m[36m, in [0m[36;1m<module>[0m
+[36m  File "[0m[36;1m...omitted for tests only.../code.py[0m[36m", line...omitted for tests only..., in [0m[36;1m<module>[0m
 [36m    [0m[35mf(a - 2)[0m
-[36m      [0m[32;1m__loader__[0m[36m = [0m<_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>[0m
+[36m      [0m[32;1m__loader__[0m[36m = [0m<_frozen_importlib_external.SourceFileLoader object at 0x...omitted for tests only...>(name='traceback_with_variables.main', path='...omitted for tests only.../main.py')[0m
 [36m      [0m[32;1m__builtins__[0m[36m = [0m<module 'builtins' (built-in)>[0m
 [36m      [0m[32;1m__package__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__spec__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__annotations__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__cached__[0m[36m = [0mNone[0m
 [36m      [0m[32;1m__name__[0m[36m = [0m'__main__'[0m
-[36m      [0m[32;1m__file__[0m[36m = [0m'/...omitted for tests only...py'[0m
+[36m      [0m[32;1m__file__[0m[36m = [0m'...omitted for tests only.../code.py'[0m
 [36m      [0m[32;1mf[0m[36m = [0m<function f at 0x...omitted for tests only...>[0m
 [36m      [0m[32;1ma[0m[36m = [0m3[0m
-[36m  File "...omitted for tests only...", line [0m[36;1m3[0m[36m, in [0m[36;1mf[0m
+[36m  File "[0m[36;1m...omitted for tests only.../code.py[0m[36m", line...omitted for tests only..., in [0m[36;1mf[0m
 [36m    [0m[35mreturn 1 / m[0m
 [36m      [0m[32;1mn[0m[36m = [0m1[0m
 [36m      [0m[32;1mm[0m[36m = [0m0[0m

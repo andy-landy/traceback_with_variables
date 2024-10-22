@@ -3,7 +3,7 @@ import inspect
 import re
 import sys
 import traceback
-from typing import Any, Iterator, Union, Optional, TextIO, NoReturn, List, Callable, Type, Tuple, Dict
+from typing import Any, Iterator, Union, Optional, TextIO, List, Callable, Type, Tuple, Dict
 
 from traceback_with_variables.color import ColorScheme, ColorSchemes, supports_ansi
 
@@ -19,7 +19,9 @@ class Format:  # no dataclass for compatibility
     def __init__(
         self,
         max_value_str_len: int = 1000,
+        ellipsis_rel_pos: float = 0.7,
         max_exc_str_len: int = 10000,
+        objects_details: int = 1,
         ellipsis_: str = '...',
         before: int = 0,
         after: int = 0,
@@ -28,8 +30,11 @@ class Format:  # no dataclass for compatibility
         brief_files_except: Patterns = None,
         custom_var_printers: Optional[List[Tuple[VarFilter, Print]]] = None,  # address examples
     ):
+        self._can_grow = True
         self.max_value_str_len = max_value_str_len
+        self.ellipsis_rel_pos = ellipsis_rel_pos
         self.max_exc_str_len = max_exc_str_len
+        self.objects_details = objects_details
         self.ellipsis_ = ellipsis_
         self.before = before
         self.after = after
@@ -39,11 +44,19 @@ class Format:  # no dataclass for compatibility
         self.custom_var_printers: List[Tuple[ShouldPrint, Print]] = [
             (_var_filter_to_should_print(f), p) for f, p in custom_var_printers or []
         ]
+        self._can_grow = False
+
+    def __setattr__(self, name, value):
+        if (not getattr(self, '_can_grow', True)) and (name not in dir(self)) or (name in dir(type(self))):
+            raise AttributeError("'Format' object has no attribute '{name}'")
+        super().__setattr__(name, value)
 
     @classmethod
-    def add_arguments(cls, parser: argparse.ArgumentParser) -> NoReturn:
+    def add_arguments(cls, parser: argparse.ArgumentParser) -> None:
         parser.add_argument("--max-value-str-len", type=int, default=1000)
+        parser.add_argument("--ellipsis-rel-pos", type=float, default=0.7)
         parser.add_argument("--max-exc-str-len", type=int, default=10000)
+        parser.add_argument("--objects-details", type=int, default=1)
         parser.add_argument("--ellipsis", default="...")
         parser.add_argument("--before", type=int, default=0)
         parser.add_argument("--after", type=int, default=0)
@@ -57,7 +70,9 @@ class Format:  # no dataclass for compatibility
     def parse(cls, ns: argparse.Namespace) -> 'Format':
         return Format(
             max_value_str_len=ns.max_value_str_len,
+            ellipsis_rel_pos=ns.ellipsis_rel_pos,
             max_exc_str_len=ns.max_exc_str_len,
+            objects_details=ns.objects_details,
             ellipsis_=ns.ellipsis,
             before=ns.before,
             after=ns.after,
@@ -183,13 +198,19 @@ def _iter_lines(
 
         for var_name, var in frame.f_locals.items():
             is_global = (var_name in frame.f_globals) and frame.f_globals[var_name] is var
-            print_: Print = repr
-            for should_print, print_cand in fmt_.custom_var_printers:
-                if should_print(var_name, type(var), filename, is_global):
-                    print_ = print_cand
-                    break
 
-            var_str = _to_cropped_str(var, print_, fmt_.max_value_str_len, fmt_.max_exc_str_len, fmt_.ellipsis_)
+            var_str = _to_cropped_str(
+                obj=var,
+                is_global=is_global,
+                name=var_name,
+                filename=filename,
+                custom_var_printers=fmt_.custom_var_printers,
+                max_value_str_len=fmt_.max_value_str_len,
+                objects_details=fmt_.objects_details,
+                ellipsis_rel_pos=fmt_.ellipsis_rel_pos,
+                max_exc_str_len=fmt_.max_exc_str_len,
+                ellipsis_=fmt_.ellipsis_
+            )
 
             if var_str is None:
                 num_skipped += 1
@@ -207,28 +228,56 @@ def _iter_lines(
         yield f'{c.ec}{e.__class__.__module__}.{e.__class__.__name__}:{c.et_} {e}{c.e}'
 
 
-def _crop(line: str, max_len: int, ellipsis_: str) -> str:
-    return (line[:max_len] + ellipsis_) if len(line) > max_len > 0 else line
+def _crop(line: str, max_len: int, ellipsis_rel_pos: float, ellipsis_: str) -> str:
+    pre_len = int(max_len * min(1.0, max(0.0, ellipsis_rel_pos)))
+    suf_len = max_len - pre_len
+    if pre_len + len(ellipsis_) + suf_len >= len(line):
+        return line
+
+    return line[:pre_len] + ellipsis_ + (line[-suf_len:] if suf_len > 0 else '')
 
 
 def _to_cropped_str(
     obj: Any,
-    print_: Print,
+    is_global: bool,
+    name: str,
+    filename: str,
+    custom_var_printers: List[Tuple[ShouldPrint, Print]],
+    objects_details: int,
     max_value_str_len: int,
+    ellipsis_rel_pos: float,
     max_exc_str_len: int,
     ellipsis_: str
 ) -> Optional[str]:
+    type_ = type(obj)
+    print_ = next((p for should_p, p in custom_var_printers if should_p(name, type_, filename, is_global)), repr)
     try:
         raw = print_(obj)
+        if raw == object.__repr__(obj):
+            if len(raw) < max_value_str_len and objects_details > 0:
+                cls_keys = set(dir(type(obj)))
+                raw += '(' + ', '.join(key + '=' + (_to_cropped_str(
+                    obj=getattr(obj, key),
+                    is_global=False,
+                    name=key,
+                    filename=getattr(sys.modules.get(type(obj).__module__, ''), '__file__', ''),
+                    custom_var_printers=custom_var_printers,
+                    objects_details=objects_details - 1,
+                    max_value_str_len=max_value_str_len,
+                    ellipsis_rel_pos=ellipsis_rel_pos,
+                    max_exc_str_len=max_exc_str_len,
+                    ellipsis_=ellipsis_,
+                ) or '<empty str>') for key in dir(obj) if key not in cls_keys and not key.startswith('__')) + ')'
 
     except:  # noqa
         return _crop(
             '<exception while printing> ' + traceback.format_exc(chain=False).replace('\n', '\n  '),
             max_exc_str_len,
+            ellipsis_rel_pos,
             ellipsis_,
         )
 
-    return _crop(raw, max_value_str_len, ellipsis_) if raw is not None else None
+    return _crop(raw, max_value_str_len, ellipsis_rel_pos, ellipsis_) if raw is not None else None
 
 
 def _to_patterns(patterns: Patterns) -> List['re.Pattern']:

@@ -3,9 +3,15 @@ class Unprintable:
         raise ValueError("please don't print me")
 
 
-def f(n: int) -> int:
-    s1 = 'short string with n: {}'.format(n)
-    l1 = 'long string with 0..n: {}'.format(', '.join(map(str, range(n))))
+class A:
+    def __init__(self, f1, f2):
+        self.f1 = f1
+        self.f2 = f2
+
+
+def f(n: int = 10001) -> int:
+    s1 = f'short string with n: {n}'
+    l1 = f'long string with 0..n: {", ".join(map(str, range(n)))}'
     us = [Unprintable(), Unprintable(), Unprintable()]
 
     if n % 10 == 0:

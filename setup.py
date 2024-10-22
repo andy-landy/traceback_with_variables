@@ -41,5 +41,5 @@ setuptools.setup(
         'pytest-cov'
     ],
     install_requires=[],
-    python_requires='>=3.5',
+    python_requires='>=3.6',
 )

@@ -1,9 +1,0 @@
-Traceback with variables (most recent call last):
-  File "...omitted for tests only.../tests/test_core.py", line 106, in check
-    f(arg)
-      name = "files_None_['.*test_core.*']"
-      arg = 10000
-      kwargs = {'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}
-  File "...omitted for tests only.../tests/dummies.py", line 12, in f
-    return 1 // (n * 0)
-builtins.ZeroDivisionError: integer division or modulo by zero

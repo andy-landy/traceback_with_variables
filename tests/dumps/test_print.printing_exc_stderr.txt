@@ -1,7 +1,7 @@
 Traceback with variables (most recent call last):
-  File "...omitted for tests only...", line 7, in main
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in main
     return f(10)
-  File "...omitted for tests only...", line 3, in f
+  File "...omitted for tests only.../code.py", line...omitted for tests only..., in f
     return n / 0
       n = 10
 builtins.ZeroDivisionError: division by zero
