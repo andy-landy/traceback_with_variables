@@ -4,7 +4,7 @@
 <p align="center">Very simple to use, but versatile when needed. Try for debug and keep for production.</p>
 
 <p align="center">
-<a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Tests/badge.svg"></a>
+<a href="https://github.com/andy-landy/traceback_with_variables/actions"><img alt="Actions Status" src="https://github.com/andy-landy/traceback_with_variables/workflows/Master-Tests/badge.svg"></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/blob/master/.github/workflows/dev-test.yml#L59"><img title="code tests coverage is 100%" alt="code tests coverage is 100%" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg"></a>
 <a href="https://github.com/andy-landy/traceback_with_variables/tree/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/andy-landy/traceback_with_variables?color=informational"></a>
 <a href="https://pepy.tech/project/traceback-with-variables"><img alt="Downloads" src="https://static.pepy.tech/badge/traceback-with-variables"></a>
