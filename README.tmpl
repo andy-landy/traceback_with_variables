@@ -4,8 +4,8 @@
 <p align="center">Very simple to use, but versatile when needed. Try for debug and keep for production.</p>
 
 <p align="center">
-<a href="{{ repo_url }}/actions"><img alt="Actions Status" src="{{ repo_url }}/workflows/Master-Tests/badge.svg"></a>
-<a href="{{ repo_url }}/blob/master/.github/workflows/dev-test.yml#L59"><img title="code tests coverage is 100%" alt="code tests coverage is 100%" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg"></a>
+<a href="{{ repo_url }}/actions"><img alt="Actions Status" src="{{ repo_url }}/workflows/tests/badge.svg"></a>
+<a href="{{ repo_url }}/blob/master/.github/workflows/master-test.yml#L59"><img title="code tests coverage is 100%" alt="code tests coverage is 100%" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg"></a>
 <a href="{{ code_url }}/LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/{{ user_repo_name }}?color=informational"></a>
 <a href="https://pepy.tech/project/traceback-with-variables"><img alt="Downloads" src="https://static.pepy.tech/badge/traceback-with-variables"></a>
 <a href="{{ pypi_url }}"><img alt="PyPI" src="https://img.shields.io/pypi/v/{{ package_name }}"></a>
@@ -40,7 +40,7 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 
 ---
 
-> :warning: **This module is actively updated and has a substantial list of features to add this week**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
+> :warning: **I'm open to update this module to meet new use cases and to make using it easier and fun**: so any proposal or advice or warning is very welcome and will be taken into account of course. When I started it I wanted to make a tool meeting all standard use cases. I think in this particular domain this is rather achievable, so I'll try. Note `next_version` branch also. Have fun!
 
 ---
 
@@ -50,7 +50,12 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 pip install traceback-with-variables=={{ version }}
 ```
 ```
-conda install -c conda-forge traceback-with-variables={{ version }}
+conda install -c conda-forge traceback-with-variables
+```
+
+to use shorter `tb` alias in interactive mode call this once:
+```
+python3 -c 'from traceback_with_variables.tb_alias import create_tb_alias as c; c()'
 ```
 
 ### 🚀 Quick Start
@@ -60,16 +65,14 @@ Using without code editing, <a href="{{ examples_code_url }}/external_script.sh"
 traceback-with-variables tested_script.py ...srcipt's args...
 ```
 
-<a href="{{ examples_code_url }}/simple.py">Simplest usage in regular Python</a>, for the whole program:
+<a href="{{ examples_code_url }}/simple.py">Simplest usage</a>, for the whole program:
 ```python
     from {{ import_name }} import activate_by_import
 ```
-
-<a href="{{ examples_code_url }}/simple_jupyter.py">Simplest usage in Jupyter or IPython</a>, for the whole program:
+or just (if you added an alias by the above command)
 ```python
-    from {{ import_name }} import activate_in_ipython_by_import
+    import tb.a
 ```
-
 
 <a href="{{ examples_code_url }}/print_for_function.py">Decorator</a>, for a single function:
 ```python
@@ -238,7 +241,7 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
         is_vegan = not (eggs or milk)
         is_huge = (sugar + eggs + milk + flour + salt + water > 10000)
         if not (is_sweet or is_vegan or is_huge):
-            raise ValueError('This is unacceptable, guess why!')
+            raise ValueError('This is unacceptable, look why!')
         ...
     ```
 

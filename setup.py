@@ -14,7 +14,7 @@ setuptools.setup(
     'rollable. Debug reasons of exceptions by logging or pretty printing color'
     'ful variable contexts for each frame in a stacktrace, showing every value'
     '. Dump locals environments after errors to console, files, and loggers. W'
-    'orks with Jupiter and IPython.',
+    'orks with Jupyter and IPython.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/andy-landy/traceback_with_variables',
@@ -23,7 +23,7 @@ setuptools.setup(
               'variables', 'python3', 'stacktrace', 'arguments', 'errors',
               'error-handling', 'dump', 'exception-handling', 'exceptions',
               'pretty', 'pretty-print', 'frame', 'simple',
-              'colors', 'jupyer', 'jupyer-notebook', 'ipython', 'customize'],
+              'colors', 'jupyter', 'jupyter-notebook', 'ipython', 'customize'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
@@ -38,7 +38,8 @@ setuptools.setup(
     tests_require=[
         'flake8',
         'ipython',
-        'pytest-cov'
+        'pytest-cov',
+        'notebook==6.2.0',
     ],
     install_requires=[],
     python_requires='>=3.6',

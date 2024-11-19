@@ -77,10 +77,11 @@ def tb_reg(request):
 
 
 def set_lib_env(path: Path) -> None:
-    try:
-        (path / 'traceback_with_variables').symlink_to(Path(traceback_with_variables.__file__).parent)
-    except FileExistsError:
-        pass
+    for module_path in Path(traceback_with_variables.__file__).parent.parent.glob('*'):
+        try:
+            (path / module_path.name).symlink_to(module_path)
+        except FileExistsError:
+            pass
 
 
 def run_code(tmp_path, python_argv: List[str], lines: List[str], code_argv: List[str], raises: bool = False) -> str:
