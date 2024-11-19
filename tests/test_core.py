@@ -55,8 +55,9 @@ def test_setattr():
     fmt.skip_files_except = []
     fmt.brief_files_except = []
     fmt.custom_var_printers = []
-    with pytest.raises(AttributeError):
+    with pytest.raises(AttributeError) as e:
         fmt.max_val_str_len = 1
+    assert str(e.value) == "'Format' object has no attribute 'max_val_str_len'"
 
 
 def test_default(check):

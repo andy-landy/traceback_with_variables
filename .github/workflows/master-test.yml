@@ -1,4 +1,4 @@
-name: Dev-Tests
+name: tests
 on:
   pull_request:
     branches:
@@ -36,7 +36,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          python -m pytest -vv --cov=traceback_with_variables --cov-report=json
+          python -Xfrozen_modules=off -m pytest -vv --cov=traceback_with_variables --cov-report=json
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4

@@ -48,7 +48,7 @@ class Format:  # no dataclass for compatibility
 
     def __setattr__(self, name, value):
         if (not getattr(self, '_can_grow', True)) and (name not in dir(self)) or (name in dir(type(self))):
-            raise AttributeError("'Format' object has no attribute '{name}'")
+            raise AttributeError(f"'Format' object has no attribute '{name}'")
         super().__setattr__(name, value)
 
     @classmethod
