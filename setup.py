@@ -39,7 +39,7 @@ setuptools.setup(
         'flake8',
         'ipython',
         'pytest-cov',
-        'notebook==6.2.0',
+        'notebook==6.4.12',
     ],
     install_requires=[],
     python_requires='>=3.6',
