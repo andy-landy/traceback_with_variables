@@ -4,7 +4,7 @@ import re
 import sys
 from pathlib import Path
 from subprocess import check_output, CalledProcessError, STDOUT
-from typing import List
+from typing import List, Type
 
 import pytest
 
@@ -16,6 +16,10 @@ from tests import dummies
 dummies_code = Path(dummies.__file__).read_text()
 activate_line = 'from traceback_with_variables import activate_by_import'
 jupyter_activate_line = 'from traceback_with_variables import activate_in_ipython_by_import'
+
+
+def type_to_name(type_: Type) -> str:
+    return type_.__name__.replace('WindowsPath', 'PosixPath')
 
 
 class Reg:
@@ -51,6 +55,7 @@ def strip_tb_text(text: str) -> str:
     text = re.sub('.:\\\\', '/', text)  # for windows
     text = text.replace('\\', '/')  # for windows
     text = text.replace('\r', '')  # for windows
+    text = text.replace('WindowsPath', 'PosixPath')  # for windows
     text = re.sub(r'\n[^\n]*\^\^\^[^\n]*\n', '\n', text)
     # File "/usr/local/lib/python3.8/dist-packages/_pytest/_code/code.py", line 810, in repr_traceback_entry
     text = re.sub(r'/[\w/.-]+/[\d]+\.py([^\w/-])', fr'{OFTO}\1', text)
@@ -66,6 +71,7 @@ def strip_tb_text(text: str) -> str:
     #text = re.sub(r'(<_froze?n?s?e?t? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
     #text = re.sub(r'(<trace?b?a?c?k? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
     #text = re.sub(r'(<func?t?i?o?n? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
+    text = re.sub(r'\n\s+~*\^+\n', '\n', text)  # for jupyter with py>=3.13
 
     return text
 

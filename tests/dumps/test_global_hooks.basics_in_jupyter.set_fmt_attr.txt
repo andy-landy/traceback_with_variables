@@ -1,20 +1,29 @@
 [36mTraceback with variables (most recent call last):[0m
 [36m  File "[0m[36;1m...omitted for tests only...[0m[36m", line...omitted for tests only..., in [0m[36;1m<module>[0m
 [36m    [0m[35mf()[0m
-[36m      [0m[32;1mactivate_in_ipython_by_import[0m[36m = [0m<module 'traceback_with_variables.activate_in_ipython_by_import' from ...vate_in_ipython_by_import.py'>[0m
-[36m      [0m[32;1md[0m[36m = [0m<traceback_with_variables.core.Format object at 0x...omitted for tests only...>(_can_g...tails=1, skip_files_except=[])[0m
-[36m      [0m[32;1mUnprintable[0m[36m = [0m<class '__main__.Unprintable'>[0m
-[36m      [0m[32;1mA[0m[36m = [0m<class '__main__.A'>[0m
+[36m      [0m[32;1mactivate_in_ipython_by_import[0m[36m = [0m<module 'traceback_with_variables.activate_in_ipython_by_import' fr...vate_in_ipython_by_import.py'>[0m
+[36m      [0m[32;1md[0m[36m = [0mtraceback_with_variables.core.Format(after=0, before=0, brief_files...tails=1, skip_files_except=[])[0m
+[36m      [0m[32;1mdataclass[0m[36m = [0m<function dataclass at 0x...omitted for tests only...>[0m
+[36m      [0m[32;1mAny[0m[36m = [0mtyping.Any[0m
+[36m      [0m[32;1mD[0m[36m = [0mD[0m
+[36m      [0m[32;1mDWithRepr[0m[36m = [0mDWithRepr[0m
+[36m      [0m[32;1mDWithStr[0m[36m = [0mDWithStr[0m
+[36m      [0m[32;1mUnprintable[0m[36m = [0mUnprintable[0m
+[36m      [0m[32;1mA[0m[36m = [0mA[0m
+[36m      [0m[32;1mSuperList[0m[36m = [0mSuperList[0m
+[36m      [0m[32;1mSuperDict[0m[36m = [0mSuperDict[0m
+[36m      [0m[32;1mSuperSet[0m[36m = [0mSuperSet[0m
+[36m      [0m[32;1mHasNoStr[0m[36m = [0mHasNoStr[0m
+[36m      [0m[32;1mHasStr[0m[36m = [0mHasStr[0m
 [36m      [0m[32;1mf[0m[36m = [0m<function f at 0x...omitted for tests only...>[0m
 [36m      [0m[32;1m...skipped...[0m[36m [0m22[0m[36m vars[0m
 [36m  File "[0m[36;1m...omitted for tests only...[0m[36m", line...omitted for tests only..., in [0m[36;1mf[0m
 [36m    [0m[35mreturn f([0m
 [36m      [0m[32;1mn[0m[36m = [0m10001[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10001'[0m
-[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...9996, 9997, 9998, 9999, 10000'[0m
+[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1...9996, 9997, 9998, 9999, 10000'[0m
 [36m      [0m[32;1mus[0m[36m = [0m<exception while printing> Traceback (most recent call last):[0m
-[36m      [0m    File "...omitted for tests only.../core.py", line...omitted for tests only..., in _to_cropped_str[0m
-[36m      [0m      raw = print_(obj)[0m
+[36m      [0m    ...traceback_with_variables internal stacks...[0m
 [36m      [0m    File "...omitted for tests only...", line...omitted for tests only..., in __repr__[0m
 [36m      [0m      raise ValueError("please don't print me")[0m
 [36m      [0m  ValueError: please don't print me[0m
@@ -23,10 +32,9 @@
 [36m    [0m[35mreturn 1 // (n * 0)[0m
 [36m      [0m[32;1mn[0m[36m = [0m10000[0m
 [36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10000'[0m
-[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ... 9995, 9996, 9997, 9998, 9999'[0m
+[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1... 9995, 9996, 9997, 9998, 9999'[0m
 [36m      [0m[32;1mus[0m[36m = [0m<exception while printing> Traceback (most recent call last):[0m
-[36m      [0m    File "...omitted for tests only.../core.py", line...omitted for tests only..., in _to_cropped_str[0m
-[36m      [0m      raw = print_(obj)[0m
+[36m      [0m    ...traceback_with_variables internal stacks...[0m
 [36m      [0m    File "...omitted for tests only...", line...omitted for tests only..., in __repr__[0m
 [36m      [0m      raise ValueError("please don't print me")[0m
 [36m      [0m  ValueError: please don't print me[0m

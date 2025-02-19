@@ -1,6 +1,6 @@
 import pytest
 
-from traceback_with_variables import core, ColorSchemes, Format
+from traceback_with_variables import core, ColorSchemes, Format, show, hide, skip
 
 from tests.dummies import Unprintable, f, A
 from tests.test_utils import tb_reg
@@ -149,6 +149,11 @@ def test_files(check, skip_files_except, brief_files_except):
     check(fmt=Format(skip_files_except=skip_files_except, brief_files_except=brief_files_except))
 
 
+@pytest.mark.parametrize('i1,p', enumerate([show, hide, skip, str, repr, None]))
+def test_standard_prints_for_var_printers(check, i1, p):
+    check(fmt=Format(custom_var_printers=[('l1', p)] if p else []))
+
+
 @pytest.mark.parametrize('i1,fs1', enumerate([None, ['s'], ['l', Unprintable], [lambda n, *_: 's' in n]]))
 @pytest.mark.parametrize('i2,fs2', enumerate([None, ['s'], ['l', Unprintable], [lambda n, *_: 's' in n]]))
 def test_var_printers(check, i1, fs1, i2, fs2):
@@ -161,3 +166,9 @@ def test_var_printers(check, i1, fs1, i2, fs2):
 def test_cur_tb(tb_reg, num_skipped_frames):
     tb_reg(core.format_cur_tb(num_skipped_frames=num_skipped_frames, fmt=Format(skip_files_except='test_core')))
 
+
+def test_standard_prints():
+    assert skip([1, 2, 3]) == None
+    assert hide([1, 2, 3]) == '...hidden...'
+    with pytest.raises(NotImplementedError):
+        show([1, 2, 3])

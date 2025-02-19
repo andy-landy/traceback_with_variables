@@ -8,19 +8,32 @@ on:
       - '*'
 jobs:
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.arrays.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        # 3.13 not available yet somehow
-        # 3.7 has issues with multiline expressions
-        # 3.6- not found for ubuntu-latest
-        python-version: [3.8, 3.9, '3.10', 3.11, 3.12]
+        arrays: [
+          # {os: ubuntu-22.04, python-version: '3.7.17'},  # multiline code is depicted differently
+          {os: ubuntu-22.04, python-version: '3.8'},
+          {os: ubuntu-22.04, python-version: '3.9'},
+          {os: ubuntu-22.04, python-version: '3.10'},
+          {os: ubuntu-22.04, python-version: '3.11'},
+          {os: ubuntu-22.04, python-version: '3.12'},
+          {os: ubuntu-22.04, python-version: '3.13'},
+          # {os: ubuntu-22.04, python-version: '3.14.0-alpha.5'},  # too early
+          # {os: windows-latest, python-version: '3.7.9'},  # multiline code is depicted differently
+          {os: windows-latest, python-version: '3.8'},
+          {os: windows-latest, python-version: '3.9'},
+          {os: windows-latest, python-version: '3.10'},
+          {os: windows-latest, python-version: '3.11'},
+          {os: windows-latest, python-version: '3.12'},
+          {os: windows-latest, python-version: '3.13'}
+          # {os: windows-latest, python-version: '3.14.0-alpha.5'}  # too early
+        ]
     steps:
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+      - name: Set up Python ${{ matrix.arrays.python-version }}
+        uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.arrays.python-version }}
 
       - name: Install dependencies
         run: |
@@ -35,13 +48,15 @@ jobs:
           flake8 traceback_with_variables --count --show-source --statistics --max-line-length=127
 
       - name: Test with pytest
+        env:
+          PYTHONHASHSEED: 1
         run: |
           python -Xfrozen_modules=off -m pytest -vv --cov=traceback_with_variables --cov-report=json
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
+          name: coverage-${{ matrix.arrays.os }}-${{ matrix.arrays.python-version }}
           path: coverage.json
 
   coverage:
