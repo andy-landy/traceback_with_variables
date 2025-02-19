@@ -1,7 +1,7 @@
 ![Example]({{ content_url }}/header.png)
 
 <h2 align="center">Python Traceback (Error Message) Printing Variables</h2>
-<p align="center">Very simple to use, but versatile when needed. Try for debug and keep for production.</p>
+<p align="center">Very simple to use and fast, but versatile when needed. Try for debug and keep for small-scale production.</p>
 
 <p align="center">
 <a href="{{ repo_url }}/actions"><img alt="Actions Status" src="{{ repo_url }}/workflows/tests/badge.svg"></a>
@@ -109,10 +109,11 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
 
 <a href="{{ examples_code_url }}/format_customized.py">Customize</a> any of the previous examples:
 ```python
+    from traceback_with_variables import fmt
     fmt.max_value_str_len = 10000
     fmt.skip_files_except = 'my_project'
+    fmt.custom_var_printers = []  # show all variables, no skips, no hides
 ```
-
 
 ### Colors
 
@@ -247,8 +248,8 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
 
 * — Should I use it after debugging is over, i.e. *in production*?
 
-    Yes, of course! That way it might save you even more time (watch out for sensitive data
-    like passwords and tokens in you logs, use skip_files_except to hide code from libs AND custom_var_printers to hide own locals). Note: you can deploy more serious frameworks, e.g. `Sentry`
+    Yes, of course! That way it might save you even more time (<a href="{{ examples_code_url }}/secret_data.py">watch out</a> for sensitive data
+    like 🔴**passwords** and **tokens** in you logs). Note: you can deploy more serious monitoring frameworks, e.g. `Sentry`
 
 <br/>
 
@@ -261,7 +262,16 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
      step 5: Examine the printouts and possibly add some more info (then go back to step 2). \
      step 6: Erase all recently added printouts, logging and exception messages. \
      step 7: Go back to step 1 once bugs appear.
-     
+
+
+* — Is it slow? I have huge lists and dicts and data objects!
+
+    Data size doesn't matter! Printing is smart, so only the resulting suffix and prefix are generated, e.g.
+
+    `list(range(100000000))`   becomes just   `"[0, 1, 2, ...9998, 99999999]"`   in 0.00012s
+
+    Use `fmt`'s `.max_value_str_len`, and `.ellipsis_rel_pos` (0.0 to 1.0) to tweak the output.
+ 
 
 ### Examples and recipes
 
@@ -279,6 +289,7 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
 * <a href="{{ examples_code_url }}/work_with_traceback_lines.py">get traceback lines for custom things</a>
 * <a href="{{ examples_code_url }}/flask.py">using with `flask`</a>
 * <a href="{{ examples_code_url }}/format_customized.py">customize the output</a>
+* <a href="{{ examples_code_url }}/secret_data.py">passwords and tokens in logs</a>
 
 ### Reference
 
@@ -292,7 +303,7 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
 * `ellipsis_` string to denote long strings truncation, default=`...`
 * `skip_files_except` use to print only certain files; list of regexes, ignored if empty, default=None
 * `brief_files_except` use to print variables only in certain files; list of regexes, ignored if empty, default=None
-* `custom_var_printers` list of pairs of (filter, printer); filter is a name fragment, a type or a function or a list thereof; printer returns `None` to skip a var
+* `custom_var_printers` list of pairs of (filter, printer); filter is a name fragment, a type or a function or a list thereof; printer returns `None` to skip a var, standard ones are `hide`, `skip`, `show`
 * `color_scheme` is `None` or one of <a href="{{ lib_code_url }}/color.py">`ColorSchemes`</a>: `.none` , `.common`, `.nice`, `.synthwave`. `None` is for auto-detect 
 
 ---

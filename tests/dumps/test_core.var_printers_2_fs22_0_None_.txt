@@ -1,7 +1,7 @@
 Traceback with variables (most recent call last):
   File "...omitted for tests only.../test_core.py", line...omitted for tests only..., in check_
     f()
-      kwargs = {'fmt': <traceback_with_variables.core.Format object at 0x...omitted for tests only...>}
+      kwargs = {'fmt': traceback_with_variables.core.Format(after=0, before=0, brief_files_except=[], color_scheme=None, custom_var_printers=[(<function _var_filter_to_should_print.<locals>.should_print at 0x...omitted for tests only...>, <function test_var_printers.<locals>.<lambda> at 0x...omitted for tests only...>)], ellipsis_='...', ellipsis_rel_pos=0.7, max_exc_str_len=10000, max_value_str_len=1000, objects_details=1, skip_files_except=[])}
       tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>
   File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
     return f(
@@ -9,8 +9,7 @@ Traceback with variables (most recent call last):
       s1 = 'short string with n: 10001'
       l1 = var
       us = <exception while printing> Traceback (most recent call last):
-          File "...omitted for tests only.../core.py", line...omitted for tests only..., in _to_cropped_str
-            raw = print_(obj)
+          ...traceback_with_variables internal stacks...
           File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in __repr__
             raise ValueError("please don't print me")
         ValueError: please don't print me
@@ -21,8 +20,7 @@ Traceback with variables (most recent call last):
       s1 = 'short string with n: 10000'
       l1 = var
       us = <exception while printing> Traceback (most recent call last):
-          File "...omitted for tests only.../core.py", line...omitted for tests only..., in _to_cropped_str
-            raw = print_(obj)
+          ...traceback_with_variables internal stacks...
           File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in __repr__
             raise ValueError("please don't print me")
         ValueError: please don't print me

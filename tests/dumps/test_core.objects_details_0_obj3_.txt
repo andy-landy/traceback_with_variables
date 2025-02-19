@@ -2,6 +2,6 @@ Traceback with variables (most recent call last):
   File "...omitted for tests only.../test_core.py", line...omitted for tests only..., in test_objects_details
     1/0
       tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only...>>
-      obj = <tests.dummies.A object at 0x...omitted for tests only...>
+      obj = tests.dummies.A(-)
       objects_details = 0
 builtins.ZeroDivisionError: division by zero

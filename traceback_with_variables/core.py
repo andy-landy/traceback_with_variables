@@ -6,13 +6,35 @@ import traceback
 from typing import Any, Iterator, Union, Optional, TextIO, List, Callable, Type, Tuple, Dict
 
 from traceback_with_variables.color import ColorScheme, ColorSchemes, supports_ansi
+from traceback_with_variables.fast_capped_str_casts import to_capped_str
 
 
-Patterns = Union[None, str, List[str]]
-Print = Callable[[Any], Optional[str]]
-ShouldPrint = Callable[[str, Type, str, bool], bool]
-VarFilterItem = Union[str, Type, ShouldPrint]
-VarFilter = Union[VarFilterItem, List[VarFilterItem]]
+Patterns = Union[None, str, List[str]]  # file filter
+
+ShouldPrint = Callable[[str, Type, str, bool], bool]  # extended var filter
+VarFilterItem = Union[str, Type, ShouldPrint]  # any var filter
+VarFilter = Union[VarFilterItem, List[VarFilterItem]]  # full final var filter
+
+Print = Callable[[Any], Optional[str]]  # how to print
+VarPrinters = List[Tuple[ShouldPrint, Print]]  # pairs for filters and printers
+
+
+def skip(obj: Any) -> Optional[str]:  # noqa: U100
+    return None
+
+
+def hide(obj: Any) -> Optional[str]:  # noqa: U100
+    return '...hidden...'
+
+
+# never called, for == only, means apply default print
+def show(obj: Any) -> Optional[str]:  # noqa: U100
+    raise NotImplementedError()
+
+
+def get_print(name: str, obj: Any, filename: str, is_global: bool, var_printers: VarPrinters) -> Print:
+    type_ = type(obj)
+    return next((p for should_p, p in var_printers if should_p(name, type_, filename, is_global)), show)
 
 
 class Format:  # no dataclass for compatibility
@@ -28,7 +50,7 @@ class Format:  # no dataclass for compatibility
         color_scheme: Optional[ColorScheme] = None,
         skip_files_except: Patterns = None,
         brief_files_except: Patterns = None,
-        custom_var_printers: Optional[List[Tuple[VarFilter, Print]]] = None,  # address examples
+        custom_var_printers: Optional[VarPrinters] = None,  # address examples
     ):
         self._can_grow = True
         self.max_value_str_len = max_value_str_len
@@ -41,7 +63,7 @@ class Format:  # no dataclass for compatibility
         self.color_scheme = color_scheme
         self.skip_files_except: List['re.Pattern'] = _to_patterns(skip_files_except)
         self.brief_files_except: List['re.Pattern'] = _to_patterns(brief_files_except)
-        self.custom_var_printers: List[Tuple[ShouldPrint, Print]] = [
+        self.custom_var_printers: VarPrinters = [
             (_var_filter_to_should_print(f), p) for f, p in custom_var_printers or []
         ]
         self._can_grow = False
@@ -79,7 +101,8 @@ class Format:  # no dataclass for compatibility
             color_scheme=getattr(ColorSchemes, ns.color_scheme),
             skip_files_except=ns.skip_files_except,
             brief_files_except=ns.brief_files_except,
-            custom_var_printers=[((lambda n, t, fn, is_global: is_global), lambda v: None)] if ns.no_globals else None,
+            custom_var_printers=[((lambda n, t, fn, is_global: is_global), lambda v: None)]  # noqa: U100
+            if ns.no_globals else None,
         )
 
     def replace(self, **kwargs: Dict[str, Any]) -> 'Format':
@@ -225,7 +248,7 @@ def _iter_lines(
             yield f'{c.c}      {c.n_}...skipped...{c.c_} {c.v_}{num_skipped}{c.c_} vars{c.e}'
 
     if e:
-        yield f'{c.ec}{e.__class__.__module__}.{e.__class__.__name__}:{c.et_} {e}{c.e}'
+        yield f'{c.ec}{e.__class__.__module__}.{e.__class__.__qualname__}:{c.et_} {e}{c.e}'
 
 
 def _crop(line: str, max_len: int, ellipsis_rel_pos: float, ellipsis_: str) -> str:
@@ -242,42 +265,44 @@ def _to_cropped_str(
     is_global: bool,
     name: str,
     filename: str,
-    custom_var_printers: List[Tuple[ShouldPrint, Print]],
+    custom_var_printers: VarPrinters,
     objects_details: int,
     max_value_str_len: int,
     ellipsis_rel_pos: float,
     max_exc_str_len: int,
     ellipsis_: str
 ) -> Optional[str]:
-    type_ = type(obj)
-    print_ = next((p for should_p, p in custom_var_printers if should_p(name, type_, filename, is_global)), repr)
+    print_ = get_print(name=name, obj=obj, filename=filename, is_global=is_global, var_printers=custom_var_printers)
     try:
+        if print_ == show:
+            return to_capped_str(
+                obj=obj,
+                len_cap=max_value_str_len,
+                ellipsis=ellipsis_,
+                rel_ellipsis_pos=ellipsis_rel_pos,
+                obj_depth=objects_details,
+            )
         raw = print_(obj)
-        if raw == object.__repr__(obj):
-            if len(raw) < max_value_str_len and objects_details > 0:
-                cls_keys = set(dir(type(obj)))
-                raw += '(' + ', '.join(key + '=' + (_to_cropped_str(
-                    obj=getattr(obj, key),
-                    is_global=False,
-                    name=key,
-                    filename=getattr(sys.modules.get(type(obj).__module__, ''), '__file__', ''),
-                    custom_var_printers=custom_var_printers,
-                    objects_details=objects_details - 1,
-                    max_value_str_len=max_value_str_len,
-                    ellipsis_rel_pos=ellipsis_rel_pos,
-                    max_exc_str_len=max_exc_str_len,
-                    ellipsis_=ellipsis_,
-                ) or '<empty str>') for key in dir(obj) if key not in cls_keys and not key.startswith('__')) + ')'
+        return _crop(raw, max_value_str_len, ellipsis_rel_pos, ellipsis_) if raw is not None else None
 
     except:  # noqa
+        lines = traceback.format_exc(chain=False).split('\n')
+        for first_li, line in enumerate(lines):
+            if line.startswith('  File "') \
+                    and ('fast_capped_str_casts.py' not in line) \
+                    and ('in _to_cropped_str' not in line):
+                break
+
         return _crop(
-            '<exception while printing> ' + traceback.format_exc(chain=False).replace('\n', '\n  '),
+            '<exception while printing> ' + '\n  '.join(
+                lines[:1] +
+                (['  ...traceback_with_variables internal stacks...'] if first_li > 1 else []) +
+                lines[first_li:]
+            ),
             max_exc_str_len,
             ellipsis_rel_pos,
             ellipsis_,
         )
-
-    return _crop(raw, max_value_str_len, ellipsis_rel_pos, ellipsis_) if raw is not None else None
 
 
 def _to_patterns(patterns: Patterns) -> List['re.Pattern']:
@@ -306,4 +331,6 @@ def _var_filter_to_should_print(filter_: VarFilter) -> ShouldPrint:
     return should_print
 
 
-default_format = Format()
+default_format = Format(custom_var_printers=[
+    ('.*(?i:pass|secret|token|key|api_key|cred|pwd).*', hide),
+])

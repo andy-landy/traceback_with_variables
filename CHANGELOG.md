@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.2.0
+- Fully compatible with 2.1.1
+- (BIG) Huge collections are printed faster, time depends only on `max_value_str_len`
+- Add `hide`, `skip`, `show` as standard prints
+- Variables like `password` and `token` are now hidden by default
+- Added warning about secrets to readme, an example code to deal with it and a short essay
+- Tested in python 3.13 and python 3.7
+- More test cases and data types
+- All objects without custom `__str__` are printed with all attrs
+- Standard backup tracebacks have this library stacks collapsed
+
 ## 2.1.1
 - Add "tb" alias creation for lines like `import tb.a`
 
