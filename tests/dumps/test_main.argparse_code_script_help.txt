@@ -1,6 +1,0 @@
-usage: code.py [-h]
---a A
-
-options:
-  -h, --help  show this help message and exit
-  --a A

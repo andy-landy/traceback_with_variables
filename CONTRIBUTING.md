@@ -25,14 +25,7 @@ Therefore there are some codestyle guidelines applied:
 ## Testing
 
 * add new test cases using `assert_smart_equals_ref`
-* create new dump files and check coverage by running `PYTEST_UPDATE_REFS=1 python3 -m pytest -s --cov=./traceback_with_variables --cov-report=xml`
+* create new dump files and check coverage by running
+    * `PYTHONHASHSEED=1 PYTEST_UPDATE_DUMPS=1 python3 -m pytest -s --cov=./traceback_with_variables --cov-report=json`
+    * `python3 check_coverage_reports.py --inp-dir . --max-allowed-num-uncovered-lines 0`
 * create a pull request to `next_version` branch
-
-## TODO list
-
-* add `...skipped N files...` lines
-* fix colab example
-* fix tests for python 3.5-3.7
-* add comparison to other tools
-* add chain args
-* move to pytest-regtest in tests

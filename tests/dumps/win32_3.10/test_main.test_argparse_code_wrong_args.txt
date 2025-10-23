@@ -1,0 +1,30 @@
+usage: code.py [-h]
+--arg ARG
+code.py: error: the following arguments are required: --arg
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 4, in <module>
+    args = p.parse_args()
+      __loader__ = _frozen_importlib_external.SourceFileLoader(name='traceback_with_variables.main', path='...omitted for tests only, abs path.../main.py')
+      __builtins__ = <module 'builtins' (built-in)>
+      __package__ = None
+      __spec__ = None
+      __annotations__ = None
+      __cached__ = None
+      __name__ = '__main__'
+      __file__ = '...omitted for tests only, abs path.../code.py'
+      argparse = <module 'argparse' from '...omitted for tests only, abs path.../argparse.py'>
+      p = ArgumentParser(prog='code.py', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+  File "...omitted for tests only, abs path.../argparse.py", line ...omitted for tests only, argparse internals..., in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+      self = ArgumentParser(prog='code.py', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+      args = None
+      namespace = None
+  File "...omitted for tests only, abs path.../argparse.py", line ...omitted for tests only, argparse internals..., in parse_known_args
+      args = {'prog': 'code.py', 'message': 'the following arguments are required: --arg'}
+  File "...omitted for tests only, abs path.../argparse.py", line ...omitted for tests only, argparse internals..., in exit
+    _sys.exit(status)
+      self = ArgumentParser(prog='code.py', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+      status = 2
+      message = 'code.py: error: the following arguments are required: --arg
+      '
+builtins.SystemExit: 2

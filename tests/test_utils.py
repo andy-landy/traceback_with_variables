@@ -2,9 +2,11 @@ import json
 import os
 import re
 import sys
+import time
+from dataclasses import dataclass
 from pathlib import Path
 from subprocess import check_output, CalledProcessError, STDOUT
-from typing import List, Type
+from typing import Callable, Dict, List, Type
 
 import pytest
 
@@ -22,64 +24,63 @@ def type_to_name(type_: Type) -> str:
     return type_.__name__.replace('WindowsPath', 'PosixPath')
 
 
+def get_min_dur_s(func: Callable, args: List, kwargs: Dict):
+    min_dur_s = -1.0
+
+    for _ in range(5):
+        start_t_s = time.time()
+        func(*args, **kwargs)
+        dur_s = time.time() - start_t_s
+        min_dur_s = min(min_dur_s, dur_s) if min_dur_s >= 0.0 else dur_s
+
+    return min_dur_s
+
+@dataclass(repr=False)
 class Reg:
-    def __init__(self, label: str) -> None:
-        self.label: str = label
+    dir_path: Path
+    label: str
+    update: bool
+
+    @classmethod
+    def create(cls, label: str):
+        update=bool(os.getenv('PYTEST_UPDATE_DUMPS', ''))
+        env_name = sys.platform + '_' + '.'.join(sys.version.split('.')[:2])
+        dir_path = Path('tests/dumps') / env_name
+        if update:
+            dir_path.mkdir(parents=True, exist_ok=True)
+        return Reg(dir_path=dir_path, label=label, update=update)
 
     def match_tb_text(self, text: str, sub_label: str = '') -> None:
         self.match_text(strip_tb_text(text), sub_label)
         
     def match_text(self, text: str, sub_label: str = '') -> None:
-        path = 'tests/dumps/' + parts_to_fname([self.label, sub_label, 'txt'])
-        match_text_in_file(path, text)
-
-
-def parts_to_fname(parts: List[str]) -> str:
-    return ''.join(c if c.isalnum() or c in '.' else '_' for c in '.'.join(p for p in parts if p))
-
-
-def match_text_in_file(path: str, text: str) -> None:
-    if os.getenv('PYTEST_UPDATE_REFS', ''):
-        with open(path, 'w') as out:
-            out.write(text)
-
-    else:
-        with open(path, 'r') as in_:
-            old_text = in_.read()
-            assert old_text == text
+        label = '.'.join(l for l in [self.label, sub_label] if l)
+        path=self.dir_path / (re.sub('[^\w.-]', '-', label) + '.txt')
+        if self.update:
+            path.write_text(text)
+        else:
+            assert text == path.read_text()  # open(newline='').read()  # newline='' to keep win32 \r
 
 
 def strip_tb_text(text: str) -> str:
-    OFTO = '...omitted for tests only...'
-    text = text.replace('\\\\', '\\')  # for windows
-    text = re.sub('.:\\\\', '/', text)  # for windows
-    text = text.replace('\\', '/')  # for windows
-    text = text.replace('\r', '')  # for windows
-    text = text.replace('WindowsPath', 'PosixPath')  # for windows
-    text = re.sub(r'\n[^\n]*\^\^\^[^\n]*\n', '\n', text)
-    # File "/usr/local/lib/python3.8/dist-packages/_pytest/_code/code.py", line 810, in repr_traceback_entry
-    text = re.sub(r'/[\w/.-]+/[\d]+\.py([^\w/-])', fr'{OFTO}\1', text)
-    text = re.sub(r'([^\w/.-])/[\w/.-]+(/[\w.-]+[^\w/.-])', fr'\1{OFTO}\2', text)
-    text = re.sub(r'/[\w/.-]+(/[\w.-]+\.py[^\w/-])', fr'{OFTO}\1', text)
-    text = re.sub(r'(line)[^\n,]+(,)', fr'\1{OFTO}\2', text)
-    #text = re.sub(r"(__file__ = )[^\n]*\n", fr"\1'{OFTO}'", text)
-    text = re.sub(r'( at 0x)\w+', fr'\1{OFTO}', text)
-    #text = re.sub(r'(__builtins__[^{]*{)[^\n]*', fr'\1{OFTO}', text)
-    text = re.sub(r'(<ipython-input-)\d+-\w+(>)', fr'{OFTO}', text)
-    text = re.sub('\n[^\n]+function open[^\n]+\n', '\n', text)
-    text = re.sub('\n[^\n]+_pytest[^\n]+\n', '\n', text)
-    #text = re.sub(r'(<_froze?n?s?e?t? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
-    #text = re.sub(r'(<trace?b?a?c?k? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
-    #text = re.sub(r'(<func?t?i?o?n? ?a?t? ?0?x?).*(>)', fr'\1{OFTO}\2', text)
-    text = re.sub(r'\n\s+~*\^+\n', '\n', text)  # for jupyter with py>=3.13
+    OFTO = '...omitted for tests only, '
+
+    text = re.sub(r'\\', '/', text)  # cast win paths so the following rules could apply
+    text = re.sub('[A-Z]:/', '/d/', text)  # same
+    text = re.sub('\r', '', text)  # cast win lines
+    text = re.sub(r'(/argparse.py", line )[^\n,]+(,)', fr'\1{OFTO}argparse internals...\2', text)  # argparse versions
+    text = re.sub(r'( at 0x)\w+', fr'\1{OFTO}obj id...', text)  # object ids
+    text = re.sub(r'<ipython-input-[^>]+>', f'{OFTO}jupyter cell...', text)  # jupyter cells on some versions
+    text = re.sub(r'/[\w/.-]+/\d+.py([^\w/.-])', fr'{OFTO}jupyter cell...\1', text)  # jupyter cells on some versions
+    text = re.sub(r'/[\w/.-]+(/[\w.-]+\.py[^\w/.-])', fr'{OFTO}abs path...\1', text)  # machine-dependent paths
+    text = re.sub('\n[^\n]+function open[^\n]+\n', '\n', text)  # Jupyter versions?
 
     return text
 
 
 @pytest.fixture
 def tb_reg(request):
-    reg = Reg(label=f'{request.module.__name__}.{request.node.name[5:]}')
-    return reg.match_tb_text
+    return Reg.create(label=f'{request.module.__name__}.{request.node.name}').match_tb_text
 
 
 def set_lib_env(path: Path) -> None:
@@ -152,7 +153,7 @@ def run_code_in_jupyter(tmp_path, lines: List[str]) -> str:
     out_path = tmp_path / 'output.ipynb'
     run_cmd([
         'jupyter', 'nbconvert', '--execute', '--allow-errors', '--to',
-        'notebook', '--output', out_path.relative_to(inp_path.parent), str(inp_path),
+        'notebook', '--output', str(out_path.relative_to(inp_path.parent)), str(inp_path),
     ])
     
     with out_path.open('r') as inp:

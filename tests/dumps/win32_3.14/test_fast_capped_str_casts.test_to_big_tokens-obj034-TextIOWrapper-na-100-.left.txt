@@ -1,0 +1,1 @@
+<_io.TextIOWrapper name='./temp_out.txt' mode='w' encoding='UTF-8'>

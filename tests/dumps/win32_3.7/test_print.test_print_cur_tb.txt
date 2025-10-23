@@ -1,0 +1,9 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../test_print.py", line 15, in test_print_cur_tb
+    get_cur_tb(out)
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only, obj id...>>
+      out = _io.StringIO()
+  File "...omitted for tests only, abs path.../test_print.py", line 21, in get_cur_tb
+    return print_cur_tb(fmt=Format(skip_files_except='test_print'), file_=out)
+      out = _io.StringIO()
+      x = 10

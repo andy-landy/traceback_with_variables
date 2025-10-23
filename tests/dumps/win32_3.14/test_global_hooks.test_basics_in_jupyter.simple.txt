@@ -1,0 +1,41 @@
+[36mTraceback with variables (most recent call last):[0m
+[36m  File "[0m[36;1m...omitted for tests only, jupyter cell...[0m[36m", line [0m[36;1m98[0m[36m, in [0m[36;1m<module>[0m
+[36m    [0m[35mf()[0m
+[36m      [0m[32;1mactivate_in_ipython_by_import[0m[36m = [0m<module 'traceback_with_variables.activate_in_ipython_by_import' from '...omitted for tests only, abs path.../activate_in_ipython_by_import.py'>[0m
+[36m      [0m[32;1mdataclass[0m[36m = [0m<function dataclass at 0x...omitted for tests only, obj id...>[0m
+[36m      [0m[32;1mAny[0m[36m = [0mtyping.Any[0m
+[36m      [0m[32;1mD[0m[36m = [0mD[0m
+[36m      [0m[32;1mDWithRepr[0m[36m = [0mDWithRepr[0m
+[36m      [0m[32;1mDWithStr[0m[36m = [0mDWithStr[0m
+[36m      [0m[32;1mUnprintable[0m[36m = [0mUnprintable[0m
+[36m      [0m[32;1mA[0m[36m = [0mA[0m
+[36m      [0m[32;1mSuperList[0m[36m = [0mSuperList[0m
+[36m      [0m[32;1mSuperDict[0m[36m = [0mSuperDict[0m
+[36m      [0m[32;1mSuperSet[0m[36m = [0mSuperSet[0m
+[36m      [0m[32;1mHasNoStr[0m[36m = [0mHasNoStr[0m
+[36m      [0m[32;1mHasStr[0m[36m = [0mHasStr[0m
+[36m      [0m[32;1mf[0m[36m = [0m<function f at 0x...omitted for tests only, obj id...>[0m
+[36m      [0m[32;1m...skipped...[0m[36m [0m22[0m[36m vars[0m
+[36m  File "[0m[36;1m...omitted for tests only, jupyter cell...[0m[36m", line [0m[36;1m93[0m[36m, in [0m[36;1mf[0m
+[36m    [0m[35mreturn f([0m
+[36m      [0m[32;1mn[0m[36m = [0m10001[0m
+[36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10001'[0m
+[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156...9951, 9952, 9953, 9954, 9955, 9956, 9957, 9958, 9959, 9960, 9961, 9962, 9963, 9964, 9965, 9966, 9967, 9968, 9969, 9970, 9971, 9972, 9973, 9974, 9975, 9976, 9977, 9978, 9979, 9980, 9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999, 10000'[0m
+[36m      [0m[32;1mus[0m[36m = [0m<exception while printing> Traceback (most recent call last):[0m
+[36m      [0m    ...traceback_with_variables internal stacks...[0m
+[36m      [0m    File "...omitted for tests only, jupyter cell...", line 30, in __repr__[0m
+[36m      [0m      raise ValueError("please don't print me")[0m
+[36m      [0m  ValueError: please don't print me[0m
+[36m      [0m  [0m
+[36m  File "[0m[36;1m...omitted for tests only, jupyter cell...[0m[36m", line [0m[36;1m87[0m[36m, in [0m[36;1mf[0m
+[36m    [0m[35mreturn 1 // (n * 0)[0m
+[36m      [0m[32;1mn[0m[36m = [0m10000[0m
+[36m      [0m[32;1ms1[0m[36m = [0m'short string with n: 10000'[0m
+[36m      [0m[32;1ml1[0m[36m = [0m'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156... 9950, 9951, 9952, 9953, 9954, 9955, 9956, 9957, 9958, 9959, 9960, 9961, 9962, 9963, 9964, 9965, 9966, 9967, 9968, 9969, 9970, 9971, 9972, 9973, 9974, 9975, 9976, 9977, 9978, 9979, 9980, 9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999'[0m
+[36m      [0m[32;1mus[0m[36m = [0m<exception while printing> Traceback (most recent call last):[0m
+[36m      [0m    ...traceback_with_variables internal stacks...[0m
+[36m      [0m    File "...omitted for tests only, jupyter cell...", line 30, in __repr__[0m
+[36m      [0m      raise ValueError("please don't print me")[0m
+[36m      [0m  ValueError: please don't print me[0m
+[36m      [0m  [0m
+[31mbuiltins.ZeroDivisionError:[0m[91m division by zero[0m

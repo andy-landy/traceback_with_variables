@@ -1,0 +1,6 @@
+usage: code.py [-h]
+--arg ARG
+
+options:
+  -h, --help  show this help message and exit
+  --arg ARG

@@ -1,0 +1,1 @@
+Traceback with variables (most recent call last):

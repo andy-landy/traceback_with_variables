@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "...omitted for tests only, abs path.../global_hooks.py", line 13, in global_print_exc_in_ipython
+    import IPython
+  File "...omitted for tests only, abs path.../IPython.py", line 1, in <module>
+    import nonexistent_module
+ModuleNotFoundError: No module named 'nonexistent_module'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 1, in <module>
+    from traceback_with_variables import activate_in_ipython_by_import
+  File "...omitted for tests only, abs path.../activate_in_ipython_by_import.py", line 8, in <module>
+    default_global_print_exc_in_ipython()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "...omitted for tests only, abs path.../default_global_hooks.py", line 24, in default_global_print_exc_in_ipython
+    global_print_exc_in_ipython()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "...omitted for tests only, abs path.../global_hooks.py", line 15, in global_print_exc_in_ipython
+    raise ValueError("IPython not found")
+ValueError: IPython not found

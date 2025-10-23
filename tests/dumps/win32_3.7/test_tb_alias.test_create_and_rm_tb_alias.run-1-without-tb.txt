@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 1, in <module>
+    import tb.a
+ModuleNotFoundError: No module named 'tb'

@@ -1,0 +1,216 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../test_core.py", line 13, in check_
+  . import pytest
+  . 
+  . from traceback_with_variables import core, ColorSchemes, Format, show, hide, skip
+  . 
+  . from tests.dummies import Unprintable, f, A
+  . from tests.test_utils import tb_reg
+  . 
+  . 
+  . @pytest.fixture
+  . def check(tb_reg):
+  .     def check_(**kwargs):
+  .         try:
+  >             f()
+      kwargs = {'fmt': traceback_with_variables.core.Format(after=0, before=100, brief_files_except=[], color_scheme=None, custom_var_printers=[], ellipsis_='...', ellipsis_rel_pos=0.7, max_exc_str_len=10000, max_value_str_len=1000, objects_details=1, skip_files_except=[])}
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only, obj id...>>
+  File "...omitted for tests only, abs path.../dummies.py", line 92, in f
+  . from dataclasses import dataclass
+  . from typing import Any
+  . 
+  . 
+  . @dataclass
+  . class D:
+  .     f1: Any
+  .     f2: Any
+  . 
+  . 
+  . @dataclass
+  . class DWithRepr:
+  .     f1: Any
+  . 
+  .     def __repr__(self):
+  .         return f'DWithRepr-{self.f1}'
+  . 
+  . 
+  . @dataclass
+  . class DWithStr:
+  .     f1: Any
+  . 
+  .     def __str__(self):
+  .         return f'DWithStr-{self.f1}'
+  . 
+  . 
+  . class Unprintable:
+  .     def __repr__(self):
+  .         raise ValueError("please don't print me")
+  . 
+  . 
+  . class A:
+  .     class B:
+  .         def __init__(self, f3):
+  .             self.f3 = f3
+  . 
+  .     def __init__(self, f1, f2):
+  .         self.f1 = f1
+  .         self.f2 = f2
+  . 
+  .     def __hash__(self):
+  .         return hash((self.f1, self.f2))
+  . 
+  .     def __eq__(self, other):
+  .         return type(self) == type(other) and self.f1 == other.f1 and self.f2 == other.f2
+  . 
+  . 
+  . class SuperList(list):
+  .     pass
+  . 
+  . 
+  . class SuperDict(dict):
+  .     pass
+  . 
+  . 
+  . class SuperSet(set):
+  .     def __iter__(self):
+  .         return iter(sorted(super().__iter__(), key=lambda x: (type(x).__qualname__, hash(x))))
+  . 
+  . 
+  . class HasNoStr:
+  .     f1 = 'one'
+  . 
+  .     def __init__(self):
+  .         self.f2 = 'two'
+  .         self.f3 = 'three'
+  . 
+  .     def __hash__(self):
+  .         return hash((self.f2, self.f3))
+  . 
+  .     def __eq__(self, other):
+  .         return type(self) == type(other) and self.f2 == other.f2 and self.f3 == other.f3
+  . 
+  . 
+  . class HasStr(HasNoStr):
+  .     def __str__(self):
+  .         return f'HasStr-with-f2-{self.f2}-f3-{self.f3}'
+  . 
+  . 
+  . def f(n: int = 10001) -> int:
+  .     s1 = f'short string with n: {n}'
+  .     l1 = f'long string with 0..n: {", ".join(map(str, range(n)))}'
+  .     us = [Unprintable(), Unprintable(), Unprintable()]
+  . 
+  .     if n % 10 == 0:
+  .         return 1 // (n * 0)
+  . 
+  .     if True:
+  .         if n % 2 == 0:
+  .             return f(n - 1)
+  .         else:
+  >             return f(
+      n = 10001
+      s1 = 'short string with n: 10001'
+      l1 = 'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156...9951, 9952, 9953, 9954, 9955, 9956, 9957, 9958, 9959, 9960, 9961, 9962, 9963, 9964, 9965, 9966, 9967, 9968, 9969, 9970, 9971, 9972, 9973, 9974, 9975, 9976, 9977, 9978, 9979, 9980, 9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999, 10000'
+      us = <exception while printing> Traceback (most recent call last):
+          ...traceback_with_variables internal stacks...
+          File "...omitted for tests only, abs path.../dummies.py", line 29, in __repr__
+            raise ValueError("please don't print me")
+        ValueError: please don't print me
+        
+  File "...omitted for tests only, abs path.../dummies.py", line 86, in f
+  . from dataclasses import dataclass
+  . from typing import Any
+  . 
+  . 
+  . @dataclass
+  . class D:
+  .     f1: Any
+  .     f2: Any
+  . 
+  . 
+  . @dataclass
+  . class DWithRepr:
+  .     f1: Any
+  . 
+  .     def __repr__(self):
+  .         return f'DWithRepr-{self.f1}'
+  . 
+  . 
+  . @dataclass
+  . class DWithStr:
+  .     f1: Any
+  . 
+  .     def __str__(self):
+  .         return f'DWithStr-{self.f1}'
+  . 
+  . 
+  . class Unprintable:
+  .     def __repr__(self):
+  .         raise ValueError("please don't print me")
+  . 
+  . 
+  . class A:
+  .     class B:
+  .         def __init__(self, f3):
+  .             self.f3 = f3
+  . 
+  .     def __init__(self, f1, f2):
+  .         self.f1 = f1
+  .         self.f2 = f2
+  . 
+  .     def __hash__(self):
+  .         return hash((self.f1, self.f2))
+  . 
+  .     def __eq__(self, other):
+  .         return type(self) == type(other) and self.f1 == other.f1 and self.f2 == other.f2
+  . 
+  . 
+  . class SuperList(list):
+  .     pass
+  . 
+  . 
+  . class SuperDict(dict):
+  .     pass
+  . 
+  . 
+  . class SuperSet(set):
+  .     def __iter__(self):
+  .         return iter(sorted(super().__iter__(), key=lambda x: (type(x).__qualname__, hash(x))))
+  . 
+  . 
+  . class HasNoStr:
+  .     f1 = 'one'
+  . 
+  .     def __init__(self):
+  .         self.f2 = 'two'
+  .         self.f3 = 'three'
+  . 
+  .     def __hash__(self):
+  .         return hash((self.f2, self.f3))
+  . 
+  .     def __eq__(self, other):
+  .         return type(self) == type(other) and self.f2 == other.f2 and self.f3 == other.f3
+  . 
+  . 
+  . class HasStr(HasNoStr):
+  .     def __str__(self):
+  .         return f'HasStr-with-f2-{self.f2}-f3-{self.f3}'
+  . 
+  . 
+  . def f(n: int = 10001) -> int:
+  .     s1 = f'short string with n: {n}'
+  .     l1 = f'long string with 0..n: {", ".join(map(str, range(n)))}'
+  .     us = [Unprintable(), Unprintable(), Unprintable()]
+  . 
+  .     if n % 10 == 0:
+  >         return 1 // (n * 0)
+      n = 10000
+      s1 = 'short string with n: 10000'
+      l1 = 'long string with 0..n: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156... 9950, 9951, 9952, 9953, 9954, 9955, 9956, 9957, 9958, 9959, 9960, 9961, 9962, 9963, 9964, 9965, 9966, 9967, 9968, 9969, 9970, 9971, 9972, 9973, 9974, 9975, 9976, 9977, 9978, 9979, 9980, 9981, 9982, 9983, 9984, 9985, 9986, 9987, 9988, 9989, 9990, 9991, 9992, 9993, 9994, 9995, 9996, 9997, 9998, 9999'
+      us = <exception while printing> Traceback (most recent call last):
+          ...traceback_with_variables internal stacks...
+          File "...omitted for tests only, abs path.../dummies.py", line 29, in __repr__
+            raise ValueError("please don't print me")
+        ValueError: please don't print me
+        
+builtins.ZeroDivisionError: integer division or modulo by zero

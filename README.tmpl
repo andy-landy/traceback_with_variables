@@ -15,8 +15,8 @@
 <a href="{{ lib_code_url }}/override.py#L9"><img title="type hints everywhere" alt="Annotations coverage" src="https://img.shields.io/badge/type--hints-100%25-blueviolet.svg"></a>
 <a href="{{ lib_code_url }}/override.py#L8"><img title="no obscure objects, only transparent functions and data classes" alt="No-OOP" src="https://img.shields.io/badge/no OOP-100%25-blueviolet.svg"></a>
 <a href="{{ code_url }}/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-blueviolet.svg"></a>
+<a href="{{ code_url }}/tests/dumps"><img alt="Tests" src="https://img.shields.io/badge/tests-9328-blueviolet.svg"></a>
 <a href="https://colab.research.google.com/github/{{ user_repo_name }}/blob/master/examples/colab.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="{{ gitter_url }}"><img alt="Gitter" src="https://img.shields.io/gitter/room/{{ user_name }}/{{ package_name }}?color=blueviolet"></a>
 <!--
 <a href="{{ pypi_url }}"><img alt="pip Downloads" src="https://static.pepy.tech/personalized-badge/{{ package_name }}?period=total&units=none&left_color=grey&right_color=orange&left_text=pip downloads"></a>
 <a href="https://anaconda.org/conda-forge/{{ package_name }}/"><img alt="conda-forge Downloads" src="https://img.shields.io/conda/dn/conda-forge/{{ package_name }}?color=orange&label=conda%20downloads"></a>
@@ -50,7 +50,7 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 pip install traceback-with-variables=={{ version }}
 ```
 ```
-conda install -c conda-forge traceback-with-variables
+conda install -c conda-forge traceback-with-variables={{ version }}
 ```
 
 to use shorter `tb` alias in interactive mode call this once:
@@ -264,9 +264,9 @@ Using a logger [<a href="{{ examples_code_url }}/log_for_function.py">with a dec
      step 7: Go back to step 1 once bugs appear.
 
 
-* — Is it slow? I have huge lists and dicts and data objects!
+* — Is it fast? I have huge lists and dicts and data objects!
 
-    Data size doesn't matter! Printing is smart, so only the resulting suffix and prefix are generated, e.g.
+    Data size doesn't matter! Printing is smart, so only visible data portions are inpsected, e.g.
 
     `list(range(100000000))`   becomes just   `"[0, 1, 2, ...9998, 99999999]"`   in 0.00012s
 

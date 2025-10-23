@@ -1,0 +1,18 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 5, in <module>
+    f(divide_by_what)
+      __loader__ = _frozen_importlib_external.SourceFileLoader(name='traceback_with_variables.main', path='...omitted for tests only, abs path.../main.py')
+      __builtins__ = <module 'builtins' (built-in)>
+      __package__ = None
+      __spec__ = None
+      __annotations__ = None
+      __cached__ = None
+      __name__ = '__main__'
+      __file__ = '...omitted for tests only, abs path.../code.py'
+      f = <function f at 0x...omitted for tests only, obj id...>
+      divide_by_what = 0
+  File "...omitted for tests only, abs path.../code.py", line 3, in f
+    return 1 / (m - 1)
+      n = 0
+      m = 1
+builtins.ZeroDivisionError: division by zero

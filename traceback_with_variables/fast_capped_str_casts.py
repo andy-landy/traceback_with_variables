@@ -125,7 +125,8 @@ def fill_tokens(obj: Any, info: TokensInfo, reverse: bool, obj_depth: int) -> No
 
         info.add_token(close_token if reverse else open_token)
         needs_comma = False
-        for key, value in (reversed(obj.items()) if reverse else obj.items()):
+        items = obj.items()
+        for key, value in (reversed(items if sys.version_info >= (3, 8) else list(items)) if reverse else items):
             if needs_comma:
                 info.add_token(', ')
             for step in range(2, -1, -1) if reverse else range(3):

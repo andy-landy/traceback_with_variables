@@ -1,5 +1,4 @@
 import os
-import time
 from decimal import Decimal
 from collections import deque, defaultdict
 from pathlib import Path
@@ -30,6 +29,7 @@ from tests.dummies import (
     f,
 )
 from tests.test_utils import (
+    get_min_dur_s,
     tb_reg,
     type_to_name,
 )
@@ -154,12 +154,9 @@ def test_speed(obj):
     if not os.getenv('PYTEST_RUN_PERF_TESTS'):
         return
 
-    start_t_s = time.time()
-    str(obj)
-    long_dur_s = time.time() - start_t_s
-    start_t_s = time.time()
-    to_capped_str(obj=obj, len_cap=20)
-    short_dur_s = time.time() - start_t_s
+    long_dur_s = get_min_dur_s(str, [obj], {})
+    short_dur_s = get_min_dur_s(to_capped_str, [], {'obj': obj, 'len_cap': 20})
+    
     assert long_dur_s > 100.0 * short_dur_s
     
 
