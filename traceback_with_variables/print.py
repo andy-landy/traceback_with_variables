@@ -25,7 +25,7 @@ class LoggerAsFile:
 
 
 def print_exc(
-    e: Optional[Exception] = None,
+    e: Optional[BaseException] = None,
     num_skipped_frames: int = 0,
     fmt: Optional[Format] = None,
     file_: Union[TextIO, LoggerAsFile] = sys.stderr,
@@ -66,7 +66,7 @@ def printing_exc(
     try:
         yield
 
-    except Exception as e:
+    except BaseException as e:
         print_exc(
             e=e,
             num_skipped_frames=2 if skip_cur_frame else 1,

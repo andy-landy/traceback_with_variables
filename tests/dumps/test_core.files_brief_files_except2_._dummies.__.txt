@@ -1,6 +1,0 @@
-Traceback with variables (most recent call last):
-  File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
-    return f(
-  File "...omitted for tests only.../dummies.py", line...omitted for tests only..., in f
-    return 1 // (n * 0)
-builtins.ZeroDivisionError: integer division or modulo by zero

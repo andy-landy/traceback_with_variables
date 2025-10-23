@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -11,8 +12,9 @@ def check_coverage_reports(inp_dir: Path, max_allowed_num_uncovered_lines: int) 
 
     for report_path in inp_dir.rglob('*.json'):
         with report_path.open('r') as inp:
-            for file_, data in json.load(inp)['files'].items():
-                line_to_was_hit = file_to_line_to_was_hit[file_.replace('\\', '/')]
+            for raw_file, data in json.load(inp)['files'].items():
+                file_ = re.sub('^.*/(traceback_with_variables/.*)$', r'\1', raw_file.replace('\\', '/'))
+                line_to_was_hit = file_to_line_to_was_hit[file_]
                 for line in data['executed_lines']:
                     line_to_was_hit[line] = True
                 for line in data['missing_lines']:

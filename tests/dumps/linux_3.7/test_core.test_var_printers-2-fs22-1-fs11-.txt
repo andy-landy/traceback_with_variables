@@ -1,0 +1,16 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../test_core.py", line 13, in check_
+    f()
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only, obj id...>>
+      ...skipped... 1 vars
+  File "...omitted for tests only, abs path.../dummies.py", line 95, in f
+    - 1
+      n = 10001
+      l1 = var
+      ...skipped... 2 vars
+  File "...omitted for tests only, abs path.../dummies.py", line 86, in f
+    return 1 // (n * 0)
+      n = 10000
+      l1 = var
+      ...skipped... 2 vars
+builtins.ZeroDivisionError: integer division or modulo by zero

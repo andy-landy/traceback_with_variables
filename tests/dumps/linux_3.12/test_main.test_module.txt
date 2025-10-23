@@ -1,0 +1,17 @@
+usage:server.py(-h)
+(--cgi)
+(-baddress)
+(-ddirectory)
+(-pversion)
+(port)
+positionalarguments:
+portbindtothisport(default:8000)
+options:
+-h,--helpshowthishelpmessageandexit
+--cgirunascgiserver
+-baddress,--bindaddress
+bindtothisaddress(default:allinterfaces)
+-ddirectory,--directorydirectory
+servethisdirectory(default:currentdirectory)
+-pversion,--protocolversion
+conformtothishttpversion(default:http/1.0)

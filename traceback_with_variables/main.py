@@ -32,7 +32,11 @@ def run_script(
         skip_cur_frame=True,
         fmt=fmt,
     ):
-        exec(compile(path.read_text(), str(path), 'exec'), globals_, globals_)
+        try:
+            exec(compile(path.read_text(), str(path), 'exec'), globals_, globals_)
+        except SystemExit as e:
+            if e.code != 0:
+                raise
 
         return 0
 

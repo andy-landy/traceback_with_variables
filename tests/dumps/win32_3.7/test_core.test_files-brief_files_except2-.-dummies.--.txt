@@ -1,0 +1,6 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../dummies.py", line 95, in f
+    - 1
+  File "...omitted for tests only, abs path.../dummies.py", line 86, in f
+    return 1 // (n * 0)
+builtins.ZeroDivisionError: integer division or modulo by zero

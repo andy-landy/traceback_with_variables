@@ -1,0 +1,5 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../test_core.py", line 167, in test_cur_tb
+    tb_reg(core.format_cur_tb(num_skipped_frames=num_skipped_frames, fmt=Format(skip_files_except='test_core')))
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only, obj id...>>
+      num_skipped_frames = 0

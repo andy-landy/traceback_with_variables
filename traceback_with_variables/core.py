@@ -117,7 +117,7 @@ class Format:  # no dataclass for compatibility
 
 
 def format_exc(
-    e: Optional[Exception] = None,
+    e: Optional[BaseException] = None,
     num_skipped_frames: int = 0,
     fmt: Optional[Format] = None,
     for_file: Optional[TextIO] = None,
@@ -131,12 +131,12 @@ def format_exc(
 
 
 def iter_exc_lines(
-    e: Optional[Exception] = None,
+    e: Optional[BaseException] = None,
     num_skipped_frames: int = 0,
     fmt: Optional[Format] = None,
     for_file: Optional[TextIO] = None,
 ) -> Iterator[str]:
-    e_: Optional[Exception] = e or sys.exc_info()[1] or getattr(sys, 'last_value', None)
+    e_: Optional[BaseException] = e or sys.exc_info()[1] or getattr(sys, 'last_value', None)
 
     if e_ is None:
         raise ValueError('no exception to handle')
@@ -185,7 +185,7 @@ def iter_cur_tb_lines(
 # - privates - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 def _iter_lines(
-    e: Optional[Exception],
+    e: Optional[BaseException],
     frame_infos: List[inspect.FrameInfo],
     fmt: Optional[Format] = None,
     for_file: Optional[TextIO] = None,

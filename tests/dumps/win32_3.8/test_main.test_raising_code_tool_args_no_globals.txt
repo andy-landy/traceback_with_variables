@@ -1,0 +1,9 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 5, in <module>
+    f(divide_by_what)
+      ...skipped... 10 vars
+  File "...omitted for tests only, abs path.../code.py", line 3, in f
+    return 1 / (m - 1)
+      n = 0
+      m = 1
+builtins.ZeroDivisionError: division by zero

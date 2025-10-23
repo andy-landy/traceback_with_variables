@@ -1,0 +1,1 @@
+[1, 2.0, 'three', HasStr-with-f2-two-f3-three, tests.dummies.A(-)]

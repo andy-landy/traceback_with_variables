@@ -35,12 +35,14 @@ setuptools.setup(
     entry_points={'console_scripts': [
         'traceback-with-variables = traceback_with_variables.main:main',
     ]},
-    tests_require=[
-        'flake8',
-        'ipython',
-        'pytest-cov',
-        'notebook==6.2.0',
-    ],
+    extras_require={
+        "test": [
+            'flake8',
+            'ipython',
+            'pytest-cov',
+            'notebook==6.2.0',
+        ],
+    },
     install_requires=[],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
 )
