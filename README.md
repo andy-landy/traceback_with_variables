@@ -47,10 +47,10 @@ _Contents:_ **[Installation](#installation)** | **[🚀 Quick Start](#-quick-sta
 ### Installation
 
 ```
-pip install traceback-with-variables==2.2.0
+pip install traceback-with-variables==2.2.1
 ```
 ```
-conda install -c conda-forge traceback-with-variables=2.2.0
+conda install -c conda-forge traceback-with-variables=2.2.1
 ```
 
 to use shorter `tb` alias in interactive mode call this once:
