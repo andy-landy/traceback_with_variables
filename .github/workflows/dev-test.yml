@@ -19,7 +19,8 @@ jobs:
           {os: ubuntu-22.04, python-version: '3.11'},
           {os: ubuntu-22.04, python-version: '3.12'},
           {os: ubuntu-22.04, python-version: '3.13'},
-          {os: ubuntu-22.04, python-version: '3.14.0-rc.3'},
+          {os: ubuntu-22.04, python-version: '3.14'},
+          {os: ubuntu-22.04, python-version: '3.15.0-beta.4'},
           {os: windows-latest, python-version: '3.7.9'},
           {os: windows-latest, python-version: '3.8'},
           {os: windows-latest, python-version: '3.9'},
@@ -27,7 +28,8 @@ jobs:
           {os: windows-latest, python-version: '3.11'},
           {os: windows-latest, python-version: '3.12'},
           {os: windows-latest, python-version: '3.13'},
-          {os: windows-latest, python-version: '3.14.0-rc.3'}
+          {os: windows-latest, python-version: '3.14'},
+          {os: windows-latest, python-version: '3.15.0-beta.4'}
         ]
     steps:
       - name: Set up Python ${{ matrix.arrays.python-version }}
@@ -71,4 +73,4 @@ jobs:
           path: coverage-reports
 
       - name: Check coverage
-        run: python3 check_coverage_reports.py --inp-dir coverage-reports --max-allowed-num-uncovered-lines 0
+        run: python3 misc/check_coverage_reports.py --inp-dir coverage-reports --max-allowed-num-uncovered-lines 0

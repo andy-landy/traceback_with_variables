@@ -1,0 +1,1 @@
+tests.dummies.HasNoStr(f2='two', f3='three')

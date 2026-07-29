@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as in_:
     long_description = in_.read()
 
 setuptools.setup(
-    name='traceback-with-variables',
+    name='traceback_with_variables',
     version=__version__,
     author='Andrey Lyashko',
     author_email='andydashlandy@gmail.com',

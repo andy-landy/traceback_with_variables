@@ -1,0 +1,6 @@
+usage: python3 -m traceback_with_variables.main [-h]
+--arg ARG
+
+options:
+  -h, --help  show this help message and exit
+  --arg ARG
