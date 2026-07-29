@@ -1,0 +1,12 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../test_core.py", line 101, in test_objects_details
+    1/0
+      tb_reg = <bound method Reg.match_tb_text of <tests.test_utils.Reg object at 0x...omitted for tests only, obj id...>>
+      obj = <exception while printing> Traceback (most recent call last):
+          ...traceback_with_variables internal stacks...
+          File "...omitted for tests only, abs path.../dummies.py", line 29, in __repr__
+            raise ValueError("please don't print me")
+        ValueError: please don't print me
+        
+      objects_details = 10
+builtins.ZeroDivisionError: division by zero

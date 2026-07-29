@@ -1,0 +1,1 @@
+[1, 2.0, 'three', HasStr-with-f2-two-f3-three, tests.dummies.A(f1=[tests.dummies.HasNoStr(f2='two', f3='three'), True, 4], f2={5: tests.dummies.SuperSet{tests.dummies.A(f1=6, f2=7), HasStr-with-f2-two-f3-three, None}, 8: -9})]

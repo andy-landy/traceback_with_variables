@@ -1,0 +1,7 @@
+Traceback with variables (most recent call last):
+  File "...omitted for tests only, abs path.../code.py", line 6, in main
+    return f(10)
+  File "...omitted for tests only, abs path.../code.py", line 3, in f
+    return n / 0
+      n = 10
+builtins.ZeroDivisionError: division by zero
